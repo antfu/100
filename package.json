@@ -1,0 +1,34 @@
+{
+  "name": "100d",
+  "private": true,
+  "scripts": {
+    "dev": "vite --port 3333 --open",
+    "build": "cross-env NODE_ENV=production vite build"
+  },
+  "dependencies": {
+    "@iconify/iconify": "^2.0.0-rc.2",
+    "@vueuse/core": "^4.0.0-beta.37",
+    "vue": "^3.0.2",
+    "vue-router": "^4.0.0-rc.2"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config-vue": "^0.4.3",
+    "@iconify/json": "^1.1.252",
+    "@purge-icons/generated": "^0.4.1",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@vue/compiler-sfc": "^3.0.2",
+    "@vuedx/typescript-plugin-vue": "^0.2.3",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.12.1",
+    "tailwindcss": "^1.9.6",
+    "typescript": "^4.0.5",
+    "vite": "^1.0.0-rc.9",
+    "vite-plugin-components": "^0.3.0",
+    "vite-plugin-purge-icons": "^0.4.5",
+    "vite-plugin-voie": "^0.4.0",
+    "voie-pages": "^0.4.0"
+  },
+  "eslintConfig": {
+    "extends": "@antfu/eslint-config-vue"
+  }
+}
