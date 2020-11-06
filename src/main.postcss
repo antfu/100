@@ -10,22 +10,14 @@ body,
   margin: 0;
   padding: 0;
 }
-
-html.dark {
-  background: #222;
+ 
+.canvas {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
 }
 
-.btn {
-  @apply
-    px-4 py-1 rounded inline-block
-    bg-teal-600 text-white cursor-pointer
-    hover:bg-teal-700
-    disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50;
-}
-
-.icon-btn {
-  @apply
-    inline-block cursor-pointer select-none
-    opacity-75 transition duration-200 ease-in-out
-    hover:opacity-100;
+.link {
+  @apply text-gray-400 hover:text-gray-600 transition;
 }
