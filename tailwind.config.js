@@ -16,6 +16,9 @@ module.exports = {
         10: '0.1',
         85: '0.85',
       },
+      fontFamily: {
+        mono: ['Fira Code', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+      },
     },
   },
   future: {

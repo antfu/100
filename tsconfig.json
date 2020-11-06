@@ -10,7 +10,6 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "paths": {
       "/~/*": ["src/*"]

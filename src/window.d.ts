@@ -1,3 +1,5 @@
+import Matter from '@types/matter-js'
+
 declare interface Window {
-  // extend the window
+  Matter: Matter
 }

@@ -8,18 +8,22 @@
   "dependencies": {
     "@iconify/iconify": "^2.0.0-rc.2",
     "@vueuse/core": "^4.0.0-beta.37",
-    "vue": "^3.0.2",
+    "@vueuse/shared": "^4.0.0-beta.37",
+    "dayjs": "^1.9.5",
+    "vue": "3.0.2",
     "vue-router": "^4.0.0-rc.2"
   },
   "devDependencies": {
     "@antfu/eslint-config-vue": "^0.4.3",
     "@iconify/json": "^1.1.252",
     "@purge-icons/generated": "^0.4.1",
+    "@types/matter-js": "^0.14.5",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
-    "@vue/compiler-sfc": "^3.0.2",
+    "@vue/compiler-sfc": "3.0.2",
     "@vuedx/typescript-plugin-vue": "^0.2.3",
     "cross-env": "^7.0.2",
     "eslint": "^7.12.1",
+    "matter-js": "^0.14.2",
     "pug": "^3.0.0",
     "stylus": "^0.54.8",
     "tailwindcss": "^1.9.6",
@@ -31,6 +35,9 @@
     "voie-pages": "^0.4.0"
   },
   "eslintConfig": {
-    "extends": "@antfu/eslint-config-vue"
+    "extends": "@antfu/eslint-config-vue",
+    "rules": {
+      "import/no-mutable-exports": "off"
+    }
   }
 }

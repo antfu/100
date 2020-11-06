@@ -1,3 +1,8 @@
+<script setup lang='ts'>
+export { works } from '../works'
+export { stringify } from '../utils/stringify'
+</script>
+
 <template lang='pug'>
 .canvas
   div
@@ -5,22 +10,7 @@
     pre
       span.text-gray-400 [
       br
-      router-link.ml-4.link(v-for='work of works' :key='work.no' :to='`/${work.no}`') {{ str(work) }},
+      router-link.ml-4.link(v-for='work of works' :key='work.no' :to='`/${work.no}`') {{ stringify({ name: work.name, no: work.no }) }},
       br
       span.text-gray-400 ]
 </template>
-
-<script setup lang='ts'>
-export { works } from '../works'
-
-export function str(obj: any) {
-  return JSON.stringify(obj)
-    .replace(/"/g, '\'')
-    .replace(/:/g, ': ')
-    .replace(/{/g, '{ ')
-    .replace(/}/g, ' }')
-    .replace(/,/g, ', ')
-    .replace(/'(\w+?)':/g, '$1:')
-    .replace(/'(\d+?)'/g, '$1')
-}
-</script>
