@@ -1,6 +1,6 @@
 <template lang='pug'>
 paper
-  div Hi Template
+  .box Hi Template
 </template>
 
 <script setup lang='ts'>

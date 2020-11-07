@@ -4,8 +4,7 @@ paper
     .box.overflow-hidden
       canvas(ref='el' width='400' height='400' @click='f.run()')
     form.contorls
-      input(v-model='showHexagon' type='checkbox' id='show-hexagon')
-      label(for='show-hexagon') Hexagon
+      toggle(v-model='showHexagon') Hexagon
 </template>
 
 <script setup lang='ts'>
