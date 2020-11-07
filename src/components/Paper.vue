@@ -10,7 +10,7 @@
     .flex.flex-col
       .flex-auto
       span.text-gray-400 {{work.date}}
-  .nav.font-mono
+  .nav.font-mono(v-if='!shot')
     router-link.link(to='/') back
 
   slot(:work='work')
@@ -22,6 +22,7 @@ import { works } from '../works'
 
 const route = useRoute()
 const no = route.path.slice(1)
+export const shot = Boolean(route.query.shot)
 export const work = works.find(i => i.no === no)
 </script>
 
