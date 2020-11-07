@@ -17,7 +17,10 @@ export const toggle = () => {
 
 <style lang='stylus' scoped>
 .toggle
+  cursor pointer
   opacity 0.2
+  &:hover
+    text-decoration underline
   &.active
     opacity 1
 </style>

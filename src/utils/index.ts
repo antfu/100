@@ -1,5 +1,7 @@
 export * from './load'
 export * from './stringify'
+export * from './vector'
+export * from './canvas'
 
 export function shuffle<T>(arr: T[]): T[] {
   const array = arr.slice(0)
@@ -8,4 +10,8 @@ export function shuffle<T>(arr: T[]): T[] {
     [array[i], array[j]] = [array[j], array[i]]
   }
   return array
+}
+
+export function range(to: number) {
+  return new Array(to).fill(0).map((_, i) => i)
 }
