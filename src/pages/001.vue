@@ -1,6 +1,6 @@
 <template lang='pug'>
-paper.overflow-hidden
-  div(@click='f.add' ref='canvas')
+paper
+  .box.overflow-hidden(@click='f.add' ref='canvas')
 </template>
 
 <script setup lang='ts'>

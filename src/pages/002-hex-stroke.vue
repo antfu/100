@@ -1,6 +1,7 @@
 <template lang='pug'>
-paper.overflow-hidden
-  canvas(ref='canvas' width='400' height='400')
+paper
+  .box.overflow-hidden
+    canvas(ref='canvas' width='400' height='400')
 </template>
 
 <script setup lang='ts'>

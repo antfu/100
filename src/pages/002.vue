@@ -1,26 +1,27 @@
 <template lang='pug'>
-paper.overflow-hidden
-  canvas(ref='el' width='400' height='400' @click='f.run()')
+paper
+  div
+    .box.overflow-hidden
+      canvas(ref='el' width='400' height='400' @click='f.run()')
+    form.contorls
+      input(v-model='showHexagon' type='checkbox' id='show-hexagon')
+      label(for='show-hexagon') Hexagon
 </template>
 
 <script setup lang='ts'>
 import { noop } from '@vueuse/shared'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import { shuffle } from '../utils'
 
 export const el = ref<HTMLCanvasElement | null>(null)
-
-function shuffle<T>(arr: T[]): T[] {
-  const array = arr.slice(0)
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]
-  }
-  return array
-}
 
 export const f = {
   run: noop,
 }
+
+export const showHexagon = ref(false)
+
+watch(showHexagon, () => f.run())
 
 onMounted(() => {
   const canvas = el.value!
@@ -40,7 +41,7 @@ onMounted(() => {
   canvas.height = dpi * canvasSize
   ctx.scale(dpi, dpi)
 
-  const drawHex = (x: number, y: number, size: number) => {
+  const drawHexagon = (x: number, y: number, size: number) => {
     const points: [number, number][] = new Array(6)
       .fill(0)
       .map((_, i) => [
@@ -56,10 +57,12 @@ onMounted(() => {
     ctx.strokeStyle = '#000000'
     ctx.lineWidth = 1
 
-    ctx.beginPath()
-    ctx.moveTo(...points[0])
-    points.forEach(([x, y]) => ctx.lineTo(x, y))
-    ctx.stroke()
+    if (showHexagon.value) {
+      ctx.beginPath()
+      ctx.moveTo(...points[0])
+      points.forEach(([x, y]) => ctx.lineTo(x, y))
+      ctx.stroke()
+    }
 
     const shuffled = shuffle(midPoints)
 
@@ -93,7 +96,7 @@ onMounted(() => {
     for (let x = 0; x < 5; x++) {
       for (let y = 0; y < 20; y++) {
         const xOffset = (y % 2) ? size * 1.5 : 0
-        drawHex(
+        drawHexagon(
           initX + x * size * 3 + xOffset,
           initY + y * size * SQRT_3 * 0.5,
           size,

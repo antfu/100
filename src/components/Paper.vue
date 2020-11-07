@@ -13,8 +13,7 @@
   .nav.font-mono
     router-link.link(to='/') back
 
-  .paper(v-bind='$attrs')
-    slot(:work='work')
+  slot(:work='work')
 </template>
 
 <script setup lang='ts'>
@@ -24,19 +23,9 @@ import { works } from '../works'
 const route = useRoute()
 const no = route.path.slice(1)
 export const work = works.find(i => i.no === no)
-
-export default {
-  inheritAttrs: false,
-}
 </script>
 
 <style lang='stylus' scoped>
-.paper
-  width 400px
-  height 400px
-  border 1px solid black
-  user-select none
-
 .nav
   position fixed
   top 0
