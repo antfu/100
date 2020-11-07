@@ -1,7 +1,7 @@
 export const info = [
   {
     name: 'Mess',
-    desc: 'Hands on Matter.js',
+    desc: '',
     date: '11/06',
   },
   {

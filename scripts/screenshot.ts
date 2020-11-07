@@ -4,8 +4,8 @@ async function run(no: string, take = 3) {
   const browser = await chromium.launch({ headless: false })
   const context = await browser.newContext({
     viewport: {
-      width: 800,
-      height: 500,
+      width: 1200,
+      height: 675,
     },
     deviceScaleFactor: 2,
   })
