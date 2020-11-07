@@ -93,7 +93,7 @@ onMounted(() => {
       drawArc2(offset + 1)
       drawArc1(offset + 4)
     }
-    else if (_mode === 'p2') {
+    else if (_mode === 'p3') {
       const offset = Math.round(Math.random() * 5)
       drawArc2(offset + 2)
       drawArc2(offset + 5)
