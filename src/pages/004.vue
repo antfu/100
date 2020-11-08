@@ -24,7 +24,7 @@ const BOX_SIZE = 400
 export const box = ref<HTMLDivElement | null>(null)
 export const { width, height } = useWindowSize()
 export const { screenLeft, screenTop } = useWindowPosition()
-export const mouse = reactive(useMouseInElement(box))
+export const mouse = reactive(useMouseInElement(box, { touch: true }))
 
 export const boxX = ref((width.value - BOX_SIZE) / 2)
 export const boxY = ref((height.value - BOX_SIZE) / 2)
@@ -56,12 +56,8 @@ watch(
   },
 )
 
-export const innerX = computed(() => {
-  return -(boxX.value + screenLeft.value)
-})
-export const innerY = computed(() => {
-  return -(boxY.value + screenTop.value)
-})
+export const innerX = computed(() => -(boxX.value + screenLeft.value))
+export const innerY = computed(() => -(boxY.value + screenTop.value))
 </script>
 
 <style lang='stylus' scoped>
