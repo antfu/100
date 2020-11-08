@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang='ts'>
+import { useTitle } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import { works } from '../works'
 
@@ -24,6 +25,8 @@ const route = useRoute()
 const no = route.path.slice(1)
 export const shot = Boolean(route.query.shot)
 export const work = works.find(i => i.no === no)
+
+useTitle(work ? `${no}. ${work.name}` : '404')
 </script>
 
 <style lang='stylus' scoped>

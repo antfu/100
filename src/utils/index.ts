@@ -1,3 +1,6 @@
+import { ref } from 'vue'
+import { useIntervalFn, useRafFn } from '@vueuse/core'
+
 export * from './load'
 export * from './stringify'
 export * from './vector'
@@ -14,4 +17,16 @@ export function shuffle<T>(arr: T[]): T[] {
 
 export function range(to: number) {
   return new Array(to).fill(0).map((_, i) => i)
+}
+
+export function useWindowPosition() {
+  const screenTop = ref(window.screenTop)
+  const screenLeft = ref(window.screenLeft)
+
+  const timeout = useRafFn(() => {
+    screenTop.value = window.screenTop
+    screenLeft.value = window.screenLeft
+  })
+
+  return { screenLeft, screenTop, timeout }
 }

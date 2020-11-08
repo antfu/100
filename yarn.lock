@@ -157,10 +157,10 @@
   resolved "https://registry.yarnpkg.com/@iconify/iconify/-/iconify-2.0.0-rc.2.tgz#c4a95ddc06ca9b9496df03604e66fdefb39f4c4b"
   integrity sha512-BybEHU5/I9EQ0CcwKAqmreZ2bMnAXrqLCTptAc6vPetHMbrXdZfejP5mt57e/8PNSt/qE7BHniU5PCYA+PGIHw==
 
-"@iconify/json@^1.1.252":
-  version "1.1.252"
-  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-1.1.252.tgz#66898ad698f98be24ed1e9e581aa082fceb80363"
-  integrity sha512-JMO9chfLYWGDuw1xxsvdwBQoI5vHVAd0bXqDVn97iag0RDC1JzhsGE1Dg2rR2K96v0LhegjmmVDY724bjd+NFA==
+"@iconify/json@^1.1.254":
+  version "1.1.254"
+  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-1.1.254.tgz#10fce37cf0d5cd0e2fa333abd0f2f80034de5b2e"
+  integrity sha512-ku9ThvOI/1DzQbiJtvaVrcz6t1jyI+IB9z1yWXSUL81O6Gs/SIVhkNil0b+eKWHj7i3/HQIacd3d4V9rYMmf5g==
 
 "@koa/cors@^3.1.0":
   version "3.1.0"
@@ -639,18 +639,18 @@
     vscode-languageserver-textdocument "^1.0.1"
     vscode-uri "^2.1.2"
 
-"@vueuse/core@^4.0.0-beta.37":
-  version "4.0.0-beta.37"
-  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-4.0.0-beta.37.tgz#add65a451bd5fbd2099f196d6f1ef9fcc6efbafd"
-  integrity sha512-BQb+FZadnpniURu6I/QSuMlIFy7Ud1nCVffCPlf/SODspMDKemLZRlwTGD9170RnD9nl/rNrIuWgcNiJZPKbhg==
+"@vueuse/core@^4.0.0-beta.39":
+  version "4.0.0-beta.39"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-4.0.0-beta.39.tgz#f70ce44840a8faf42f1f949c8e2e7a30b59ca183"
+  integrity sha512-+LDDMosERfkn+DLzCTtLgi4njZ6RnA/IfP8NsIix4UOh5D90qwi2cxisnUP7lkkYi61578xl9J1X7yc7UU2Mrg==
   dependencies:
-    "@vueuse/shared" "4.0.0-beta.37"
+    "@vueuse/shared" "4.0.0-beta.39"
     vue-demi latest
 
-"@vueuse/shared@4.0.0-beta.37", "@vueuse/shared@^4.0.0-beta.37":
-  version "4.0.0-beta.37"
-  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.0.0-beta.37.tgz#1239f560c130336d48c69463f7788a8d8bd02b59"
-  integrity sha512-vW9ccVl2+yL/9V3snTRCtknCeyt8RE+SIHtnOSyTTvXKvVAMbiBrgn6U8I8qIMzkGqkNAPGmugOahxzw0oiI+w==
+"@vueuse/shared@4.0.0-beta.39", "@vueuse/shared@^4.0.0-beta.39":
+  version "4.0.0-beta.39"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.0.0-beta.39.tgz#1512a51537ea31d0c3c0f753bd1ba3d612b866d7"
+  integrity sha512-Fx33CJa0cFwS0pQqrToHpVP6VVSN4QGnofq+Oa0U41ej3rHITKYQOo3GuZMFmZcYpqnmctLoqCk+GKIIH+t4jA==
   dependencies:
     vue-demi latest
 
@@ -1703,10 +1703,10 @@ eslint-visitor-keys@^2.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.0.0.tgz#21fdc8fbcd9c795cc0321f0563702095751511a8"
   integrity sha512-QudtT6av5WXels9WjIM7qz1XD1cWGvX4gGXvp/zBn9nXG02D0utdU3Em2m/QjTnrsk6bBjmCygl3rmj118msQQ==
 
-eslint@^7.12.1:
-  version "7.12.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.12.1.tgz#bd9a81fa67a6cfd51656cdb88812ce49ccec5801"
-  integrity sha512-HlMTEdr/LicJfN08LB3nM1rRYliDXOmfoO4vj39xN6BLpFzF00hbwBoqHk8UcJ2M/3nlARZWy/mslvGEuZFvsg==
+eslint@^7.13.0:
+  version "7.13.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.13.0.tgz#7f180126c0dcdef327bfb54b211d7802decc08da"
+  integrity sha512-uCORMuOO8tUzJmsdRtrvcGq5qposf7Rw0LwkTJkoDbOycVQtQjmnhZSuLQnozLE4TmAzlMVV45eCHmQ1OpDKUQ==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@eslint/eslintrc" "^0.2.1"

@@ -1,6 +1,9 @@
 <script setup lang='ts'>
+import { useTitle } from '@vueuse/core'
 export { works } from '../works'
 export { stringify } from '../utils/stringify'
+
+useTitle('100 days')
 </script>
 
 <template lang='pug'>
