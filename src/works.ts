@@ -1,6 +1,6 @@
 export const info = [
   {
-    name: 'Mess',
+    name: 'Mass',
     desc: '',
     date: '11/06',
   },
@@ -8,6 +8,11 @@ export const info = [
     name: 'Hex',
     desc: '',
     date: '11/07',
+  },
+  {
+    name: 'Three',
+    desc: '',
+    date: '11/08',
   },
 ]
 

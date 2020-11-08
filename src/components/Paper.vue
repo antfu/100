@@ -9,7 +9,7 @@
     .flex-auto
     .flex.flex-col
       .flex-auto
-      span.text-gray-400 {{work.date}}
+      span.text-gray-300 {{work.date}}
   .nav.font-mono(v-if='!shot')
     router-link.link(to='/') back
 
