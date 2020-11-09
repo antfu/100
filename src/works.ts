@@ -18,7 +18,6 @@ export const info = [
     name: 'Scope',
     desc: '',
     date: '11/09',
-    draft: true,
   },
 ]
 

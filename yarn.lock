@@ -639,18 +639,18 @@
     vscode-languageserver-textdocument "^1.0.1"
     vscode-uri "^2.1.2"
 
-"@vueuse/core@^4.0.0-beta.39":
-  version "4.0.0-beta.39"
-  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-4.0.0-beta.39.tgz#f70ce44840a8faf42f1f949c8e2e7a30b59ca183"
-  integrity sha512-+LDDMosERfkn+DLzCTtLgi4njZ6RnA/IfP8NsIix4UOh5D90qwi2cxisnUP7lkkYi61578xl9J1X7yc7UU2Mrg==
+"@vueuse/core@^4.0.0-beta.40":
+  version "4.0.0-beta.40"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-4.0.0-beta.40.tgz#7efdc15c1b994647dff7ae65c0ca573d96ce9b28"
+  integrity sha512-FOTOUrXAAp0NOmy8hMlP1HpUhnB8LeRJZDOEUl/A9gKMDwWvPTEvxKsDAIzSa4s7I0MapVzfeP3soNCNfl9+vQ==
   dependencies:
-    "@vueuse/shared" "4.0.0-beta.39"
+    "@vueuse/shared" "4.0.0-beta.40"
     vue-demi latest
 
-"@vueuse/shared@4.0.0-beta.39", "@vueuse/shared@^4.0.0-beta.39":
-  version "4.0.0-beta.39"
-  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.0.0-beta.39.tgz#1512a51537ea31d0c3c0f753bd1ba3d612b866d7"
-  integrity sha512-Fx33CJa0cFwS0pQqrToHpVP6VVSN4QGnofq+Oa0U41ej3rHITKYQOo3GuZMFmZcYpqnmctLoqCk+GKIIH+t4jA==
+"@vueuse/shared@4.0.0-beta.40", "@vueuse/shared@^4.0.0-beta.40":
+  version "4.0.0-beta.40"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.0.0-beta.40.tgz#76e9b52228159e7ec88df2c8f4eea8fce1a42ec3"
+  integrity sha512-Ay71viUTXs0XX2hQ04kEExhpsCrw3KankBMP7euorsPjuQmIZjUA4NNOb45UAudg+uF5HXLpgWLvwb4cMOLHnQ==
   dependencies:
     vue-demi latest
 

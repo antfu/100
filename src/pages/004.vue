@@ -1,6 +1,11 @@
 <template lang='pug'>
 paper(@mouseup='mouseup' @touchend='mouseup')
-  .box.fixed.overflow-hidden.bg-white(ref='box' :style='{top: px(boxY), left: px(boxX) }' @mousedown='mousedown' @touchstart='mousedown')
+  .box.fixed.overflow-hidden.bg-white(
+    ref='box'
+    :style='{top: px(boxY), left: px(boxX) }'
+    @mousedown='mousedown'
+    @touchstart='mousedown'
+  )
     .inner.absolute.p-10(:style='{top: px(innerY), left: px(innerX), height: px(screenHeight), width: px(screenWidth)}')
       h3.font-bold.mt-4.mb-2 The standard Lorem Ipsum passage, used since the 1500s
       p "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -16,7 +21,7 @@ paper(@mouseup='mouseup' @touchend='mouseup')
 </template>
 
 <script setup lang='ts'>
-import { useMouseInElement, useWindowSize } from '@vueuse/core'
+import { useDeviceMotion, useMouseInElement, useWindowSize } from '@vueuse/core'
 import { computed, reactive, ref, watch } from 'vue'
 import { useWindowPosition } from '../utils'
 
@@ -36,6 +41,8 @@ export const px = (v: number) => `${v}px`
 
 export const dragging = ref(false)
 export const draggingOffests = ref([0, 0])
+
+export const motion = reactive(useDeviceMotion())
 
 export const mousedown = () => {
   draggingOffests.value = [mouse.elementX, mouse.elementY]

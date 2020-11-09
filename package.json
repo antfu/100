@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "@iconify/iconify": "^2.0.0-rc.2",
-    "@vueuse/core": "^4.0.0-beta.39",
-    "@vueuse/shared": "^4.0.0-beta.39",
+    "@vueuse/core": "^4.0.0-beta.40",
+    "@vueuse/shared": "^4.0.0-beta.40",
     "dayjs": "^1.9.5",
     "vue": "3.0.2",
     "vue-router": "^4.0.0-rc.2"
