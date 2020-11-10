@@ -66,6 +66,8 @@ onMounted(async() => {
   watch(viewport, () => {
     render.canvas.width = viewport.width
     render.canvas.height = viewport.height
+    render.canvas.style.height = `${viewport.height}px`
+    render.canvas.style.width = `${viewport.width}px`
   })
 
   engine.world.gravity.y = 0
@@ -130,7 +132,7 @@ onMounted(async() => {
       Body.setVelocity(body, { x: (Math.random() - 0.5) * 2 * mutiplier, y: (Math.random() - 0.5) * 2 * mutiplier })
     }
 
-    watch(sphere, init, { immediate: true })
+    watch([sphere, viewport], init, { immediate: true })
 
     return {
       getDistance,
@@ -151,7 +153,6 @@ onMounted(async() => {
       },
     },
   })
-
   World.add(engine.world, mouseConstraint)
 
   let restoreCount = 0
