@@ -4,14 +4,28 @@ paper
 </template>
 
 <script setup lang='ts'>
-import { ref, onMounted } from 'vue'
+import { useWindowSize } from '@vueuse/core'
+import { ref, onMounted, reactive, computed, watch } from 'vue'
+import type Matter from 'matter-js'
+import { useRoute } from 'vue-router'
 import { load, range } from '../utils'
 
+const route = useRoute()
+
 export const el = ref(null)
-export const sphere = ref(true)
+export const sphere = ref(!route.query.square)
+export const debug = ref(!!route.query.debug)
+
+const viewport = reactive(useWindowSize())
+
+const offest = reactive({
+  x: computed(() => (viewport.width - 400) / 2),
+  y: computed(() => (viewport.height - 400) / 2),
+})
 
 onMounted(async() => {
   await load('https://cdn.jsdelivr.net/npm/matter-js@0.14.2/build/matter.min.js')
+
   const Matter = window.Matter
   const Engine = Matter.Engine
   const Render = Matter.Render
@@ -21,36 +35,40 @@ onMounted(async() => {
   const Mouse = Matter.Mouse
   const MouseConstraint = Matter.MouseConstraint
 
-  const width = window.innerWidth
-  const height = window.innerHeight
-
   const engine = Engine.create()
   const render = Render.create({
     element: el.value!,
     engine,
     options: {
-      width,
-      height,
+      width: viewport.width,
+      height: viewport.height,
       background: 'transparent',
       wireframes: false,
       // @ts-ignore untyped
-      showVelocity: true,
+      showVelocity: debug.value,
       // @ts-ignore untyped
       pixelRatio: 'auto',
     },
   })
 
+  watch(viewport, () => {
+    render.canvas.width = viewport.width
+    render.canvas.height = viewport.height
+  })
+
   engine.world.gravity.y = 0
 
-  const r16 = range(8)
-
-  const offsetX = (width - 400) / 2
-  const offsetY = (height - 400) / 2
+  const r8 = range(8)
 
   const size = 50
-  const blocks = r16.flatMap(ix => r16.map((iy) => {
-    const x = offsetX + ix * size
-    const y = offsetY + iy * size
+  const blocks = r8.flatMap(ix => r8.map((iy) => {
+    let body: Matter.Body = undefined!
+
+    const pos = reactive({
+      x: computed(() => offest.x + ix * size + size * 0.5),
+      y: computed(() => offest.y + iy * size + size * 0.5),
+    })
+
     const options = {
       frictionAir: 0.1,
       friction: 0,
@@ -61,16 +79,12 @@ onMounted(async() => {
       },
     }
 
-    const body = sphere.value
-      ? Bodies.circle(x, y, size / 2, options)
-      : Bodies.rectangle(x, y, size, size, options)
-
     const restore = (factor = 0.1) => {
       Body.setVelocity(
         body,
         {
-          x: factor * (x - body.position.x),
-          y: factor * (y - body.position.y),
+          x: factor * (pos.x - body.position.x),
+          y: factor * (pos.y - body.position.y),
         },
       )
       Body.setAngularVelocity(
@@ -82,23 +96,32 @@ onMounted(async() => {
       Body.setAngularVelocity(body, 0)
       Body.setInertia(body, 0)
       Body.setVelocity(body, { x: 0, y: 0 })
-      Body.setPosition(body, { x, y })
+      Body.setPosition(body, { x: pos.x, y: pos.y })
     }
 
-    const getDistance = () => Math.sqrt((x - body.position.x) ** 2 + (y - body.position.y) ** 2)
+    const getDistance = () => {
+      return Math.sqrt((pos.x - body.position.x) ** 2 + (pos.y - body.position.y) ** 2)
+    }
+
+    const init = () => {
+      if (body)
+        World.remove(engine.world, body)
+
+      body = sphere.value
+        ? Bodies.circle(pos.x, pos.y, size / 2, options)
+        : Bodies.rectangle(pos.x, pos.y, size, size, options)
+
+      World.add(engine.world, [body])
+    }
+
+    watch(sphere, init, { immediate: true })
 
     return {
       getDistance,
-      body,
       restore,
       reset,
     }
   }))
-
-  World.add(
-    engine.world,
-    blocks.map(i => i.body),
-  )
 
   const mouse = Mouse.create(render.canvas)
   const mouseConstraint = MouseConstraint.create(engine, {
@@ -107,7 +130,7 @@ onMounted(async() => {
     constraint: {
       stiffness: 0.2,
       render: {
-        visible: true,
+        visible: false,
       },
     },
   })

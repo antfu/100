@@ -20,7 +20,7 @@ export const info = [
     date: '11/10',
   },
   {
-    name: 'Crowd',
+    name: 'M & M',
     date: '11/11',
     draft: true,
   },
