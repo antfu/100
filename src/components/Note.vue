@@ -25,10 +25,11 @@ export const active = ref(false)
 
   .content
     pointer-events none
-    left calc(50% - 250px)
+    left 50%
     width 500px
+    max-width 100vw
     min-height 300px
-    transform translateY(110%)
+    transform translate(-50%, 110%)
     transition 0.3s all ease-in-out
 
   .modal-bg
@@ -39,7 +40,7 @@ export const active = ref(false)
 .note.active
   .content
     display block
-    transform none
+    transform translate(-50%, 0)
     pointer-events auto
   .modal-bg
     opacity 0.2

@@ -17,9 +17,13 @@ paper
     pre <b>r</b>  - radial    (-1 ~ 1)
     pre <b>th</b> - angular θ (-1 ~ 1)
     br
+    p return value should be in -1 to 1
+    p 0 -> black / 1 -> A / -1 -> B
+    p color A & B will be picked randomly
+    br
     p `Math.` can be omitted
     p `2 * t` can be written as `2t`
-    p urls are sharable
+    p link is sharable
 </template>
 
 <script setup lang='ts'>
@@ -45,15 +49,31 @@ const expressions = shuffle([
   'tan(th) / r / sin(t)',
 ])
 
-const colors = [
-  [190, 194, 63], // lime
-  [178, 143, 206], // purple
-  [241, 124, 103], // pink
-  [80, 222, 191], // teal
-  [239, 187, 36], // yellow
-]
+function hexToRgb(hex: string) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)!
+  return [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16),
+  ]
+}
 
-let color = pick(colors).map(i => -i)
+const colors = shuffle([
+  '#30896C',
+  '#3A8FB7',
+  '#58B2DC',
+  '#9B90C2',
+  '#A8D8B9',
+  '#BEC23F',
+  '#D05A6E',
+  '#D75455',
+  '#F05E1C',
+  '#F19483',
+  '#F6C555',
+]).map(i => hexToRgb(i))
+
+let colorA = pick(colors)
+let colorB = next(colors, colorA)
 
 export const expression = ref<string>(route.query?.q?.toString() || pick(expressions))
 export const fps = Boolean(route.query?.fps)
@@ -97,8 +117,9 @@ onMounted(async() => {
       const raw = fn(t, radius, th) as any
       const value = +raw
       const it = isNaN(value) ? 0 : value
-      const [r, g, b] = it < 0 ? color : [255, 255, 255]
-      drawPixel(data, x, y, r * it, g * it, b * it)
+      const [r, g, b] = it < 0 ? colorA : colorB
+      const abs = Math.abs(it)
+      drawPixel(data, x, y, r * abs, g * abs, b * abs)
     }
   }
 
@@ -155,7 +176,8 @@ onMounted(async() => {
     (exp, prev) => {
       stop()
       fn = () => 0
-      color = pick(colors).map(i => -i)
+      colorA = pick(colors)
+      colorB = next(colors, colorA)
       if (prev)
         router.replace({ query: { q: exp } })
 
