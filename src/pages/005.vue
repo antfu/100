@@ -240,6 +240,6 @@ onMounted(async() => {
 .canvas-wrapper {
   transform: scale(1.6);
   transform-origin: 0 0;
-  margin-top: -1px;
+  margin-top: -2px;
 }
 </style>
