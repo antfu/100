@@ -8,6 +8,7 @@ import { ref, onMounted } from 'vue'
 import { load, range } from '../utils'
 
 export const el = ref(null)
+export const sphere = ref(true)
 
 onMounted(async() => {
   await load('https://cdn.jsdelivr.net/npm/matter-js@0.14.2/build/matter.min.js')
@@ -50,15 +51,19 @@ onMounted(async() => {
   const blocks = r16.flatMap(ix => r16.map((iy) => {
     const x = offsetX + ix * size
     const y = offsetY + iy * size
-    const body = Bodies.circle(x, y, size / 2, {
+    const options = {
       frictionAir: 0.1,
       friction: 0,
       render: {
-        fillStyle: `rgb(${30 + ix * 26},${60 + iy * 20},${90 + ix * iy})`,
+        fillStyle: `rgb(${30 + ix * 26},${60 + iy * 20},${90 + (8 - ix) * (iy + 1)})`,
         strokeStyle: 'black',
-        lineWidth: 1,
+        lineWidth: 0,
       },
-    })
+    }
+
+    const body = sphere.value
+      ? Bodies.circle(x, y, size / 2, options)
+      : Bodies.rectangle(x, y, size, size, options)
 
     const restore = (factor = 0.1) => {
       Body.setVelocity(
@@ -111,6 +116,7 @@ onMounted(async() => {
 
   let restoreCount = 0
   let timer: ReturnType<typeof setInterval> | undefined
+  let timeout: ReturnType<typeof setTimeout> | undefined
 
   const restoreAll = () => {
     blocks.map(i => ({ ...i, distance: i.getDistance() }))
@@ -120,20 +126,26 @@ onMounted(async() => {
 
   const start = () => {
     if (restoreCount) {
-      restoreCount = 10
+      restoreCount = 60
       return
     }
-    restoreCount = 10
-    timer = setInterval(() => {
-      restoreCount -= 1
-      restoreAll()
-      if (restoreCount <= 0)
-        stop()
-    }, 1000)
+    stop()
+    restoreCount = 60
+    timeout = setTimeout(() => {
+      timer = setInterval(() => {
+        restoreCount -= 1
+        restoreAll()
+        if (restoreCount <= 0)
+          stop()
+      }, 100)
+    }, 2000)
   }
   const stop = () => {
     if (timer)
       clearInterval(timer)
+    if (timeout)
+      clearInterval(timeout)
+
     restoreCount = 0
   }
   const reset = () => {
