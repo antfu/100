@@ -1,13 +1,14 @@
 <template lang='pug'>
 paper
   .flex.flex-col
-    iframe.none.h-2.mb-1(ref='runner' sandbox='allow-same-origin')
-    .box.overflow-hidden(ref='box' @click='random')
+    iframe.none.h-2.mb-4(ref='runner' sandbox='allow-same-origin')
+    .box.overflow-hidden(ref='box' @click='next')
       .canvas-wrapper
         canvas(ref='el')
     .flex.mt-2
       p.text-gray-500 (t,r,th) =>
-      input.flex-auto.outline-none.ml-3(v-model='expression' maxlength='20')
+      input.flex-auto.outline-none.ml-3(v-model='expression' ref='input' maxlength='32')
+    p.text-gray-400(:class='{"opacity-0": !author}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
 
 note.font-normal.font-mono
   p.font-bold.mb-1 polar = (t,r,th)
@@ -24,30 +25,41 @@ note.font-normal.font-mono
   p `Math.` can be omitted
   p `2 * t` can be written as `2t`
   p link is sharable
+  br
+  p <b>c</b> - change colors
+  p <b>m</b> - monochrome
 </template>
 
 <script setup lang='ts'>
-import { useRafFn, useThrottle } from '@vueuse/core'
-import { onMounted, ref, watch } from 'vue'
+import { useEventListener, useRafFn, useThrottle } from '@vueuse/core'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { initCanvas, load, next, pick, range, shuffle } from '../utils'
+import { get, initCanvas, load, pick, range, shuffle } from '../utils'
 
 export const el = ref<HTMLCanvasElement | null>(null)
 export const runner = ref<HTMLIFrameElement | null>(null)
+export const input = ref<HTMLInputElement | null>(null)
 
 const route = useRoute()
 const router = useRouter()
 
-const expressions = shuffle([
-  'th - sin(r) * cos(t)',
-  'cos(t)',
-  'abs(sin(r - 3t))',
-  't % r',
-  'random() * 2 - 1',
-  'sin(th)',
-  'tan(th * 12t)',
-  'tan(th) / r / sin(t)',
+let expressionIndex = -1
+const presets = shuffle([
+  { code: 'th - sin(r) * cos(t)' },
+  { code: 'cos(t)' },
+  { code: 'abs(sin(r - 3t))' },
+  { code: 't % r' },
+  { code: 'random() * 2 - 1' },
+  { code: 'sin(th)' },
+  { code: 'tan(th * 12t)' },
+  { code: 'tan(th) / r / sin(t)' },
+  { code: 'abs(tan(r*t/th)|r)', by: 'inky' },
+  { code: 'sin(3 * t)/r', by: 'rudygt' },
 ])
+
+export const author = computed(() =>
+  presets.find(i => i.code === expression.value)?.by,
+)
 
 function hexToRgb(hex: string) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)!
@@ -72,19 +84,44 @@ const colors = shuffle([
   '#F6C555',
 ]).map(i => hexToRgb(i))
 
-let colorA = pick(colors)
-let colorB = next(colors, colorA)
+let colorA = [0, 0, 0]
+let colorB = [0, 0, 0]
 
-export const expression = ref<string>(route.query?.q?.toString() || pick(expressions))
+export const expression = ref<string>(route.query?.q?.toString() || '')
 export const fps = Boolean(route.query?.fps)
 
 const thorrtled = useThrottle(expression, 500)
 
 const MathContext = `const {${Object.getOwnPropertyNames(Math).join(',')}}=Math`
 
-export const random = () => {
-  expression.value = next(expressions, expression.value)
+export const next = () => {
+  expressionIndex += 1
+  const { code } = get(presets, expressionIndex)
+  expression.value = code
+  recolor()
 }
+
+export const recolor = () => {
+  colorA = pick(colors)
+  colorB = pick(colors, colorA)
+}
+
+recolor()
+if (!expression.value)
+  next()
+
+useEventListener('keydown', (e) => {
+  if (input.value === document.activeElement)
+    return
+
+  if (e.key === 'c') {
+    recolor()
+  }
+  else if (e.key === 'm') {
+    colorA = [255, 255, 255]
+    colorB = [255, 255, 255]
+  }
+})
 
 onMounted(async() => {
   await load('https://cdn.jsdelivr.net/npm/stats.js@0.17.0/build/stats.min.js')
@@ -176,8 +213,6 @@ onMounted(async() => {
     (exp, prev) => {
       stop()
       fn = () => 0
-      colorA = pick(colors)
-      colorB = next(colors, colorA)
       if (prev)
         router.replace({ query: { q: exp } })
 
