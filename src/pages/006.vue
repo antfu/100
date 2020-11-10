@@ -1,10 +1,11 @@
 <template lang='pug'>
 paper
   .fixed.top-0.bottom-0.left-0.right-0(ref='el')
+  p {{motion}}
 </template>
 
 <script setup lang='ts'>
-import { useWindowSize } from '@vueuse/core'
+import { useDeviceMotion, useWindowSize } from '@vueuse/core'
 import { ref, onMounted, reactive, computed, watch } from 'vue'
 import type Matter from 'matter-js'
 import { useRoute } from 'vue-router'
@@ -22,6 +23,8 @@ const offest = reactive({
   x: computed(() => (viewport.width - 400) / 2),
   y: computed(() => (viewport.height - 400) / 2),
 })
+
+export const motion = reactive(useDeviceMotion())
 
 onMounted(async() => {
   await load('https://cdn.jsdelivr.net/npm/matter-js@0.14.2/build/matter.min.js')
