@@ -148,13 +148,11 @@ onMounted(async() => {
       reset()
   })
 
-  addEventListener('mouseup', () => {
-    start()
-  })
+  addEventListener('mouseup', start)
+  addEventListener('touchend', start)
 
-  addEventListener('mousedown', () => {
-    stop()
-  })
+  addEventListener('mousedown', stop)
+  addEventListener('touchstart', stop)
 
   // @ts-ignore
   render.element.style.zIndex = -1
