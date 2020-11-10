@@ -5,7 +5,7 @@ async function run() {
   const context = await browser.newContext({
     viewport: {
       width: 960,
-      height: 480,
+      height: 500,
     },
     deviceScaleFactor: 2,
   })
