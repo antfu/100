@@ -2,6 +2,7 @@ export const info = [
   {
     name: 'Mass',
     date: '11/06',
+    draft: false,
   },
   {
     name: 'Hex',
@@ -22,6 +23,11 @@ export const info = [
   {
     name: 'M & M',
     date: '11/11',
+  },
+  {
+    name: 'Ego',
+    date: '11/12',
+    draft: true,
   },
 ]
 
