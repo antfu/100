@@ -31,19 +31,11 @@ note
 </template>
 
 <script setup lang='ts'>
-import { useEventListener, useRafFn, useThrottle } from '@vueuse/core'
+import { useEventListener, useRafFn, useThrottle, noop } from '@vueuse/core'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { get, initCanvas, load, pick, range, shuffle } from '../utils'
 
-export const el = ref<HTMLCanvasElement | null>(null)
-export const runner = ref<HTMLIFrameElement | null>(null)
-export const input = ref<HTMLInputElement | null>(null)
-
-const route = useRoute()
-const router = useRouter()
-
-let expressionIndex = -1
 const presets = shuffle([
   { code: 'th - sin(r) * cos(t)' },
   { code: 'cos(t)' },
@@ -53,6 +45,11 @@ const presets = shuffle([
   { code: 'sin(th)' },
   { code: 'tan(th * 12t)' },
   { code: 'tan(th) / r / sin(t)' },
+  { code: 'r * cos(th) < sin(t)' },
+  { code: 'round(20r*cos(th+t))%3' },
+  { code: 'ceil(20r*cos(t%th))%4' },
+
+  // community
   { code: 'abs(tan(r*t/th)|r)', by: 'inky' },
   { code: 'sin(3 * t)/r', by: 'rudygt' },
   { code: 'sin(t%r)*r/th*cos(random()-r)', by: 'line_o' },
@@ -61,6 +58,15 @@ const presets = shuffle([
   { code: 'tan(t*cos(2*th))*cos(t*r)', by: 'patak_js' },
   { code: 'cos(t*r*2)**2-sin(t*th)**2', by: 'patak_js' },
 ])
+
+export const el = ref<HTMLCanvasElement | null>(null)
+export const runner = ref<HTMLIFrameElement | null>(null)
+export const input = ref<HTMLInputElement | null>(null)
+
+const route = useRoute()
+const router = useRouter()
+
+let expressionIndex = -1
 
 export const author = computed(() =>
   presets.find(i => i.code === expression.value)?.by,
@@ -111,6 +117,9 @@ export const recolor = () => {
   colorB = pick(colors, colorA)
 }
 
+let start = noop
+let stop = noop
+
 recolor()
 if (!expression.value)
   next()
@@ -121,6 +130,9 @@ useEventListener('keydown', (e) => {
 
   if (e.key === 'c') {
     recolor()
+  }
+  else if (e.key === 'r') {
+    start()
   }
   else if (e.key === 'm') {
     colorA = [255, 255, 255]
@@ -201,13 +213,13 @@ onMounted(async() => {
     stats.end()
   })
 
-  const stop = () => {
+  stop = () => {
     stopped = true
     rafControl.stop()
     ctx.clearRect(0, 0, width, height)
   }
 
-  const start = () => {
+  start = () => {
     ts = +new Date()
     stopped = false
     rafControl.start()
