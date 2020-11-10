@@ -3,7 +3,6 @@ import { UserConfig } from 'vite'
 import Voie from 'vite-plugin-voie'
 import PurgeIcons from 'vite-plugin-purge-icons'
 import ViteComponents from 'vite-plugin-components'
-import { postBuild } from './scripts/postbuild'
 
 const alias = {
   '/~/': path.resolve(__dirname, 'src'),

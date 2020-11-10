@@ -41,7 +41,7 @@ const expressions = shuffle([
   't % r',
   'random() * 2 - 1',
   'sin(th)',
-  'tan(th * 2t)',
+  'tan(th * 12t)',
   'tan(th) / r / sin(t)',
 ])
 

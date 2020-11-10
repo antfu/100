@@ -10,10 +10,10 @@ async function run() {
     deviceScaleFactor: 2,
   })
 
-  async function take(no: string, retry = 3, delay = 1000, take = 1) {
+  async function take(no: string, retry = 3, delay = 1000, take = 1, query = '') {
     for (let i = 0; i < retry; i++) {
       const page = await context.newPage()
-      await page.goto(`http://localhost:3333/${no}?shot=true`)
+      await page.goto(`http://localhost:3333/${no}?shot=true${query}`)
       await page.waitForTimeout(delay)
       for (let j = 0; j < take; j++)
         await page.screenshot({ path: `scripts/screenshots/${no}-${i}-${j}.png` })
@@ -24,9 +24,10 @@ async function run() {
 
   // await take('', 1)
   // await take('001', 3, 800, 4)
-  await take('002', 8, 500)
+  // await take('002', 8, 500)
   // await take('003', 1, 1500, 5)
   // await take('004', 1, 500)
+  // await take('005', 5, 30000, 5, '&q=tan(th%20*%2016t)')
 
   await browser.close()
 }
