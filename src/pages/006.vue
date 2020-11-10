@@ -84,7 +84,7 @@ onMounted(async() => {
       frictionAir: 0.1,
       friction: 0,
       render: {
-        fillStyle: `rgb(${30 + ix * 26},${60 + iy * 20},${90 + (8 - ix) * (iy + 1)})`,
+        fillStyle: `rgb(${30 + ix * 26},${80 + iy * 22},${90 + (9 - ix) * (8 - iy)})`,
         strokeStyle: 'black',
         lineWidth: 0,
       },
@@ -192,6 +192,12 @@ onMounted(async() => {
     stop()
     blocks.forEach(i => i.reset())
   }
+  const shake = () => {
+    stop()
+    blocks.forEach(i => i.shake())
+    start()
+  }
+
   // @ts-ignore
   render.mouse = mouse
 
@@ -206,17 +212,18 @@ onMounted(async() => {
   useEventListener('mousedown', stop)
   useEventListener('touchstart', stop)
 
-  useShake(() => {
-    stop()
-    blocks.forEach(i => i.shake())
-    start()
-  })
+  useShake(shake)
 
   // @ts-ignore
   render.element.style.zIndex = -1
 
   Engine.run(engine)
   Render.run(render)
+
+  if (route.query.shake) {
+    setTimeout(shake, 500)
+    setTimeout(shake, 1000)
+  }
 })
 </script>
 

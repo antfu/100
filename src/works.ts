@@ -22,7 +22,6 @@ export const info = [
   {
     name: 'M & M',
     date: '11/11',
-    draft: true,
   },
 ]
 
