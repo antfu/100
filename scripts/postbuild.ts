@@ -26,6 +26,17 @@ export async function postBuild() {
 
     await fs.writeFile(`dist/${work.no}.html`, $.html(), 'utf-8')
   }
+
+  const $ = cheerio.load(indexHTML)
+  const head = $('head')
+  const title = $('title').text()
+
+  head.append($(`<meta property="og:title" content="${title}" />`))
+  head.append($(`<meta property="og:image" content="${DOMAIN}/shots/index.png" />`))
+  head.append($('<meta name="twitter:card" content="summary_large_image" />'))
+  head.append($('<meta name="twitter:creator" content="@antfu7" />'))
+
+  await fs.writeFile('dist/index.html', $.html(), 'utf-8')
 }
 
 postBuild()
