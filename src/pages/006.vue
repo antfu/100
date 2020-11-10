@@ -162,7 +162,7 @@ onMounted(async() => {
   const restoreAll = () => {
     blocks.map(i => ({ ...i, distance: i.getDistance() }))
       .sort((a, b) => b.distance - a.distance)
-      .forEach((i, idx) => i.restore(idx < 3 ? 0.2 : 0.05))
+      .forEach((i, idx) => i.restore(idx < 3 ? 0.15 : 0.08))
   }
 
   const start = () => {
