@@ -57,6 +57,7 @@ const presets = shuffle([
   { code: 'abs(th+t)*4%2>1&&r', by: 'matths' },
   { code: 'tan(t*cos(2*th))*cos(t*r)', by: 'patak_js' },
   { code: 'cos(t*r*2)**2-sin(t*th)**2', by: 'patak_js' },
+  { code: 'abs(th+sin(t*r))', by: 'cartocalypse' },
 ])
 
 export const el = ref<HTMLCanvasElement | null>(null)
