@@ -38,11 +38,9 @@ import { get, initCanvas, load, pick, range, shuffle } from '../utils'
 
 const presets = shuffle([
   { code: 'th - sin(r) * cos(t)' },
-  { code: 'cos(t)' },
   { code: 'abs(sin(r - 3t))' },
   { code: 't % r' },
   { code: 'random() * 2 - 1' },
-  { code: 'sin(th)' },
   { code: 'tan(th * 12t)' },
   { code: 'tan(th) / r / sin(t)' },
   { code: 'r * cos(th) < sin(t)' },
