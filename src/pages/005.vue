@@ -59,6 +59,7 @@ const presets = shuffle([
   { code: 'cos(t%th)/1-tan(r-random()*.091)', by: 'line_o' },
   { code: 'abs(th+t)*4%2>1&&r', by: 'matths' },
   { code: 'tan(t*cos(2*th))*cos(t*r)', by: 'patak_js' },
+  { code: 'cos(t*r*2)**2-sin(t*th)**2', by: 'patak_js' },
 ])
 
 export const author = computed(() =>

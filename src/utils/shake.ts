@@ -3,8 +3,8 @@ import { watch } from 'vue'
 
 export function useShake(fn: () => void) {
   const options = {
-    threshold: 15, // default velocity threshold for shake to register
-    timeout: 1000, // default interval between events
+    threshold: 10, // default velocity threshold for shake to register
+    timeout: 500, // default interval between events
   }
 
   const { accelerationIncludingGravity } = useDeviceMotion()

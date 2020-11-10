@@ -114,7 +114,7 @@ onMounted(async() => {
       World.add(engine.world, [body])
     }
 
-    const shake = (mutiplier = 10) => {
+    const shake = (mutiplier = 30) => {
       Body.setAngularVelocity(body, (Math.random() - 0.5) * 2)
       Body.setVelocity(body, { x: (Math.random() - 0.5) * 2 * mutiplier, y: (Math.random() - 0.5) * 2 * mutiplier })
     }
@@ -196,8 +196,9 @@ onMounted(async() => {
   useEventListener('touchstart', stop)
 
   useShake(() => {
-    console.log('Shaked!')
+    stop()
     blocks.forEach(i => i.shake())
+    start()
   })
 
   // @ts-ignore
