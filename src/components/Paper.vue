@@ -22,7 +22,10 @@ import { useRoute } from 'vue-router'
 import { works } from '../works'
 
 const route = useRoute()
-const no = route.path.slice(1)
+let no = route.path.slice(1)
+if (no.startsWith('x'))
+  no = no.slice(1)
+
 export const shot = Boolean(route.query.shot)
 export const work = works.find(i => i.no === no)
 

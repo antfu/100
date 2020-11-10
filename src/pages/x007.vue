@@ -1,15 +1,18 @@
 <template lang='pug'>
-paper
+paper(:style='transformStyle')
   div
-    .box(ref='box')
+    .box.rounded-full(ref='box')
       .anchor.overflow-visable.w-0.h-0.fixed
-        .text(:style='transformStyle') A ship in harbor is safe,<br>but that is not what ships are built for
+        .text
+          p.pt-4 A ship in harbor is safe,<br>but that is not what ships<br>are built for.
+          br
+          em.text-gray-400 — John A. Shedd
 
       .div.p-4(v-if='debug')
         p Gamma {{ gamma }}
         p Beta {{ beta }}
         p Theta {{theta}}
-    .text-gray-400.text-center(v-if='!mobile') use phone to visit
+    .text-gray-400.text-center.fixed.tip(v-if='!mobile') use phone to visit
 </template>
 
 <script setup lang='ts'>
@@ -35,7 +38,7 @@ export const theta = computed(() => {
 
 export const transformStyle = computed(() => {
   return {
-    transform: `translate(-50%, -50%) rotate(${theta.value}rad)`,
+    transform: `rotate(${theta.value}rad)`,
   }
 })
 </script>
@@ -47,5 +50,10 @@ export const transformStyle = computed(() => {
 .text
   width 500px
   text-align center
+  transform translate(-50%, -50%)
+
+.tip
+  top calc(50% + 220px)
+  left 50%
   transform translate(-50%, -50%)
 </style>
