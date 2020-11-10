@@ -1,6 +1,6 @@
 <template lang='pug'>
 .note.font-normal.font-mono(:class='{active}' v-if='!shot')
-  .handle.fixed.border.border-gray-200.text-center.p-2.text-gray-400(@click='active=true') ?
+  .handle.fixed.border.border-gray-200.text-center.p-2.text-gray-400.bg-white.bg-opacity-75(@click='active=true') ?
   .modal-bg.bg-black.fixed.top-0.left-0.right-0.bottom-0(@click='active=false')
   .content.border.border-gray-200.p-8.fixed.bottom-0.bg-white.shadow
     slot Hello
@@ -23,7 +23,6 @@ export const active = ref(false)
     height 40px
     bottom -2px
     cursor default
-    background white
 
   .content
     pointer-events none

@@ -1,6 +1,11 @@
 <template lang='pug'>
 paper
   .fixed.top-0.bottom-0.left-0.right-0(ref='el')
+
+note
+  p drag them, or shake your phone
+  br
+  a.link(@click='toggleShape') toggle shape
 </template>
 
 <script setup lang='ts'>
@@ -16,12 +21,19 @@ export const el = ref(null)
 export const sphere = ref(!route.query.square)
 export const debug = ref(!!route.query.debug)
 
+const size = 50
+const rows = 8
+
 const viewport = reactive(useWindowSize())
 
 const offest = reactive({
-  x: computed(() => (viewport.width - 400) / 2),
-  y: computed(() => (viewport.height - 400) / 2),
+  x: computed(() => (viewport.width - size * rows) / 2),
+  y: computed(() => (viewport.height - size * rows) / 2),
 })
+
+export const toggleShape = () => {
+  sphere.value = !sphere.value
+}
 
 onMounted(async() => {
   await load('https://cdn.jsdelivr.net/npm/matter-js@0.14.2/build/matter.min.js')
@@ -58,9 +70,8 @@ onMounted(async() => {
 
   engine.world.gravity.y = 0
 
-  const r8 = range(8)
+  const r8 = range(rows)
 
-  const size = 50
   const blocks = r8.flatMap(ix => r8.map((iy) => {
     let body: Matter.Body = undefined!
 
@@ -79,7 +90,7 @@ onMounted(async() => {
       },
     }
 
-    const restore = (factor = 0.1) => {
+    const restore = (factor = 0.05) => {
       Body.setVelocity(
         body,
         {
@@ -150,7 +161,7 @@ onMounted(async() => {
   const restoreAll = () => {
     blocks.map(i => ({ ...i, distance: i.getDistance() }))
       .sort((a, b) => b.distance - a.distance)
-      .forEach((i, idx) => i.restore(idx < 3 ? 0.2 : 0.1))
+      .forEach((i, idx) => i.restore(idx < 3 ? 0.2 : 0.05))
   }
 
   const start = () => {
