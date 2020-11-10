@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --port 3333 --open",
-    "build": "cross-env NODE_ENV=production vite build",
+    "build": "cross-env NODE_ENV=production vite build && esno scripts/postbuild.ts",
     "shot": "esno scripts/screenshot.ts"
   },
   "dependencies": {
@@ -18,13 +18,17 @@
     "@antfu/eslint-config-vue": "^0.4.3",
     "@iconify/json": "^1.1.254",
     "@purge-icons/generated": "^0.4.1",
+    "@types/cheerio": "^0.22.22",
+    "@types/fs-extra": "^9.0.3",
     "@types/matter-js": "^0.14.5",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@vue/compiler-sfc": "3.0.2",
     "@vuedx/typescript-plugin-vue": "^0.2.3",
+    "cheerio": "^1.0.0-rc.3",
     "cross-env": "^7.0.2",
     "eslint": "^7.13.0",
     "esno": "^0.2.4",
+    "fs-extra": "^9.0.1",
     "matter-js": "^0.14.2",
     "playwright": "^1.5.2",
     "pug": "^3.0.0",
