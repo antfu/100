@@ -6,6 +6,9 @@ paper
     .controls
       turns.inline-block.mr-2(v-model='mode' :options='patterns')
       toggle.inline-block.mr-2(v-model='showHexagon') hex
+
+note
+  p inspired by <a href='https://codepen.io/Manoylov/pen/dyorBVb' target='_blank'>this CodePen</a>
 </template>
 
 <script setup lang='ts'>

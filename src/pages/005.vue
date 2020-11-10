@@ -10,7 +10,7 @@ paper
       input.flex-auto.outline-none.ml-3(v-model='expression' ref='input' maxlength='32')
     p.text-gray-400(:class='{"opacity-0": !author}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
 
-note.font-normal.font-mono
+note
   p.font-bold.mb-1 polar = (t,r,th)
   p inspired by <a href='https://tixy.land/' target='_blank'>tixy.land</a> but in polar coordinates
   br

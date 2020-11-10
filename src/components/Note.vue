@@ -1,5 +1,5 @@
 <template lang='pug'>
-.note(:class='{active}' v-if='!shot')
+.note.font-normal.font-mono(:class='{active}' v-if='!shot')
   .handle.fixed.border.border-gray-200.text-center.p-2.text-gray-400(@click='active=true') ?
   .modal-bg.bg-black.fixed.top-0.left-0.right-0.bottom-0(@click='active=false')
   .content.border.border-gray-200.p-8.fixed.bottom-0.bg-white.shadow
@@ -22,13 +22,14 @@ export const active = ref(false)
     width 40px
     height 40px
     bottom -2px
+    cursor default
 
   .content
     pointer-events none
     left 50%
     width 500px
     max-width 100vw
-    min-height 300px
+    min-height 100px
     transform translate(-50%, 110%)
     transition 0.3s all ease-in-out
 

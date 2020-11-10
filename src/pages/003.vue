@@ -1,6 +1,11 @@
 <template lang='pug'>
 paper
   .box.overflow-hidden(ref='box')
+
+note
+  p.font-bold hands-on <a href='https://threejs.org/' target='_blank'>three.js</a>
+  br
+  p following <a href='https://tympanus.net/codrops/2020/03/17/create-a-wave-motion-effect-on-an-image-with-three-js/' target='_blank'>this guide</a>
 </template>
 
 <script setup lang='ts'>
