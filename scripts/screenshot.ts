@@ -5,7 +5,7 @@ async function run() {
   const context = await browser.newContext({
     viewport: {
       width: 960,
-      height: 540,
+      height: 480,
     },
     deviceScaleFactor: 2,
   })
@@ -22,11 +22,11 @@ async function run() {
     }
   }
 
-  // await take('', 1)
-  // await take('001', 3, 800, 4)
+  await take('', 1)
+  await take('001', 3, 800, 4)
   await take('002', 8, 500)
   await take('003', 1, 1500, 5)
-  // await take('004', 1, 500)
+  await take('004', 1, 500)
 
   await browser.close()
 }
