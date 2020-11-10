@@ -1,5 +1,5 @@
 <template lang='pug'>
-.canvas
+.canvas(:class='{shot}')
   .bottom-nav.font-mono.flex
     div
       span.font-bold {{work.name}}
@@ -43,4 +43,10 @@ useTitle(work ? `${no}. ${work.name}` : '404')
   left 0
   right 0
   padding 8px 12px
+
+.shot .nav
+  padding 24px
+
+.shot .bottom-nav
+  padding 20px 24px
 </style>
