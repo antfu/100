@@ -7,7 +7,7 @@ paper
         canvas(ref='el')
     .flex.mt-2
       p.text-gray-500 (t,r,th) =>
-      input.flex-auto.outline-none.ml-3(v-model='expression' ref='input' maxlength='32')
+      input.flex-auto.outline-none.ml-3(v-model='expression' ref='input' maxlength='32' autocomplete='false' spellcheck='false')
     p.text-gray-400(:class='{"opacity-0": !author}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
 
 note
@@ -55,6 +55,7 @@ const presets = shuffle([
   { code: 'tan(th) / r / sin(t)' },
   { code: 'abs(tan(r*t/th)|r)', by: 'inky' },
   { code: 'sin(3 * t)/r', by: 'rudygt' },
+  { code: 'sin(t%r)*r/th*cos(random()-r)', by: 'line_o' },
 ])
 
 export const author = computed(() =>
