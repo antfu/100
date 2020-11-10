@@ -8,6 +8,18 @@ paper
     .flex.mt-2
       p.text-gray-500 (t,r,th) =>
       input.flex-auto.outline-none.ml-3(v-model='expression' maxlength='20')
+
+  note.font-normal.font-mono
+    p.font-bold.mb-1 polar = (t,r,th)
+    p inspired by <a href='https://tixy.land/' target='_blank'>tixy.land</a> but in polar coordinates
+    br
+    pre <b>t</b>  - seconds passed
+    pre <b>r</b>  - radial    (-1 ~ 1)
+    pre <b>th</b> - angular θ (-1 ~ 1)
+    br
+    p `Math.` can be omitted
+    p `2 * t` can be written as `2t`
+    p urls are sharable
 </template>
 
 <script setup lang='ts'>
