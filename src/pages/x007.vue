@@ -4,7 +4,7 @@ paper(:style='transformStyle')
     .box.rounded-full(ref='box')
       .anchor.overflow-visable.w-0.h-0.fixed
         .text
-          p.pt-4 A ship in harbor is safe,<br>but that is not what ships<br>are built for.
+          p.pt-12 A ship in harbor is safe,<br>but that is not what ships<br>are built for.
           br
           em.text-gray-400 — John A. Shedd
 
@@ -25,7 +25,7 @@ const route = useRoute()
 export const debug = !!route.query.debug
 export const { gamma, beta } = useDeviceOrientation()
 
-export const mobile = computed(() => gamma.value == null || beta.value == null)
+export const mobile = computed(() => gamma.value != null && beta.value != null && gamma.value !== 0 && beta.value !== 0)
 export const theta = computed(() => {
   if (gamma.value == null || beta.value == null)
     return 0
