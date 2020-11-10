@@ -11,7 +11,8 @@ paper(:style='transformStyle')
       .div.p-4(v-if='debug')
         p Gamma {{ gamma }}
         p Beta {{ beta }}
-        p Theta {{theta}}
+        p Theta {{ theta }}
+        p Alpha {{ alpha }}
     .text-gray-400.text-center.fixed.tip(v-if='!mobile') use phone to visit
 </template>
 
@@ -23,9 +24,9 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 export const debug = !!route.query.debug
-export const { gamma, beta } = useDeviceOrientation()
+export const { gamma, beta, alpha } = useDeviceOrientation()
 
-export const mobile = computed(() => gamma.value != null && beta.value != null && gamma.value !== 0 && beta.value !== 0)
+export const mobile = computed(() => gamma.value != null && beta.value != null && (gamma.value !== 0 || beta.value !== 0 || alpha.value !== 0))
 export const theta = computed(() => {
   if (gamma.value == null || beta.value == null)
     return 0
