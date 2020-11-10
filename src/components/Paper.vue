@@ -1,6 +1,6 @@
 <template lang='pug'>
 .canvas(:class='{shot}')
-  .bottom-nav.font-mono.flex
+  .bottom-nav.font-mono.flex(v-if='work')
     div
       span.font-bold {{work.name}}
       span.text-gray-300.ml-1 {{work.no}}
