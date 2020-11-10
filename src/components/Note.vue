@@ -23,6 +23,7 @@ export const active = ref(false)
     height 40px
     bottom -2px
     cursor default
+    background white
 
   .content
     pointer-events none

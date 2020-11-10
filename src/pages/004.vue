@@ -70,7 +70,3 @@ watch(
 export const innerX = computed(() => -(boxX.value + screenLeft.value))
 export const innerY = computed(() => -(boxY.value + screenTop.value))
 </script>
-
-<style lang='stylus' scoped>
-
-</style>

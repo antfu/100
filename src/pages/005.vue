@@ -7,7 +7,7 @@ paper
         canvas(ref='el')
     .flex.mt-2
       p.text-gray-500 (t,r,th) =>
-      input.flex-auto.outline-none.ml-2(v-model='expression' ref='input' maxlength='32' autocomplete='false' spellcheck='false')
+      input.flex-auto.outline-none.ml-3(v-model='expression' ref='input' maxlength='32' autocomplete='false' spellcheck='false')
     p.text-gray-400(:class='{"opacity-0": !author}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
 
 note
@@ -244,5 +244,7 @@ onMounted(async() => {
   transform: scale(1.6);
   transform-origin: 0 0;
   margin-top: -2px;
+  margin-left: -2px;
+  perspective: 1px;
 }
 </style>
