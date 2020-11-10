@@ -1,15 +1,14 @@
 <template lang='pug'>
 paper
   .fixed.top-0.bottom-0.left-0.right-0(ref='el')
-  p {{motion}}
 </template>
 
 <script setup lang='ts'>
-import { useDeviceMotion, useWindowSize } from '@vueuse/core'
+import { useEventListener, useWindowSize } from '@vueuse/core'
 import { ref, onMounted, reactive, computed, watch } from 'vue'
 import type Matter from 'matter-js'
 import { useRoute } from 'vue-router'
-import { load, range } from '../utils'
+import { load, range, useShake } from '../utils'
 
 const route = useRoute()
 
@@ -23,8 +22,6 @@ const offest = reactive({
   x: computed(() => (viewport.width - 400) / 2),
   y: computed(() => (viewport.height - 400) / 2),
 })
-
-export const motion = reactive(useDeviceMotion())
 
 onMounted(async() => {
   await load('https://cdn.jsdelivr.net/npm/matter-js@0.14.2/build/matter.min.js')
@@ -117,12 +114,18 @@ onMounted(async() => {
       World.add(engine.world, [body])
     }
 
+    const shake = (mutiplier = 10) => {
+      Body.setAngularVelocity(body, (Math.random() - 0.5) * 2)
+      Body.setVelocity(body, { x: (Math.random() - 0.5) * 2 * mutiplier, y: (Math.random() - 0.5) * 2 * mutiplier })
+    }
+
     watch(sphere, init, { immediate: true })
 
     return {
       getDistance,
       restore,
       reset,
+      shake,
     }
   }))
 
@@ -181,16 +184,21 @@ onMounted(async() => {
   // @ts-ignore
   render.mouse = mouse
 
-  addEventListener('keydown', (e) => {
+  useEventListener('keydown', (e) => {
     if (e.key === 'r')
       reset()
   })
 
-  addEventListener('mouseup', start)
-  addEventListener('touchend', start)
+  useEventListener('mouseup', start)
+  useEventListener('touchend', start)
 
-  addEventListener('mousedown', stop)
-  addEventListener('touchstart', stop)
+  useEventListener('mousedown', stop)
+  useEventListener('touchstart', stop)
+
+  useShake(() => {
+    console.log('Shaked!')
+    blocks.forEach(i => i.shake())
+  })
 
   // @ts-ignore
   render.element.style.zIndex = -1

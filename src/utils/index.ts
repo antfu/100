@@ -1,10 +1,11 @@
 import { ref } from 'vue'
-import { useIntervalFn, useRafFn } from '@vueuse/core'
+import { useRafFn } from '@vueuse/core'
 
 export * from './load'
 export * from './stringify'
 export * from './vector'
 export * from './canvas'
+export * from './shake'
 
 export function shuffle<T>(arr: T[]): T[] {
   const array = arr.slice(0)
