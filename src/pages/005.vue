@@ -99,7 +99,7 @@ const colors = shuffle([
 let colorA = [0, 0, 0]
 let colorB = [0, 0, 0]
 
-export const expression = ref<string>(route.query?.q?.toString() || '')
+export const expression = ref<string>(route.query?.q?.toString()?.trimEnd() || '')
 export const fps = Boolean(route.query?.fps)
 
 const thorrtled = useThrottle(expression, 500)
@@ -232,7 +232,7 @@ onMounted(async() => {
       stop()
       fn = () => 0
       if (prev)
-        router.replace({ query: { q: exp } })
+        router.replace({ query: { q: `${exp} ` } })
 
       try {
         // eslint-disable-next-line no-eval
