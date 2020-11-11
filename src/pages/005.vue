@@ -2,7 +2,7 @@
 paper
   .flex.flex-col
     iframe.none.h-2.mb-4(ref='runner' sandbox='allow-same-origin')
-    .box.overflow-hidden(ref='box' @click='next' :class='{"rounded-full": rounded}')
+    .box.overflow-hidden.transistion(ref='box' @click='next' :class='{"rounded-full": rounded}')
       .canvas-wrapper
         canvas(ref='el')
     .flex.mt-2
@@ -33,6 +33,7 @@ note
 
 <script setup lang='ts'>
 import { useEventListener, useRafFn, useThrottle, noop } from '@vueuse/core'
+import { useRouteQuery } from '@vueuse/router'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { get, initCanvas, load, pick, range, shuffle } from '../utils'
@@ -104,7 +105,7 @@ let colorA = [0, 0, 0]
 let colorB = [0, 0, 0]
 
 export const expression = ref<string>(route.query?.q?.toString()?.trimEnd() || '')
-export const fps = Boolean(route.query?.fps)
+export const fps = useRouteQuery('fps')
 
 const thorrtled = useThrottle(expression, 500)
 
@@ -157,7 +158,7 @@ onMounted(async() => {
 
   // @ts-ignore
   const stats = new window.Stats()
-  if (fps) {
+  if (fps.value) {
     stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
     document.body.appendChild(stats.dom)
   }
