@@ -2,7 +2,7 @@
 paper
   .flex.flex-col
     iframe.none.h-2.mb-4(ref='runner' sandbox='allow-same-origin')
-    .box.overflow-hidden(ref='box' @click='next')
+    .box.overflow-hidden(ref='box' @click='next' :class='{"rounded-full": rounded}')
       .canvas-wrapper
         canvas(ref='el')
     .flex.mt-2
@@ -26,8 +26,9 @@ note
   p `2 * t` can be written as `2t`
   p link is sharable
   br
-  p <b>c</b> - change colors
-  p <b>m</b> - monochrome
+  p(@click='recolor') <b>c</b> - change colors
+  p(@click='f.start') <b>r</b> - reset `t`
+  p(@click='toggleShape') <b>s</b> - canvas shape
 </template>
 
 <script setup lang='ts'>
@@ -58,6 +59,8 @@ const presets = shuffle([
   { code: 'abs(th+sin(t*r))', by: 'cartocalypse' },
   { code: 'sin(th+t+r*tan(t))', by: 'erinbeess' },
   { code: '.5r*sin(th)+.5/.5*sin(t*5)', by: 'matths' },
+  { code: '(cos(2t*r)-sin(t+th))*0.5', by: 'patak_js' },
+  { code: '(cos(2t*(r-1))-sin(t+5*th))/2', by: 'patak_js' },
 ])
 
 export const el = ref<HTMLCanvasElement | null>(null)
@@ -66,8 +69,9 @@ export const input = ref<HTMLInputElement | null>(null)
 
 const route = useRoute()
 const router = useRouter()
-
 let expressionIndex = -1
+
+export const rounded = ref(false)
 
 export const author = computed(() =>
   presets.find(i => i.code === expression.value)?.by,
@@ -106,6 +110,8 @@ const thorrtled = useThrottle(expression, 500)
 
 const MathContext = `const {${Object.getOwnPropertyNames(Math).join(',')}}=Math`
 
+export const toggleShape = () => rounded.value = !rounded.value
+
 export const next = () => {
   expressionIndex += 1
   const { code } = get(presets, expressionIndex)
@@ -118,8 +124,10 @@ export const recolor = () => {
   colorB = pick(colors, colorA)
 }
 
-let start = noop
-let stop = noop
+export const f = {
+  start: noop,
+  stop: noop,
+}
 
 recolor()
 if (!expression.value)
@@ -133,7 +141,10 @@ useEventListener('keydown', (e) => {
     recolor()
   }
   else if (e.key === 'r') {
-    start()
+    f.start()
+  }
+  else if (e.key === 's') {
+    toggleShape()
   }
   else if (e.key === 'm') {
     colorA = [255, 255, 255]
@@ -214,13 +225,13 @@ onMounted(async() => {
     stats.end()
   })
 
-  stop = () => {
+  f.stop = () => {
     stopped = true
     rafControl.stop()
     ctx.clearRect(0, 0, width, height)
   }
 
-  start = () => {
+  f.start = () => {
     ts = +new Date()
     stopped = false
     rafControl.start()
@@ -243,7 +254,7 @@ onMounted(async() => {
             return ${exp.replace(/(\d+)(\w)/, (_, n, x) => `${n} * ${x}`)}
           }
         }`)()
-        start()
+        f.start()
       }
       catch (e) {
       }
