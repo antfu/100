@@ -1,5 +1,5 @@
 <template lang='pug'>
-.canvas(:class='{shot}')
+.paper(:class='{shot}')
   .bottom-nav.font-mono.flex(v-if='work')
     div
       span.font-bold {{work.name}}

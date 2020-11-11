@@ -1,14 +1,21 @@
 <template lang='pug'>
 paper
-  .flex.flex-col
-    iframe.none.h-2.mb-4(ref='runner' sandbox='allow-same-origin')
-    .box.overflow-hidden.transistion(ref='box' @click='next' :class='{"rounded-full": rounded}')
-      .canvas-wrapper
-        canvas(ref='el')
-    .flex.mt-2
-      p.text-gray-500 (t,r,th) =>
-      input.flex-auto.outline-none.ml-3(v-model='expression' ref='input' maxlength='32' autocomplete='false' spellcheck='false')
-    p.text-gray-400(:class='{"opacity-0": !author}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
+  .box.overflow-hidden(ref='box' @click='next' :class='{"rounded-full": rounded}')
+    .canvas-wrapper
+      canvas(ref='el')
+  .box-description
+    .flex.mt-2(:class='{"text-center": rounded, "flex-col": rounded}')
+      p.text-gray-400 (t,r,th) =>
+      input.flex-auto.outline-none(
+        v-model='expression'
+        :class='{ "text-center": rounded, "ml-3": !rounded }'
+        ref='input'
+        maxlength='32'
+        autocomplete='false'
+        spellcheck='false'
+      )
+    p.text-gray-400(:class='{"opacity-0": !author, "text-center": rounded, "mt-4": rounded}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
+    iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
 
 note
   p.font-bold.mb-1 polar = (t,r,th)

@@ -9,7 +9,7 @@ useTitle('100 days')
 </script>
 
 <template lang='pug'>
-.canvas
+.paper
   div
     h1.font-mono.mb-2.text-lg 100 days
     pre

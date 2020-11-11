@@ -1,11 +1,10 @@
 <template lang='pug'>
 paper
-  div
-    .box.overflow-hidden
-      canvas(ref='el' width='400' height='400' @click='f.run()')
-    .controls
-      turns.inline-block.mr-2(v-model='mode' :options='patterns')
-      toggle.inline-block.mr-2(v-model='showHexagon') hex
+  .box.overflow-hidden
+    canvas(ref='el' width='400' height='400' @click='f.run()')
+  .box-description.py-1
+    turns.inline-block.mr-2(v-model='mode' :options='patterns')
+    toggle.inline-block.mr-2(v-model='showHexagon') hex
 
 note
   p inspired by <a href='https://codepen.io/Manoylov/pen/dyorBVb' target='_blank'>this CodePen</a>

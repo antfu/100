@@ -10,11 +10,13 @@ body,
   @apply font-mono font-light;
 }
  
-.canvas {
+.paper {
   @apply fixed top-0 left-0 right-0 bottom-0 grid;
   place-items: center;
   user-select: none;
 }
+
+
 
 .link {
   @apply text-gray-400 hover:text-gray-600 transition;
@@ -26,8 +28,18 @@ body,
   border: 1px solid black;
 }
 
-.controls {
-  @apply py-1;
+.box-heading {
+  position: fixed;
+  left: calc(50% - 200px);
+  width: 400px;
+  bottom: calc(50% + 200px);
+}
+
+.box-description {
+  position: fixed;
+  left: calc(50% - 200px);
+  width: 400px;
+  top: calc(50% + 200px);
 }
 
 a[target='_blank']:not(.link) {

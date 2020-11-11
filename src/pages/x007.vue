@@ -1,19 +1,19 @@
 <template lang='pug'>
 paper(:style='transformStyle')
-  div
-    .box.rounded-full(ref='box')
-      .anchor.overflow-visable.w-0.h-0.fixed
-        .text
-          p.pt-12 A ship in harbor is safe,<br>but that is not what ships<br>are built for.
-          br
-          em.text-gray-400 — John A. Shedd
+  .box.rounded-full(ref='box')
+    .anchor.overflow-visable.w-0.h-0.fixed
+      .text
+        p.pt-12 A ship in harbor is safe,<br>but that is not what ships<br>are built for.
+        br
+        em.text-gray-400 — John A. Shedd
 
-      .div.p-4(v-if='debug')
-        p Gamma {{ gamma }}
-        p Beta {{ beta }}
-        p Theta {{ theta }}
-        p Alpha {{ alpha }}
-    .text-gray-400.text-center.fixed.tip(v-if='!mobile') use phone to visit
+  .box-description.py-3
+    .text-gray-400.text-center.tip(v-if='!mobile') use phone to visit
+    .div.p-4(v-if='debug')
+      p Gamma {{ gamma }}
+      p Beta {{ beta }}
+      p Theta {{ theta }}
+      p Alpha {{ alpha }}
 </template>
 
 <script setup lang='ts'>
@@ -48,13 +48,9 @@ export const transformStyle = computed(() => {
 .anchor
   left 50%
   top 50%
+
 .text
   width 500px
   text-align center
-  transform translate(-50%, -50%)
-
-.tip
-  top calc(50% + 220px)
-  left 50%
   transform translate(-50%, -50%)
 </style>
