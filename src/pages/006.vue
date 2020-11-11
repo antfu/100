@@ -205,6 +205,10 @@ onMounted(async() => {
   useEventListener('keydown', (e) => {
     if (e.key === 'r')
       reset()
+    else if (e.key === 's')
+      toggleShape()
+    else if (e.keyCode === 32) // space
+      shake()
   })
 
   useEventListener('mouseup', start)
