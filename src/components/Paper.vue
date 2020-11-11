@@ -17,9 +17,23 @@
 </template>
 
 <script setup lang='ts'>
-import { useTitle } from '@vueuse/core'
+import { ref } from 'vue'
+import { useEventListener, useFullscreen, useTitle } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import { works } from '../works'
+
+export const fullscreen = useFullscreen(ref(document.querySelector('html')))
+
+useEventListener('keydown', (e) => {
+  if (document.activeElement === document.body) {
+    if (e.key === 'f') {
+      if (fullscreen.isFullscreen.value)
+        fullscreen.exitFullscreen()
+      else
+        fullscreen.enterFullscreen()
+    }
+  }
+})
 
 const route = useRoute()
 let no = route.path.slice(1)
