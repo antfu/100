@@ -8,7 +8,7 @@ paper(:style='transformStyle')
         em.text-gray-400 — John A. Shedd
 
   .box-description.py-3
-    .text-gray-400.text-center.tip(v-if='!mobile') use phone to visit
+    .text-gray-400.text-center.tip(v-if='!mobile && !shot') use phone to visit
     .div.p-4(v-if='debug')
       p Gamma {{ gamma }}
       p Beta {{ beta }}
@@ -24,10 +24,14 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 export const debug = !!route.query.debug
+export const shot = !!route.query.shot
 export const { gamma, beta, alpha } = useDeviceOrientation()
 
 export const mobile = computed(() => gamma.value != null && beta.value != null && (gamma.value !== 0 || beta.value !== 0 || alpha.value !== 0))
 export const theta = computed(() => {
+  if (shot)
+    return Math.PI / 2 * 4.55
+
   if (gamma.value == null || beta.value == null)
     return 0
 

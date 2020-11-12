@@ -27,7 +27,6 @@ export const info = [
   {
     name: 'Ship',
     date: '11/12',
-    draft: true,
   },
 ]
 

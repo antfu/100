@@ -28,7 +28,8 @@ async function run() {
   // await take('003', 1, 1500, 5)
   // await take('004', 1, 500)
   // await take('005', 5, 1000, 20, '&q=th%20-%20sin(r)%20*%20cos(t)')
-  await take('006', 4, 3000, 5, '&shake=true')
+  // await take('006', 4, 3000, 5, '&shake=true')
+  await take('007', 1, 500)
 
   await browser.close()
 }
