@@ -2,7 +2,7 @@
 paper
   .box.centered.overflow-hidden
     canvas(ref='el' width='400' height='400')
-  .box-description.py-1
+  .box-description.py-1(v-if='!shot')
     toggle.inline-block.mr-2(v-model='wireframe') wireframe
     turns.inline-block.mr-2(v-model='speedLevel' :options='speeds')
 
@@ -15,12 +15,14 @@ note
 
 <script setup lang='ts'>
 import { useRafFn } from '@vueuse/core'
+import { useRouteQuery } from '@vueuse/router'
 import { timestamp } from '@vueuse/shared'
 import { computed, onMounted, ref, watch } from 'vue'
 import { initCanvas, SQRT_3, Vector, r90, range, r30, r60, pick, shuffle } from '../utils'
 
 export const el = ref<HTMLCanvasElement | null>(null)
 
+export const shot = useRouteQuery('shot')
 export const wireframe = ref(true)
 export const speeds = ['x0.5', 'x1', 'x2']
 export const speedLevel = ref('x1')
