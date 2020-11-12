@@ -72,6 +72,10 @@ const presets = shuffle([
   { code: 'sin(2/(r+.1)+th+t)', by: 'kennethdmiller3' },
   { code: 'sin(5/(r+.2)-t)*sin(5*th+t)', by: 'kennethdmiller3' },
   { code: 'r*sin(1/r-th-t)*sin(2/r+th+t)', by: 'kennethdmiller3' },
+  { code: 'r*(5*r*sin(5/r+t)^5*sin(th*5-t))', by: 'kennethdmiller3' },
+  { code: '5*r*sin(5*r-3th-t)^(5*r-t)%3', by: 'kennethdmiller3' },
+  { code: 'r*sin(1/r-th-t)*sin(2/r+th+t)', by: 'kennethdmiller3' },
+  { code: 'r*(7*sin(7/r-t)^7*sin(7*th-t))/7', by: 'kennethdmiller3' },
 ])
 
 export const el = ref<HTMLCanvasElement | null>(null)
