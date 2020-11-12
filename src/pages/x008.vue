@@ -1,36 +1,49 @@
 <template lang='pug'>
 paper
   .box.centered.overflow-hidden
-    canvas(ref='el' width='400' height='400' @click='f.run()')
+    canvas(ref='el' width='400' height='400')
   .box-description.py-1
     toggle.inline-block.mr-2(v-model='wireframe') wireframe
     turns.inline-block.mr-2(v-model='speedLevel' :options='speeds')
+
+note
+  p inspired by&nbsp;
+    a(href='https://twitter.com/beesandbombs/status/1320394711182528515?s=20' target='_blank') this tweet
+    | &nbsp;from&nbsp;
+    a(href='https://twitter.com/beesandbombs' target='_blank') @beesandbombs
 </template>
 
 <script setup lang='ts'>
 import { useRafFn } from '@vueuse/core'
-import { noop, timestamp } from '@vueuse/shared'
-import { computed, onMounted, ref } from 'vue'
-import { initCanvas, SQRT_3, Vector, r90, range, r30, r60 } from '../utils'
+import { timestamp } from '@vueuse/shared'
+import { computed, onMounted, ref, watch } from 'vue'
+import { initCanvas, SQRT_3, Vector, r90, range, r30, r60, pick, shuffle } from '../utils'
 
 export const el = ref<HTMLCanvasElement | null>(null)
 
-export const f = {
-  run: noop,
-}
-
-export const wireframe = ref(false)
-
+export const wireframe = ref(true)
 export const speeds = ['x0.5', 'x1', 'x2']
-
 export const speedLevel = ref('x1')
 
 const speed = computed(() => {
   if (speedLevel.value === 'x0.5')
-    return 3000
+    return 2400
   else if (speedLevel.value === 'x2')
-    return 750
-  return 1500
+    return 600
+  return 1200
+})
+
+const colorPresets = [
+  ['#444444', '#ffffff'],
+  ['#6A8372', '#ffe7b3'],
+  ['#B54434', '#E3916E'],
+  ['#1E88A8', '#eefefd'],
+]
+let colors = ['#6A8372', '#ffe7b3']
+
+watch(wireframe, (v) => {
+  if (v)
+    colors = shuffle(pick(colorPresets))
 })
 
 onMounted(() => {
@@ -104,9 +117,9 @@ onMounted(() => {
     if (turn) {
       if (!wireframe.value) {
         ctx.rect(0, 0, width, height)
-        ctx.fillStyle = 'black'
+        ctx.fillStyle = colors[1]
         ctx.fill()
-        ctx.fillStyle = 'white'
+        ctx.fillStyle = colors[0]
       }
 
       if (cycle === 1)
@@ -133,9 +146,9 @@ onMounted(() => {
     else {
       if (!wireframe.value) {
         ctx.rect(0, 0, canvas.width, canvas.height)
-        ctx.fillStyle = 'white'
+        ctx.fillStyle = colors[0]
         ctx.fill()
-        ctx.fillStyle = 'black'
+        ctx.fillStyle = colors[1]
       }
 
       if (cycle === 2) {

@@ -8,6 +8,8 @@ paper
 
 note
   p inspired by <a href='https://codepen.io/Manoylov/pen/dyorBVb' target='_blank'>this CodePen</a>
+  br
+  p extend reading <a href='https://www.redblobgames.com/grids/hexagons/' target='_blank'>Hexagonal Grids</a>
 </template>
 
 <script setup lang='ts'>
