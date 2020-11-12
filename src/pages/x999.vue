@@ -26,31 +26,13 @@ note
 
 <script setup lang='ts'>
 import { useEventListener, useRafFn, useThrottle, noop } from '@vueuse/core'
-import { computed, onMounted, Ref, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouteQuery } from '@vueuse/router'
+import { onMounted, ref, watch } from 'vue'
 import { initCanvas, load, range } from '../utils'
 
 export const el = ref<HTMLCanvasElement | null>(null)
 export const runner = ref<HTMLIFrameElement | null>(null)
 export const input = ref<HTMLInputElement | null>(null)
-
-function useRouteQuery(name: string, defaultValue?: string, { mode = 'replace', route = useRoute(), router = useRouter() } = {}): Ref<string> {
-  return computed<any>({
-    get() {
-      const data = route.query[name]
-      if (data == null)
-        return defaultValue ?? null
-
-      if (Array.isArray(data))
-        return data.filter(Boolean)
-      return data
-    },
-    set(v) {
-      // @ts-ignore
-      router.replace({ query: { ...route.query, [name]: v } })
-    },
-  })
-}
 
 export const expX = useRouteQuery('x', 'x + 1')
 export const expY = useRouteQuery('y', 'y + 1')

@@ -158,9 +158,9 @@
   integrity sha512-BybEHU5/I9EQ0CcwKAqmreZ2bMnAXrqLCTptAc6vPetHMbrXdZfejP5mt57e/8PNSt/qE7BHniU5PCYA+PGIHw==
 
 "@iconify/json@^1.1.254":
-  version "1.1.255"
-  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-1.1.255.tgz#6d5b0d5caff69a3fd438b060e62d893f822768e1"
-  integrity sha512-dSLG4/rtibWeJDUmtJHI5q+w4mAXYK8LgTPUWpSNi5RbojMNuTqKj/k4qfREIuuArwEDY5nhj6LNu4l66TktxQ==
+  version "1.1.256"
+  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-1.1.256.tgz#0f138d421ab12faca2fdd49aaf4fbc0122db08e3"
+  integrity sha512-CeLKbKL3lvq8afhR3LEyaBqXZDC52fgU0Ij3LbTRCwPUsumLNzhXA7MzN/f0JDYfXm9LShkfpgMcm00wQaANgg==
 
 "@koa/cors@^3.1.0":
   version "3.1.0"
@@ -331,9 +331,9 @@
     "@types/serve-static" "*"
 
 "@types/fs-extra@^9.0.3":
-  version "9.0.3"
-  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-9.0.3.tgz#9996e5cce993508c32325380b429f04a1327523e"
-  integrity sha512-NKdGoXLTFTRED3ENcfCsH8+ekV4gbsysanx2OPbstXVV6fZMgUCqTxubs6I9r7pbOJbFgVq1rpFtLURjKCZWUw==
+  version "9.0.4"
+  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-9.0.4.tgz#12553138cf0438db9a31cdc8b0a3aa9332eb67aa"
+  integrity sha512-50GO5ez44lxK5MDH90DYHFFfqxH7+fTqEEnvguQRzJ/tY9qFrMSHLiYHite+F3SNmf7+LHC1eMXojuD+E3Qcyg==
   dependencies:
     "@types/node" "*"
 
@@ -654,25 +654,25 @@
     vscode-uri "^2.1.2"
 
 "@vueuse/core@npm:@knightly/vueuse@dev":
-  version "4.0.0-knightly-dev.202011110651"
-  resolved "https://registry.yarnpkg.com/@knightly/vueuse/-/vueuse-4.0.0-knightly-dev.202011110651.tgz#00876748bfe91c60e1e65806a2d6f86b430b5d5b"
-  integrity sha512-kHLQ/4ETpLNMjd+6FE8Efq2sMkNGCvGIgHz8tm0NRqR+ivZXUuzYpK8LfSx4DioDVSDOv8aYTduc0OWFiI8rCA==
+  version "4.0.0-knightly-dev.202011121030"
+  resolved "https://registry.yarnpkg.com/@knightly/vueuse/-/vueuse-4.0.0-knightly-dev.202011121030.tgz#3e8a1d22f32dc2f411cf5ba4080f3c9734fb6556"
+  integrity sha512-M1tvQ/n3DzbESTP2y1KTNiWAKIrIcoC0K1Xvp5MfI6QIZGqe+4Mwp6DoCwjp1JTlpd0/90Co3RHVRNm7ai76xw==
   dependencies:
-    "@vueuse/shared" "npm:@knightly/vueuse__shared@4.0.0-knightly-dev.202011110651"
+    "@vueuse/shared" "npm:@knightly/vueuse__shared@4.0.0-knightly-dev.202011121030"
     vue-demi latest
 
 "@vueuse/router@npm:@knightly/vueuse__router@dev":
-  version "4.0.0-knightly-dev.202011110651"
-  resolved "https://registry.yarnpkg.com/@knightly/vueuse__router/-/vueuse__router-4.0.0-knightly-dev.202011110651.tgz#b543fe6d48e619edf0a8553ce2324fa55a12580d"
-  integrity sha512-lOXaOPQaoGcSbaw9vw4zlqL56XFV+MWHfQrf2syjNBQby5IYQVS4bWTGaOg+26JFraHI9JiPjn9Ri2J1sOQ9Hw==
+  version "4.0.0-knightly-dev.202011121030"
+  resolved "https://registry.yarnpkg.com/@knightly/vueuse__router/-/vueuse__router-4.0.0-knightly-dev.202011121030.tgz#d782419c199e87bc34e45a20ae8bd264135a2b77"
+  integrity sha512-qIneE6XqVmmN80KfgxCIQ71EuKZBzxZcA05VwjlYUX3I2h7Y/Gdb4VTw/+3s9TmFgMdImvnXjkWoimHiqHTIbg==
   dependencies:
-    "@vueuse/shared" "npm:@knightly/vueuse__shared@4.0.0-knightly-dev.202011110651"
+    "@vueuse/shared" "npm:@knightly/vueuse__shared@4.0.0-knightly-dev.202011121030"
     vue-demi latest
 
-"@vueuse/shared@npm:@knightly/vueuse__shared@4.0.0-knightly-dev.202011110651", "@vueuse/shared@npm:@knightly/vueuse__shared@dev":
-  version "4.0.0-knightly-dev.202011110651"
-  resolved "https://registry.yarnpkg.com/@knightly/vueuse__shared/-/vueuse__shared-4.0.0-knightly-dev.202011110651.tgz#b18dd42f45ba45198e507a8c190208f0a4af9aad"
-  integrity sha512-028R75i0vJQ6OpSefR2iwer91jf14pzVk3P7ba+o4ORuB6xpdVoaChnw3kINrIeQz4s660Fv+dbqxrYwCiwIMQ==
+"@vueuse/shared@npm:@knightly/vueuse__shared@4.0.0-knightly-dev.202011121030", "@vueuse/shared@npm:@knightly/vueuse__shared@dev":
+  version "4.0.0-knightly-dev.202011121030"
+  resolved "https://registry.yarnpkg.com/@knightly/vueuse__shared/-/vueuse__shared-4.0.0-knightly-dev.202011121030.tgz#f1c80aa30a97c4753d78cb45c10dd81cd963e011"
+  integrity sha512-biBWNrhfbEanFqHe2EUrN2xCfF7xuhnJrlWoZlr+bSPko2bZNeDVuR3YJ1p0IJnHcaMm55gs1xbV18NcpgnfYQ==
   dependencies:
     vue-demi latest
 
@@ -1494,7 +1494,7 @@ domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
-domutils@^2.0.0:
+domutils@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/domutils/-/domutils-2.4.2.tgz#7ee5be261944e1ad487d9aa0616720010123922b"
   integrity sha512-NKbgaM8ZJOecTZsIzW5gSuplsX2IWW2mIK7xVr8hTQF2v1CJWTmLZ1HOCh5sH+IzVPAGE5IucooOkvwBRAdowA==
@@ -1524,9 +1524,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.591:
-  version "1.3.592"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.592.tgz#4621521b223bf6e5469373528321e185d3c24670"
-  integrity sha512-kGNowksvqQiPb1pUSQKpd8JFoGPLxYOwduNRCqCxGh/2Q1qE2JdmwouCW41lUzDxOb/2RIV4lR0tVIfboWlO9A==
+  version "1.3.593"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.593.tgz#947ccf6dc8e013e2b053d2463ecd1043c164fcef"
+  integrity sha512-GvO7G1ZxvffnMvPCr4A7+iQPVuvpyqMrx2VWSERAjG+pHK6tmO9XqYdBfMIq9corRyi4bNImSDEiDvIoDb8HrA==
 
 emoji-regex@^7.0.1:
   version "7.0.3"
@@ -1696,11 +1696,11 @@ eslint-plugin-es@^3.0.0:
     regexpp "^3.0.0"
 
 eslint-plugin-html@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-6.1.0.tgz#0e0d4845d4b3eb6e199652385e272f7b722673db"
-  integrity sha512-xcqithhnjUxoEDRL0hYci4RSS8EZ1NGr3/H8x3BxJvxgbu4R3YaEUea9i93j95NuAgoAbOUfNmybta8fqi4UbA==
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-6.1.1.tgz#95aee151900b9bb2da5fa017b45cc64456a0a74e"
+  integrity sha512-JSe3ZDb7feKMnQM27XWGeoIjvP4oWQMJD9GZ6wW67J7/plVL87NK72RBwlvfc3tTZiYUchHhxAwtgEd1GdofDA==
   dependencies:
-    htmlparser2 "^4.1.0"
+    htmlparser2 "^5.0.1"
 
 eslint-plugin-import@^2.22.1:
   version "2.22.1"
@@ -2230,14 +2230,14 @@ htmlparser2@^3.9.1:
     inherits "^2.0.1"
     readable-stream "^3.1.1"
 
-htmlparser2@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-4.1.0.tgz#9a4ef161f2e4625ebf7dfbe6c0a2f52d18a59e78"
-  integrity sha512-4zDq1a1zhE4gQso/c5LP1OtrhYTncXNSpvJYtWJBtXAETPlMfi3IFNjGuQbYLuVY4ZR0QMqRVvo4Pdy9KLyP8Q==
+htmlparser2@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-5.0.1.tgz#7daa6fc3e35d6107ac95a4fc08781f091664f6e7"
+  integrity sha512-vKZZra6CSe9qsJzh0BjBGXo8dvzNsq/oGvsjfRdOrrryfeD9UOBEEQdeoqCRmKZchF5h2zOBMQ6YuQ0uRUmdbQ==
   dependencies:
     domelementtype "^2.0.1"
-    domhandler "^3.0.0"
-    domutils "^2.0.0"
+    domhandler "^3.3.0"
+    domutils "^2.4.2"
     entities "^2.0.0"
 
 http-assert@^1.3.0:
