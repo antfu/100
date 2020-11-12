@@ -10,7 +10,7 @@ useTitle('100 days')
 
 <template lang='pug'>
 .paper
-  div
+  .centered
     h1.font-mono.mb-2.text-lg 100 days
     pre
       span.text-gray-400 [

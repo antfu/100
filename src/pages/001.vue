@@ -1,6 +1,6 @@
 <template lang='pug'>
 paper
-  .box.overflow-hidden(@click='f.add' ref='canvas')
+  .box.centered.overflow-hidden(@click='f.add' ref='canvas')
 
 note
   p hands-on <a href='https://brm.io/matter-js' target='_blank'>Matter.js</a>

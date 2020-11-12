@@ -1,6 +1,6 @@
 <template lang='pug'>
 paper
-  .box.overflow-hidden
+  .box.centered.overflow-hidden
     canvas(ref='el' width='400' height='400' @click='f.run()')
   .box-description.py-1
     turns.inline-block.mr-2(v-model='mode' :options='patterns')

@@ -1,6 +1,6 @@
 <template lang='pug'>
 paper
-  .box(ref='box')
+  .box.centered(ref='box')
 </template>
 
 <script setup lang='ts'>

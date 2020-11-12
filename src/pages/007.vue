@@ -1,6 +1,6 @@
 <template lang='pug'>
 paper(:style='transformStyle')
-  .box.rounded-full(ref='box')
+  .box.centered.rounded-full(ref='box')
     .anchor.overflow-visable.w-0.h-0.fixed
       .text
         p.pt-12 A ship in harbor is safe,<br>but that is not what ships<br>are built for.

@@ -1,6 +1,6 @@
 <template lang='pug'>
 paper
-  .box.overflow-hidden(ref='box')
+  .box.centered.overflow-hidden(ref='box')
 
 note
   p.font-bold hands-on <a href='https://threejs.org/' target='_blank'>three.js</a>

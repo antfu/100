@@ -18,10 +18,18 @@ body {
   @apply fixed top-0 left-0 right-0 bottom-0 grid;
   place-items: center;
   user-select: none;
+  justify-content: center;
 }
 
 .link {
   @apply text-gray-400 hover:text-gray-600 transition;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .box {
