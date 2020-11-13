@@ -1,17 +1,23 @@
 <template lang='pug'>
 .paper(:class='{shot}')
   .bottom-nav.font-mono.flex(v-if='work')
-    div
-      span.font-bold {{work.name}}
-      span.text-gray-300.ml-1 {{work.no}}
-      br
-      span.text-gray-400 {{work.desc}}
+    .nav-links
+      router-link.prev.link(v-if='prev' :to='`/${prev.no}`')
+        span {{prev.name}}
+        span.mx-1.opacity-25 {{prev.no}}
+      .current
+        span.font-bold {{work.name}}
+        span.mx-1.opacity-50 {{work.no}}
+      router-link.next.link(v-if='next' :to='`/${next.no}`')
+        span {{next.name}}
+        span.mx-1.opacity-25 {{next.no}}
     .flex-auto
     .flex.flex-col
       .flex-auto
       span.text-gray-300 {{work.date}}
   .nav.font-mono(v-if='!shot')
-    router-link.link(to='/') back
+    router-link.link.text-xl.block.pt-1(to='/')
+      icon(icon='carbon:chevron-left')
 
   slot(:work='work')
 </template>
@@ -41,7 +47,11 @@ if (no.startsWith('x'))
   no = no.slice(1)
 
 export const shot = Boolean(route.query.shot)
-export const work = works.find(i => i.no === no)
+export const index = works.findIndex(i => i.no === no)
+
+export const work = works[index]
+export const prev = works[index - 1]
+export const next = works[index + 1]
 
 useTitle(work ? `${no}. ${work.name}` : '404')
 </script>
@@ -66,4 +76,16 @@ useTitle(work ? `${no}. ${work.name}` : '404')
 
 .shot .bottom-nav
   padding 20px 24px
+
+.nav-links
+  .next, .prev
+    opacity 0
+    transition .3s all ease-in-out
+    margin-top -1.5em
+    display block
+
+.nav-links:hover
+  .next, .prev
+    opacity 1
+    margin-top 0
 </style>
