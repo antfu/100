@@ -83,7 +83,7 @@ onMounted(() => {
     return vec.map(([x, y]) => [x + dx, y + dy])
   }
 
-  const ts = timestamp()
+  const ts = timestamp() + 1000
 
   const diamond: Vector[] = [
     [-hs, 0],
@@ -99,7 +99,7 @@ onMounted(() => {
   ]
 
   const frame = () => {
-    const t = timestamp() - ts
+    const t = Math.max(timestamp() - ts, 0)
 
     ctx.clearRect(0, 0, width, height)
 
