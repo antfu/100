@@ -19,10 +19,10 @@ export const shot = useRouteQuery('shot')
 
 onMounted(() => {
   const canvas = el.value!
-  const { ctx } = initCanvas(canvas)
+  const { ctx, dpi } = initCanvas(canvas)
   const { width, height } = canvas
 
-  const s = 30
+  const s = 400
   const hs = s / 2
   const r3s = s * SQRT_3 / 2
 
@@ -108,7 +108,8 @@ onMounted(() => {
     return _rotationCache[x][y]
   }
 
-  const ranges = range(20)
+  const cx = width / 2 / dpi
+  const cy = height / 2 / dpi
 
   const frame = () => {
     const t = Math.max(timestamp() - ts, 0)
@@ -116,26 +117,37 @@ onMounted(() => {
     ctx.clearRect(0, 0, width, height)
 
     ctx.strokeStyle = '#777'
+    const duration = 10000
 
     function iteration(t: number) {
-      const duration = 10000
       // const r = t / duration
-      const scale = 1 - Math.sin(t % duration / duration)
+      const scale = Math.pow(1 - t % duration / duration, 2)
+
+      ctx.lineWidth = 15 * scale
 
       const d = s * 3.5 * scale
       const hd = d / 2
 
-      for (const x of ranges) {
-        for (const y of ranges) {
-          square(x * d, y * d, rotation(x, 2 * y), scale)
-          cross(x * d + hd, y * d, rotation(2 * x, y - 1), scale)
-          triange(x * d, y * d + hd, rotation(x + 5, y - 4), scale)
-          circle(x * d + hd, y * d + hd, 0, scale)
+      let amount = Math.round((width / dpi) / d) + 2
+      if (amount % 2)
+        amount += 1
+
+      const half = amount / 2
+
+      for (let x = -half; x < half; x++) {
+        for (let y = -half; y < half; y++) {
+          const bx = x * d + cx
+          const by = y * d + cy
+          square(bx, by, rotation(x, 2 * y), scale)
+          cross(bx + hd, by, rotation(2 * x, y - 1) / 2, scale)
+          triange(bx, by + hd * 0.9, rotation(x + 5, y - 4), scale)
+          circle(bx + hd, by + hd, 0, scale)
         }
       }
     }
 
     iteration(t)
+    // iteration(t + duration / 2)
   }
 
   ctx.lineWidth = 1
