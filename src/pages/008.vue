@@ -57,7 +57,7 @@ onMounted(() => {
   const hs = s / 2
   const r3s = s * SQRT_3 / 2
   const d = s / 2 + r3s
-  const amount = Math.ceil(width / d)
+  const amount = Math.ceil(width / d) + 1
   const offset = -hs
 
   function draw(vec: Vector[]) {
