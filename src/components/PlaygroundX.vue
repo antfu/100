@@ -1,41 +1,49 @@
 <template lang='pug'>
-paper
-  .box.overflow-hidden(ref='box' @click='next')
+div
+  .box.overflow-hidden(ref='box')
     .canvas-wrapper
       canvas(ref='el')
-  .box-description
+  .box-description(v-show='controls')
     .flex.flex-col.mt-2
       p.text-gray-400 (t,x,y) =>
-      input.flex-auto.outline-none(
-        v-model='expX'
-        maxlength='32'
-        autocomplete='false'
-        spellcheck='false'
-      )
-      input.flex-auto.outline-none(
-        v-model='expY'
-        maxlength='32'
-        autocomplete='false'
-        spellcheck='false'
-      )
+      .flex
+        .mr-2.text-gray-400 x =
+        input.flex-auto.outline-none(
+          v-model='expX'
+          maxlength='32'
+          autocomplete='false'
+          spellcheck='false'
+        )
+      .flex
+        .mr-2.text-gray-400 y =
+        input.flex-auto.outline-none(
+          v-model='expY'
+          maxlength='32'
+          autocomplete='false'
+          spellcheck='false'
+        )
     iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
-
-note
-  p Hello
 </template>
 
-<script setup lang='ts'>
-import { useEventListener, useRafFn, useThrottle, noop } from '@vueuse/core'
+<script setup='props' lang='ts'>
+import { useEventListener, useRafFn, useThrottle, noop, useVModel } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { onMounted, ref, watch } from 'vue'
 import { initCanvas, load, range } from '../utils'
+
+declare const props: {
+  x: string
+  y: string
+  controls?: boolean
+  iterations: number
+}
 
 export const el = ref<HTMLCanvasElement | null>(null)
 export const runner = ref<HTMLIFrameElement | null>(null)
 export const input = ref<HTMLInputElement | null>(null)
 
-export const expX = useRouteQuery('x', 'x + 1')
-export const expY = useRouteQuery('y', 'y + 1')
+export const expX = useVModel(props, 'x')
+export const expY = useVModel(props, 'y')
 export const fps = useRouteQuery('fps')
 
 const thorrtledX = useThrottle(expX, 500)
@@ -82,6 +90,12 @@ onMounted(async() => {
   const data = ctx.createImageData(width, height)
 
   const drawPixel = (data: ImageData, x: number, y: number, r: number, g: number, b: number) => {
+    x = x % width
+    y = y % height
+    if (x < 0)
+      x += width
+    if (y < 0)
+      y += width
     const pixelindex = (y * width + x) * 4
     data.data[pixelindex] = r
     data.data[pixelindex + 1] = g
@@ -99,18 +113,31 @@ onMounted(async() => {
   let ix = cx
   let iy = cy
 
-  const frame = (t: number) => {
+  const iteration = () => {
     try {
+      t += 1
       const nx = +fnX(t, ix, iy)
       const ny = +fnY(t, ix, iy)
 
-      const tx = Math.round((cx + nx)) % width
-      const ty = Math.round((cy - ny)) % height
+      const tx = Math.round(cx + nx)
+      const ty = Math.round(cy - ny)
 
       drawPixel(data, tx, ty, 0, 0, 0)
 
       ix = nx
       iy = ny
+    }
+    catch (e) {
+      console.log(e)
+      stop()
+    }
+  }
+
+  const frame = () => {
+    try {
+      range(props.iterations || 2).forEach(() => {
+        iteration()
+      })
 
       ctx.putImageData(data, 0, 0)
     }
@@ -124,10 +151,8 @@ onMounted(async() => {
 
   const rafControl = useRafFn(() => {
     stats.begin()
-    if (!stopped) {
-      t += 1
-      frame(t)
-    }
+    if (!stopped)
+      frame()
 
     stats.end()
   })
@@ -161,14 +186,14 @@ onMounted(async() => {
         fnX = runner.value!.contentWindow!.eval(`()=>{
           ${MathContext};
           return (t,x,y) => {
-            return ${expX.replace(/(\d+)(\w)/, (_, n, x) => `${n} * ${x}`)}
+            return ${expX}
           }
         }`)()
         // @ts-ignore
         fnY = runner.value!.contentWindow!.eval(`()=>{
           ${MathContext};
           return (t,x,y) => {
-            return ${expY.replace(/(\d+)(\w)/, (_, n, x) => `${n} * ${x}`)}
+            return ${expY}
           }
         }`)()
 

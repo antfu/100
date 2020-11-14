@@ -2,6 +2,8 @@
 paper
   .box.centered.overflow-hidden
     canvas(ref='el' width='400' height='400')
+  .box-description
+    pre {{JSON.stringify(data, null, 2)}}
 
 note
   p Will I get my PS5?
@@ -10,19 +12,24 @@ note
 <script setup lang='ts'>
 import { timestamp, useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
-import { onMounted, ref } from 'vue'
-import { initCanvas, SQRT_3, Vector, r360, range, r30, r60, r120 } from '../utils'
+import { onMounted, reactive, ref } from 'vue'
+import { initCanvas, SQRT_3, Vector, r360, r60, r120 } from '../utils'
 
 export const el = ref<HTMLCanvasElement | null>(null)
 
 export const shot = useRouteQuery('shot')
+
+export const data = reactive<any>({
+  t: 0,
+  scale: 0,
+})
 
 onMounted(() => {
   const canvas = el.value!
   const { ctx, dpi } = initCanvas(canvas)
   const { width, height } = canvas
 
-  const s = 400
+  const s = 600
   const hs = s / 2
   const r3s = s * SQRT_3 / 2
 
@@ -119,11 +126,19 @@ onMounted(() => {
     ctx.strokeStyle = '#777'
     const duration = 10000
 
-    function iteration(t: number) {
-      // const r = t / duration
-      const scale = Math.pow(1 - t % duration / duration, 2)
+    function iteration(t: number, track = false) {
+      if (t < 0)
+        return
 
-      ctx.lineWidth = 15 * scale
+      const scale = 1 - t % duration / duration
+
+      if (track) {
+        data.scale = scale
+        data.scale2 = Math.sqrt(scale)
+        data.t = t
+      }
+
+      ctx.lineWidth = 30 * scale
 
       const d = s * 3.5 * scale
       const hd = d / 2
@@ -132,7 +147,13 @@ onMounted(() => {
       if (amount % 2)
         amount += 1
 
+      if (amount >= 90)
+        return
+
       const half = amount / 2
+
+      if (track)
+        data.amount = amount
 
       for (let x = -half; x < half; x++) {
         for (let y = -half; y < half; y++) {
@@ -146,8 +167,8 @@ onMounted(() => {
       }
     }
 
-    iteration(t)
-    // iteration(t + duration / 2)
+    iteration(t, true)
+    iteration(t - duration / 2)
   }
 
   ctx.lineWidth = 1
