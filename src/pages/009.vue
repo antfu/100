@@ -6,7 +6,7 @@ paper
 
 note
   p x = x + (random() - 0.5) * 8
-  p y = x + (random() - 0.5) * 8
+  p y = y + (random() - 0.5) * 8
   br
   a.link(@click='playground.f.start()') restart
 </template>
