@@ -31,7 +31,7 @@
     "esno": "^0.2.4",
     "fs-extra": "^9.0.1",
     "matter-js": "^0.14.2",
-    "playwright": "^1.5.2",
+    "playwright": "^1.6.1",
     "pug": "^3.0.0",
     "stylus": "^0.54.8",
     "tailwindcss": "^1.9.6",
