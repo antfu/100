@@ -9,6 +9,7 @@ export const r120 = Math.PI / 3 * 2
 export const r360 = Math.PI * 2
 
 export const SQRT_3 = Math.sqrt(3)
+export const SQRT_2 = Math.sqrt(2)
 
 export function exclude<T>(arr: T[], v: T) {
   return arr.filter(i => i !== v)
