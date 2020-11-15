@@ -14,7 +14,7 @@ note
 
 import { onMounted, ref } from 'vue'
 import { useRafFn } from '@vueuse/core'
-import { load } from '../utils'
+import * as THREE from 'three'
 
 export const box = ref<HTMLElement | null>(null)
 
@@ -150,10 +150,6 @@ void main() {
 `
 
 onMounted(async() => {
-  await load('https://cdnjs.cloudflare.com/ajax/libs/three.js/r122/three.min.js')
-
-  const THREE = window.THREE
-
   const scene = new THREE.Scene()
   const clock = new THREE.Clock()
   const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000)
