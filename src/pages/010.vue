@@ -89,15 +89,15 @@ onMounted(() => {
     const rt = t % duration
     const rounds = Math.floor(t / (duration * 2))
 
-    const size = 398 / Math.pow(SQRT_2, rounds)
+    const size = Math.round(398 / Math.pow(SQRT_2, rounds))
 
-    if (rounds > 20)
+    if (size < 5)
       return
 
     if (turn)
-      roundRect(size, size * Math.pow(rt / 550, 2))
+      roundRect(size, Math.round(size * Math.pow(rt / 550, 2)))
     else
-      rectRound(size, Math.pow(rt / 60, 4))
+      rectRound(size, Math.round(Math.pow(rt / 60, 4)))
   }
 
   if (shot.value) {
