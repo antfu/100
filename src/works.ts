@@ -44,6 +44,10 @@ export const info = [
     name: 'Box',
     date: '11/16',
   },
+  {
+    name: 'Displace',
+    date: '11/17',
+  },
 ]
 
 export const works = info.map((info, idx) => {

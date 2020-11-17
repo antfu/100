@@ -33,7 +33,8 @@ async function run() {
   // await take('008', 1, 500, 8)
   // await take('009', 10, 1500)
   // await take('010', 1, 500)
-  await take('011', 10, 500)
+  // await take('011', 10, 500)
+  await take('012', 10, 500, 4)
 
   await browser.close()
 }

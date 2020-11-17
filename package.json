@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "@iconify/iconify": "^2.0.0-rc.2",
-    "@vueuse/core": "^4.0.0-rc.1",
-    "@vueuse/router": "^4.0.0-rc.1",
-    "@vueuse/shared": "^4.0.0-rc.1",
+    "@vueuse/core": "^4.0.0-rc.2",
+    "@vueuse/router": "^4.0.0-rc.2",
+    "@vueuse/shared": "^4.0.0-rc.2",
     "dayjs": "^1.9.6",
     "vue": "3.0.2",
     "vue-router": "^4.0.0-rc.3"
@@ -22,7 +22,7 @@
     "@types/cheerio": "^0.22.22",
     "@types/fs-extra": "^9.0.4",
     "@types/matter-js": "^0.14.6",
-    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.0",
     "@vue/compiler-sfc": "3.0.2",
     "@vuedx/typescript-plugin-vue": "^0.2.3",
     "cheerio": "^1.0.0-rc.3",
