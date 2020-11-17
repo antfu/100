@@ -90,6 +90,8 @@ onMounted(async() => {
     const sinRad = sin(rad)
     const a2 = a ** 2 || 1
     const b2 = b ** 2 || 1
+    cx = round(cx)
+    cy = round(cy)
 
     const box = round(max(abs(a), abs(b)) * 2)
 
@@ -104,7 +106,7 @@ onMounted(async() => {
 
   const ts = timestamp()
   const distance = dpi * 40
-  const amount = width / distance
+  const amount = round(width / distance)
   const offset = 18 * dpi
 
   const frame = () => {
