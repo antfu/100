@@ -4,7 +4,10 @@ paper
     canvas(ref='el' width='400' height='400' :style='filterStyle')
   .box-description.py-4(v-if='!shot')
     tempate(v-for='c,idx in coeff')
-      .inline-block.w-12.mx-2.text-right(:class='[c < 0 ? "text-gray-300" : "text-gray-500"]') {{ c.toFixed(2) }}
+      .inline-block.w-12.mx-2.text-right(
+        :class='[c < 0 ? "text-gray-300" : "text-gray-500"]'
+        @click='rollAt(idx)'
+      ) {{ c.toFixed(2) }}
       br(v-if='idx % 6 === 5')
 </template>
 
@@ -29,13 +32,19 @@ export const coeff = ref([
   8, 2, 1, 2, -5.3, 3,
 ])
 
+export const randomCoeff = (idx: number) => {
+  if (idx % 2)
+    return (random() - 0.5) * 12
+  else
+    return (random() - 0.5) * 20
+}
+
 export const roll = () => {
-  coeff.value = new Array(coeff.value.length).fill(0).map((_, i) => {
-    if (i % 2)
-      return (random() - 0.5) * 12
-    else
-      return (random() - 0.5) * 20
-  })
+  coeff.value = new Array(coeff.value.length).fill(0).map((_, i) => randomCoeff(i))
+}
+
+export const rollAt = (idx: number) => {
+  coeff.value = coeff.value.map((v, i) => i === idx ? randomCoeff(i) : v)
 }
 
 export const hue = ref(0)
