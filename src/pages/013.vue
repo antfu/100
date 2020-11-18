@@ -13,10 +13,10 @@ paper
     .text-gray-400(v-if='!stopped') *
 
 note
-  .p For each node, there is 50% chance for growing a new branch of it's two branches.
+  .p for each node, there is 50% chance for growing a new branch for its two branches.
   br
-  .p <b>init</b> - the initial iterations that guaranteed having 100% to grow new branches.
-  .p <b>len</b> - the max length for each branch.
+  .p <b>init</b> - the initial iterations that guaranteed having 100% to grow.
+  .p <b>len</b> - max length for each branch.
 </template>
 
 <script setup='props' lang='ts'>
