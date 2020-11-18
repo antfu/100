@@ -13,7 +13,7 @@ paper
     .text-gray-400(v-if='!stopped') *
 
 note
-  .p For each note, 50% chance for growing a new branch of it's two branches.
+  .p For each node, there is 50% chance for growing a new branch of it's two branches.
   br
   .p <b>init</b> - the initial iterations that guaranteed having 100% to grow new branches.
   .p <b>len</b> - the max length for each branch.
