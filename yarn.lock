@@ -4482,10 +4482,10 @@ vite-plugin-components@^0.3.0:
     fast-glob "^3.2.4"
     minimatch "^3.0.4"
 
-vite-plugin-psvg@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/vite-plugin-psvg/-/vite-plugin-psvg-0.1.1.tgz#fa7a2113d98e28837747c27b092a343fcf160368"
-  integrity sha512-xFNXuthyUHU2RPB3AJvmp1/yYR5Hx9qkMOuYG7aWWPtah659fV7zL/styDAm9RCVQ6GV8UsOTVrlkPhW3VzE0A==
+vite-plugin-psvg@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/vite-plugin-psvg/-/vite-plugin-psvg-0.1.2.tgz#e597d1438e7c99e6d9f69b382d37b7c75c252a05"
+  integrity sha512-SFgAhyaFHIFqmBUfHV7ob1d/sI5I1VKAJ/em6qhtqlpihf36hM4PTY+uq5J2xuEcSXLe4uoAX52BI4UQx4jjAQ==
   dependencies:
     "@lingdong/psvg" "^0.0.1"
     hash-sum "^2.0.0"
