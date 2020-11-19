@@ -29,7 +29,7 @@ export const url = computed(() => `/${count.value.toString().padStart(3, '0')}`)
 export const src = computed(() => `${url.value}?hideFrame=true`)
 
 export const next = () => {
-  count.value = (count.value + 1) % works.length
+  count.value = (count.value + 1) % (works.length + 1)
   if (count.value === 0)
     count.value += 1
   loading.value = true
