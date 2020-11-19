@@ -157,10 +157,10 @@
   resolved "https://registry.yarnpkg.com/@iconify/iconify/-/iconify-2.0.0-rc.2.tgz#c4a95ddc06ca9b9496df03604e66fdefb39f4c4b"
   integrity sha512-BybEHU5/I9EQ0CcwKAqmreZ2bMnAXrqLCTptAc6vPetHMbrXdZfejP5mt57e/8PNSt/qE7BHniU5PCYA+PGIHw==
 
-"@iconify/json@^1.1.260":
-  version "1.1.260"
-  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-1.1.260.tgz#75bfcdcaf01f1a0092bb26f4ce7aebf357da431a"
-  integrity sha512-gpRn0o55mvBTCcZRb8jBtqxV/5Av01BnnVn7/FyboBNdGkEQ8EMTqJL10SDUf9TLM8s63KKSg/ZeCJj870THtA==
+"@iconify/json@^1.1.261":
+  version "1.1.261"
+  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-1.1.261.tgz#9a6986b6b36d77ca147c4be149db9a43280a8fb2"
+  integrity sha512-lnRk1OBqNxZ593oZyOXEMp/O+cr+lF54xaW6+F3krWdWhzxQgi0W1ffzvdiLySdbTEorQ2NvVU4e0+Af27rXPA==
 
 "@koa/cors@^3.1.0":
   version "3.1.0"
@@ -4482,10 +4482,10 @@ vite-plugin-components@^0.3.0:
     fast-glob "^3.2.4"
     minimatch "^3.0.4"
 
-vite-plugin-psvg@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/vite-plugin-psvg/-/vite-plugin-psvg-0.1.0.tgz#a972d17f1ed514cf252117c5c92f2a93028b986e"
-  integrity sha512-67zzxj1InY1ygnm9tlO+adm+GfxoXvK3F9Xa9nzmKTLtoRNTsnO6N5ZAOr8hdW2Mzp6OFn45ULGoUqq/eTc1IA==
+vite-plugin-psvg@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-psvg/-/vite-plugin-psvg-0.1.1.tgz#fa7a2113d98e28837747c27b092a343fcf160368"
+  integrity sha512-xFNXuthyUHU2RPB3AJvmp1/yYR5Hx9qkMOuYG7aWWPtah659fV7zL/styDAm9RCVQ6GV8UsOTVrlkPhW3VzE0A==
   dependencies:
     "@lingdong/psvg" "^0.0.1"
     hash-sum "^2.0.0"
