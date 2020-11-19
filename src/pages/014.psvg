@@ -1,0 +1,17 @@
+<psvg width="400" height="400">
+  <stroke color="black" cap="round"/>
+
+  <def-ball ring="" r="5" d="" i="0" dur="5s">
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 10 10;360 10 10" repeatCount="indefinite" begin="{i/4}s"  dur="{dur}" fill="freeze" />
+      <circle cx="{ring}" cy="{-12}" r="{r}" fill="transparent">
+      </circle>
+    </g>
+  </def-ball>
+
+  <for ring="60" true="{ring<540}" step="70">
+    <for i="0" true="{i<MIN(ring/1.5, 100)}" step="1">
+      <ball ring="{ring}" r="{RANDOM() * 9 + 1}" i="{i}" dur="{RANDOM() * 8 + 3}s"/>
+    </for>
+  </for>
+</psvg>
