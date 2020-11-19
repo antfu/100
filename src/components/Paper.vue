@@ -1,6 +1,6 @@
 <template lang='pug'>
 .paper(:class='{shot}')
-  .bottom-nav.font-mono.flex(v-if='work')
+  .bottom-nav.font-mono.flex.z-10(v-if='work')
     .nav-links
       router-link.prev.link(v-if='prev' :to='`/${prev.no}`')
         span {{prev.name}}
@@ -15,7 +15,7 @@
     .flex.flex-col
       .flex-auto
       span.text-gray-300 {{work.date}}
-  .nav.font-mono(v-if='!shot')
+  .nav.font-mono(v-if='!shot && !hideFrame')
     router-link.link.text-xl.block.pt-1(to='/')
       icon(icon='carbon:chevron-left')
 
@@ -34,9 +34,9 @@ useEventListener('keydown', (e) => {
   if (document.activeElement === document.body) {
     if (e.key === 'f') {
       if (fullscreen.isFullscreen.value)
-        fullscreen.exitFullscreen()
+        fullscreen.exit()
       else
-        fullscreen.enterFullscreen()
+        fullscreen.enter()
     }
   }
 })
@@ -47,6 +47,7 @@ if (no.startsWith('x'))
   no = no.slice(1)
 
 export const shot = Boolean(route.query.shot)
+export const hideFrame = Boolean(route.query.hideFrame)
 export const index = works.findIndex(i => i.no === no)
 
 export const work = works[index]
