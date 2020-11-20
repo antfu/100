@@ -11,6 +11,14 @@ export function hexToRgb(hex: string): ColorVector {
   ]
 }
 
+export function toHex(c: number) {
+  return c.toString(16).padStart(2, '0')
+}
+
+export function rgbToHex(r = 0, g = 0, b = 0) {
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`
+}
+
 /**
  * @param vectors
  * @param num 0~1
