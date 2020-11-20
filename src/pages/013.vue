@@ -23,12 +23,12 @@ note
 import { useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { onMounted, ref, watch } from 'vue'
-import { initCanvas, r15, r180, r90 } from '../utils'
+import { initCanvas, polar2cart, r15, r180, r90 } from '../utils'
 
 export const shot = useRouteQuery('shot')
 export const el = ref<HTMLCanvasElement | null>(null)
 
-const { cos, sin, random } = Math
+const { random } = Math
 
 export const f = {
   start: () => {},
@@ -47,12 +47,6 @@ onMounted(async() => {
 
   let steps: Function[] = []
   let prevSteps: Function[] = []
-
-  function polar2cart(x = 0, y = 0, r = 0, theta = 0) {
-    const dx = r * cos(theta)
-    const dy = r * sin(theta)
-    return [x + dx, y + dy]
-  }
 
   let iterations = 0
 

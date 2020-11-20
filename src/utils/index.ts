@@ -6,6 +6,7 @@ export * from './stringify'
 export * from './vector'
 export * from './canvas'
 export * from './shake'
+export * from './colors'
 
 export function shuffle<T>(arr: T[]): T[] {
   const array = arr.slice(0)
@@ -30,4 +31,8 @@ export function useWindowPosition() {
   })
 
   return { screenLeft, screenTop, timeout }
+}
+
+export function random(max = 1, min = 0) {
+  return Math.random() * (max - min) + min
 }

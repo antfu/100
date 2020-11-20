@@ -43,7 +43,7 @@ import { useEventListener, useRafFn, useThrottle, noop } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { get, initCanvas, load, pick, range, shuffle } from '../utils'
+import { get, hexToRgb, initCanvas, load, pick, range, shuffle } from '../utils'
 
 const presets = shuffle([
   { code: 'th - sin(r) * cos(t)' },
@@ -91,15 +91,6 @@ export const rounded = ref(false)
 export const author = computed(() =>
   presets.find(i => i.code === expression.value)?.by,
 )
-
-function hexToRgb(hex: string) {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)!
-  return [
-    parseInt(result[1], 16),
-    parseInt(result[2], 16),
-    parseInt(result[3], 16),
-  ]
-}
 
 const colors = shuffle([
   '#30896C',
