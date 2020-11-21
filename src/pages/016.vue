@@ -5,10 +5,10 @@ paper
 </template>
 
 <script setup='props' lang='ts'>
-import { timestamp, useMouseInElement, useRafFn } from '@vueuse/core'
+import { timestamp, useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
-import { onMounted, ref, watch } from 'vue'
-import { distance, initCanvas, random, rgbToHex, toHex } from '../utils'
+import { onMounted, ref } from 'vue'
+import { distance, initCanvas, random, toHex } from '../utils'
 
 export const shot = useRouteQuery('shot')
 export const el = ref<HTMLCanvasElement | null>(null)
@@ -37,8 +37,8 @@ onMounted(async() => {
     const ts = timestamp()
 
     points.push([
-      random(400),
-      random(400),
+      random(500, -100),
+      random(500, -100),
       ts,
     ])
 

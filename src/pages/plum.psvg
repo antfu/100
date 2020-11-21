@@ -1,0 +1,44 @@
+<psvg width="300" height="300">
+  <var len="10"/>
+  <var iterations="20"/>
+  <var chance="0.5"/>
+  <var rotation="{PI/6}"/>
+  <var initial="3"/>
+
+
+  <def-branch r="0">
+    <if true="{r>iterations}">
+      <return/>
+    </if>
+
+    <var n="{len*RANDOM()}"/>
+    <var theta="{rotation*RANDOM()}"/>
+
+    <if true="{r<initial||RANDOM()<chance}">
+      <push>
+        <rotate rad="{theta}"/>
+        <line x1="0" y1="0" x2="0" y2="{-n}"/>
+        <translate x="0" y="{-n}"/>
+        <branch r="{r+1}"/>
+      </push>
+    </if>
+    <if true="{r<initial||RANDOM()<chance}">
+      <push>
+        <rotate rad="{-theta}"/>
+        <line x1="0" y1="0" x2="0" y2="{-n}"/>
+        <translate x="0" y="{-n}"/>
+        <branch r="{r+1}"/>
+      </push>
+    </if>
+  </def-branch>
+
+
+  <translate x="{WIDTH/2}" y="{HEIGHT}"/>
+
+  <var first="{len*RANDOM()}"/>
+  <stroke color="black" cap="round"/>
+  <line x1="0" y1="0" x2="0" y2="{-first}"/>
+  <translate x="0" y="{-first}"/>
+
+  <branch/>
+</psvg>
