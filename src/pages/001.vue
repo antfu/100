@@ -9,8 +9,9 @@ note
 <script setup lang='ts'>
 import { noop } from '@vueuse/shared'
 import { ref, onMounted } from 'vue'
-import { load } from '../utils'
+import Matter from 'matter-js'
 
+const { Engine, Render, World, Bodies } = Matter
 export const canvas = ref(null)
 
 export const f = {
@@ -18,13 +19,6 @@ export const f = {
 }
 
 onMounted(async() => {
-  await load('https://cdn.jsdelivr.net/npm/matter-js@0.14.2/build/matter.min.js')
-  const Matter = window.Matter
-  const Engine = Matter.Engine
-  const Render = Matter.Render
-  const World = Matter.World
-  const Bodies = Matter.Bodies
-
   const engine = Engine.create()
   const render = Render.create({
     element: canvas.value!,
@@ -62,7 +56,3 @@ onMounted(async() => {
   Render.run(render)
 })
 </script>
-
-<style lang="stylus" scoped>
-
-</style>

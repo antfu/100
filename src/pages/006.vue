@@ -11,10 +11,11 @@ note
 <script setup lang='ts'>
 import { useEventListener, useWindowSize } from '@vueuse/core'
 import { ref, onMounted, reactive, computed, watch } from 'vue'
-import type Matter from 'matter-js'
+import Matter from 'matter-js'
 import { useRoute } from 'vue-router'
-import { load, range, useShake } from '../utils'
+import { range, useShake } from '../utils'
 
+const { Bodies, Body, Engine, Mouse, MouseConstraint, Render, World } = Matter
 const route = useRoute()
 
 export const el = ref(null)
@@ -36,17 +37,6 @@ export const toggleShape = () => {
 }
 
 onMounted(async() => {
-  await load('https://cdn.jsdelivr.net/npm/matter-js@0.14.2/build/matter.min.js')
-
-  const Matter = window.Matter
-  const Engine = Matter.Engine
-  const Render = Matter.Render
-  const World = Matter.World
-  const Bodies = Matter.Bodies
-  const Body = Matter.Body
-  const Mouse = Matter.Mouse
-  const MouseConstraint = Matter.MouseConstraint
-
   const engine = Engine.create()
   const render = Render.create({
     element: el.value!,
@@ -75,7 +65,7 @@ onMounted(async() => {
   const r8 = range(rows)
 
   const blocks = r8.flatMap(ix => r8.map((iy) => {
-    let body: Matter.Body = undefined!
+    let body: Body = undefined!
 
     const pos = reactive({
       x: computed(() => offest.x + ix * size + size * 0.5),
