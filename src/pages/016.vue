@@ -1,6 +1,6 @@
 <template lang='pug'>
 paper
-  .box.overflow-hidden(@click='f.start' style='border-color: #592A2A')
+  .box.overflow-hidden
     canvas(ref='el' width='400' height='400')
 </template>
 
@@ -14,10 +14,6 @@ export const shot = useRouteQuery('shot')
 export const el = ref<HTMLCanvasElement | null>(null)
 
 const { round, max } = Math
-
-export const f = {
-  start: () => {},
-}
 
 const timeout = 2000
 const D = 100
@@ -68,10 +64,6 @@ onMounted(async() => {
     })
   }
 
-  const frame = () => {
-    updateCanvas()
-  }
-
-  useRafFn(frame)
+  useRafFn(updateCanvas)
 })
 </script>

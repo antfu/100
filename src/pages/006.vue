@@ -65,7 +65,7 @@ onMounted(async() => {
   const r8 = range(rows)
 
   const blocks = r8.flatMap(ix => r8.map((iy) => {
-    let body: Body = undefined!
+    let body: Matter.Body = undefined!
 
     const pos = reactive({
       x: computed(() => offest.x + ix * size + size * 0.5),
