@@ -68,6 +68,10 @@ export const info = [
     name: 'Gravity',
     date: '11/22',
   },
+  {
+    name: 'Field 1',
+    date: '11/23',
+  },
 ]
 
 export const works = info.map((info, idx) => {

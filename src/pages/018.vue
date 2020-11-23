@@ -1,8 +1,8 @@
 <template lang='pug'>
 paper
-  .box.centered.overflow-hidden(@click='f.reset' ref='el')
+  .box.centered.overflow-hidden(@click='roll' ref='el')
     canvas.absolute.left-0.top-0.opacity-25(ref='canvas' width='400' height='400')
-  .box-description
+  .box-description(v-if='debug')
     .flex.flex-col.mt-2
       p.text-gray-400 (t,x,y) =>
       .flex
@@ -21,13 +21,14 @@ paper
           autocomplete='false'
           spellcheck='false'
         )
-    iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
+  iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
 </template>
 
 <script setup lang='ts'>
 import { noop, useIntervalFn, useThrottle } from '@vueuse/shared'
 import { ref, onMounted, watch } from 'vue'
 import Matter from 'matter-js'
+import { useRouteQuery } from '@vueuse/router'
 import { initCanvas, random, range } from '../utils'
 
 const { Engine, Render, World, Bodies, Body } = Matter
@@ -35,6 +36,16 @@ const { Engine, Render, World, Bodies, Body } = Matter
 export const el = ref<HTMLDivElement | null>(null)
 export const canvas = ref<HTMLCanvasElement | null>(null)
 export const runner = ref<HTMLIFrameElement | null>(null)
+
+export const debug = useRouteQuery('debug')
+export const showArrows = debug
+
+let presetIndex = 0
+const presets = [
+  ['sin(x / 10) / 2', 'sin(y / 10) / 2'],
+  ['sin(x / 15) / 1.5', 'sin(y / 15) / 1.5'],
+]
+
 export const expX = ref('sin(x / 10) / 2')
 export const expY = ref('sin(y / 10) / 2')
 
@@ -42,10 +53,6 @@ const thorrtledX = useThrottle(expX, 500)
 const thorrtledY = useThrottle(expY, 500)
 
 const MathContext = `const {${Object.getOwnPropertyNames(Math).join(',')}}=Math`
-
-export const f = {
-  reset: noop,
-}
 
 const cx = 200
 const cy = 200
@@ -60,8 +67,17 @@ const field = (_x = 0, _y = 0) => {
     fnX(0, x, y),
     fnY(0, x, y),
   ]
+}
 
-  // sin((cx - x) / 10) / 2, sin((cy - y) / 10) / 2]
+export const f = {
+  reset: noop,
+}
+
+export function roll() {
+  presetIndex = (presetIndex + 1) % presets.length
+  const [a, b] = presets[presetIndex]
+  expX.value = a
+  expY.value = b
 }
 
 onMounted(async() => {
@@ -85,10 +101,12 @@ onMounted(async() => {
   const fieldArrow = () => {
     ctx.clearRect(0, 0, 400, 400)
 
-    for (let x = 5; x <= 400; x += 10) {
-      for (let y = 5; y <= 400; y += 10) {
-        const [dx, dy] = field(x, y)
-        arrow(x, y, x + dx * 10, y + dy * 10)
+    if (showArrows.value) {
+      for (let x = 5; x <= 400; x += 10) {
+        for (let y = 5; y <= 400; y += 10) {
+          const [dx, dy] = field(x, y)
+          arrow(x, y, x + dx * 10, y + dy * 10)
+        }
       }
     }
   }
@@ -149,7 +167,7 @@ onMounted(async() => {
         }`)()
 
         console.log(expX, expY, 'ok')
-        f.reset()
+        // f.reset()
         fieldArrow()
       }
       catch (e) {
@@ -172,7 +190,11 @@ onMounted(async() => {
       const [fx, fy] = field(dot.position.x, dot.position.y)
       Body.setVelocity(dot, { x: fx, y: fy })
     }
-  }, 300, true)
+  }, 1000, true)
+
+  useIntervalFn(() => {
+    roll()
+  }, 10000)
 
   Engine.run(engine)
   Render.run(render)
