@@ -1,6 +1,7 @@
 <template lang='pug'>
 paper
-  .box.centered.overflow-hidden(@click='f.reset' ref='canvas')
+  .box.centered.overflow-hidden(@click='f.reset' ref='el')
+    canvas.absolute.left-0.top-0.opacity-25(ref='canvas' width='400' height='400')
   .box-description
     .flex.flex-col.mt-2
       p.text-gray-400 (t,x,y) =>
@@ -27,11 +28,12 @@ paper
 import { noop, useIntervalFn, useThrottle } from '@vueuse/shared'
 import { ref, onMounted, watch } from 'vue'
 import Matter from 'matter-js'
-import { random, range } from '../utils'
+import { initCanvas, random, range } from '../utils'
 
 const { Engine, Render, World, Bodies, Body } = Matter
 
-export const canvas = ref(null)
+export const el = ref<HTMLDivElement | null>(null)
+export const canvas = ref<HTMLCanvasElement | null>(null)
 export const runner = ref<HTMLIFrameElement | null>(null)
 export const expX = ref('sin(x / 10) / 2')
 export const expY = ref('sin(y / 10) / 2')
@@ -45,15 +47,60 @@ export const f = {
   reset: noop,
 }
 
+const cx = 200
+const cy = 200
+
+let fnX = (t: number, x: number, y: number) => 0
+let fnY = (t: number, x: number, y: number) => 0
+
+const field = (_x = 0, _y = 0) => {
+  const x = cx - _x
+  const y = cy - _y
+  return [
+    fnX(0, x, y),
+    fnY(0, x, y),
+  ]
+
+  // sin((cx - x) / 10) / 2, sin((cy - y) / 10) / 2]
+}
+
 onMounted(async() => {
+  const { ctx } = initCanvas(canvas.value!)
+
+  const arrow = (fromx = 0, fromy = 0, tox = 0, toy = 0) => {
+    const headlen = 2 // length of head in pixels
+    const dx = tox - fromx
+    const dy = toy - fromy
+    const angle = Math.atan2(dy, dx)
+    ctx.strokeStyle = '#ff505050'
+    ctx.lineWidth = 0.3
+    ctx.moveTo(fromx, fromy)
+    ctx.lineTo(tox, toy)
+    ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6))
+    ctx.moveTo(tox, toy)
+    ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6))
+    ctx.stroke()
+  }
+
+  const fieldArrow = () => {
+    ctx.clearRect(0, 0, 400, 400)
+
+    for (let x = 5; x <= 400; x += 10) {
+      for (let y = 5; y <= 400; y += 10) {
+        const [dx, dy] = field(x, y)
+        arrow(x, y, x + dx * 10, y + dy * 10)
+      }
+    }
+  }
+
   const engine = Engine.create()
   const render = Render.create({
-    element: canvas.value!,
+    element: el.value!,
     engine,
     options: {
       width: 400,
       height: 400,
-      background: '#ffffff',
+      background: 'transparent',
       wireframes: false,
       // @ts-expect-error untyped
       pixelRatio: 'auto',
@@ -76,9 +123,6 @@ onMounted(async() => {
   }
 
   const dots = range(1000).map(i => dot(random(400), random(400)))
-
-  let fnX = (t: number, x: number, y: number) => 0
-  let fnY = (t: number, x: number, y: number) => 0
 
   watch(
     [thorrtledX, thorrtledY],
@@ -106,6 +150,7 @@ onMounted(async() => {
 
         console.log(expX, expY, 'ok')
         f.reset()
+        fieldArrow()
       }
       catch (e) {
         console.log(expX, expY, e.message)
@@ -113,19 +158,6 @@ onMounted(async() => {
     },
     { immediate: true },
   )
-
-  const cx = 200
-  const cy = 200
-  const field = (_x = 0, _y = 0) => {
-    const x = cx - _x
-    const y = cy - _y
-    return [
-      fnX(0, x, y),
-      fnY(0, x, y),
-    ]
-
-    // sin((cx - x) / 10) / 2, sin((cy - y) / 10) / 2]
-  }
 
   f.reset = () => {
     dots.forEach((dot) => {
