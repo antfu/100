@@ -1,136 +1,89 @@
 <template lang='pug'>
 paper
-  .box.centered.overflow-hidden(ref='box')
+  .box.centered.overflow-hidden(ref='el')
 </template>
 
 <script setup lang='ts'>
-import { onMounted, ref } from 'vue'
-import { clamp, useMouse, useRafFn } from '@vueuse/core'
-import * as THREE from 'three'
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { r90, random, range } from '../utils'
+// https://github.com/danmarshall/google-font-to-svg-path/blob/master/index.ts
+import { noop } from '@vueuse/shared'
+import { ref, onMounted } from 'vue'
+import Matter from 'matter-js'
+import { useRouteQuery } from '@vueuse/router'
+import maker from 'makerjs'
+import { load } from '../utils'
 
-export const box = ref<HTMLElement | null>(null)
+const { Engine, Render, Svg, Vertices, Bodies, World } = Matter
 
-const camera_focal = 50
-const camera_near = 0.1
-const camera_far = 50
+export const el = ref<HTMLDivElement | null>(null)
+export const canvas = ref<HTMLCanvasElement | null>(null)
+export const runner = ref<HTMLIFrameElement | null>(null)
 
-// Lights
-const light_am_color = 0xCCCCCC
-const light_spot_color = 0xFFFFFF
-const light_spot_intensity = 10
-const light_spot_position = { x: 0, y: 20, z: 8 }
-const light_spot_camera_near = 1
+export const debug = useRouteQuery('debug')
 
-// Plane Properties
-const plane_width = 50
-const plane_height = 50
-const plane_color = 0xFFFFFF
+export const f = {
+  reset: noop,
+}
 
 onMounted(async() => {
-  const renderer = new THREE.WebGLRenderer()
-  box.value!.appendChild(renderer.domElement)
-  renderer.physicallyCorrectLights = true
-  renderer.setPixelRatio(window.devicePixelRatio)
-  renderer.setSize(400, 400)
-  renderer.shadowMap.enabled = true
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap
+  await Promise.all([
+    load('https://cdn.jsdelivr.net/gh/schteppe/poly-decomp.js@master/build/decomp.min.js'),
+    load('https://cdn.jsdelivr.net/gh/progers/pathseg@master/pathseg.js'),
+    load('https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js'),
+  ])
 
-  const camera = new THREE.PerspectiveCamera(camera_focal, 1, camera_near, camera_far)
-  camera.position.set(0, 0, 40)
-  // camera.useQuaternion = true
-  camera.lookAt(0, 0, 0)
+  const engine = Engine.create()
+  const render = Render.create({
+    element: el.value!,
+    engine,
+    options: {
+      width: 400,
+      height: 400,
+      background: 'transparent',
+      wireframes: false,
+      // @ts-expect-error untyped
+      pixelRatio: 'auto',
+      // showVelocity: true,
+      // showAngleIndicator: true,
+    },
+  })
+  const world = engine.world
 
-  // Create the scene
-  const scene = new THREE.Scene()
-
-  const loader = new SVGLoader()
-
-  {
-    // Add abbient light
-    const am_light = new THREE.AmbientLight(light_am_color) // soft white light
-    scene.add(am_light)
-  }
-
-  {
-  // Add directional light
-    const spot_light = new THREE.SpotLight(light_spot_color, light_spot_intensity)
-    spot_light.position.set(light_spot_position.x, light_spot_position.y, light_spot_position.z)
-    spot_light.target = scene
-    spot_light.castShadow = true
-    spot_light.receiveShadow = true
-    spot_light.shadowCameraNear = light_spot_camera_near
-    scene.add(spot_light)
-  }
-
-  {
-    // Add the ground plane
-    const plane_geometry = new THREE.PlaneGeometry(plane_width, plane_height)
-    const plane_material = new THREE.MeshLambertMaterial({ color: plane_color, side: THREE.DoubleSide })
-    const plane_mesh = new THREE.Mesh(plane_geometry, plane_material)
-    plane_mesh.receiveShadow = true
-    scene.add(plane_mesh)
-  }
-
-  const trees: THREE.Group[] = []
-
-  loader.load('/019-tree.svg', (data) => {
-    range(30).forEach(() => {
-      const paths = data.paths
-      const group = new THREE.Group()
-      group.scale.multiplyScalar(0.03)
-      group.position.set(random(15, -15), random(15, -15), 0)
-      group.rotation.x = -r90
-
-      for (let i = 0; i < paths.length; i++) {
-        const path = paths[i]
-
-        const material = new THREE.MeshLambertMaterial({
-          color: 0xFFFFFF,
-          side: THREE.DoubleSide,
-          depthWrite: false,
-        })
-
-        const shapes = path.toShapes(true)
-
-        for (let j = 0; j < shapes.length; j++) {
-          const shape = shapes[j]
-          const geometry = new THREE.ShapeBufferGeometry(shape)
-          const mesh = new THREE.Mesh(geometry, material)
-          mesh.castShadow = true
-          mesh.receiveShadow = true
-          mesh.position.y = -150
-          group.add(mesh)
-        }
+  window.opentype.load('http://fonts.gstatic.com/s/firacode/v9/uU9eCBsR6Z2vfE9aq3bL0fxyUs4tcw4W_ONrFVfxN87gsj0.ttf',
+    (err, font) => {
+      if (err || !font) {
+        console.error(err)
+        return
       }
 
-      trees.push(group)
-      scene.add(group)
-    })
-  })
+      // generate the text using a font
+      const textModel = new maker.models.Text(font, 'Hello', 5, true, false, undefined, { kerning: false })
 
-  const controls = new OrbitControls(camera, renderer.domElement)
+      const svg = maker.exporter.toSVG(textModel)
 
-  controls.update()
+      const dom = document.createElement('div')
+      dom.innerHTML = svg
+      const paths = Array.from(dom.querySelectorAll('path'))
 
-  const { y } = useMouse()
+      console.log(paths)
 
-  // Render loop
-  useRafFn(() => {
-    const r = clamp((y.value - (window.innerHeight - 400) / 2) / 400, 0, 1.5) * -r90
+      for (const path of paths) {
+        const points = Svg.pathToVertices(path, 30)
+        const vertexSets = [Vertices.scale(points, 0.4, 0.4, { x: 0, y: 0 })]
+        const body = Bodies.fromVertices(100, 200, vertexSets, {
+          render: {
+            fillStyle: '#fff',
+            strokeStyle: '#000',
+            lineWidth: 1,
+          },
+        }, true)
+        World.add(world, body)
+      }
+    },
+  )
 
-    trees.forEach(i => i.rotation.x = r)
+  engine.world.gravity.y = 0
 
-    controls.update()
-
-    renderer.render(scene, camera)
-  })
+  Engine.run(engine)
+  Render.run(render)
 })
-
 </script>
-
-<style lang='stylus' scoped>
-
-</style>
