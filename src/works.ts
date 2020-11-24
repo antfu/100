@@ -72,6 +72,10 @@ export const info = [
     name: 'Field 1',
     date: '11/23',
   },
+  {
+    name: 'Fractal 1',
+    date: '11/24',
+  },
 ]
 
 export const works = info.map((info, idx) => {

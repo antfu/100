@@ -1,89 +1,182 @@
 <template lang='pug'>
 paper
-  .box.centered.overflow-hidden(ref='el')
+  .box.centered.overflow-hidden
+    canvas(:class='{shake}' ref='el' width='400' height='400' @click='f.next()')
+  .box-description.py-1(v-if='!shot')
+    p.text-gray-400 click
 </template>
 
 <script setup lang='ts'>
-// https://github.com/danmarshall/google-font-to-svg-path/blob/master/index.ts
-import { noop } from '@vueuse/shared'
-import { ref, onMounted } from 'vue'
-import Matter from 'matter-js'
 import { useRouteQuery } from '@vueuse/router'
-import maker from 'makerjs'
-import { load } from '../utils'
+import { noop, useTimeoutFn } from '@vueuse/shared'
+import { onMounted, ref } from 'vue'
+import { initCanvas, r30, SQRT_3, Vector } from '../utils'
 
-const { Engine, Render, Svg, Vertices, Bodies, World } = Matter
+export const el = ref<HTMLCanvasElement | null>(null)
 
-export const el = ref<HTMLDivElement | null>(null)
-export const canvas = ref<HTMLCanvasElement | null>(null)
-export const runner = ref<HTMLIFrameElement | null>(null)
-
-export const debug = useRouteQuery('debug')
-
+export const shot = useRouteQuery('shot')
 export const f = {
-  reset: noop,
+  next: noop,
 }
 
-onMounted(async() => {
-  await Promise.all([
-    load('https://cdn.jsdelivr.net/gh/schteppe/poly-decomp.js@master/build/decomp.min.js'),
-    load('https://cdn.jsdelivr.net/gh/progers/pathseg@master/pathseg.js'),
-    load('https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js'),
-  ])
+const cx = 200
+const cy = 200
 
-  const engine = Engine.create()
-  const render = Render.create({
-    element: el.value!,
-    engine,
-    options: {
-      width: 400,
-      height: 400,
-      background: 'transparent',
-      wireframes: false,
-      // @ts-expect-error untyped
-      pixelRatio: 'auto',
-      // showVelocity: true,
-      // showAngleIndicator: true,
-    },
-  })
-  const world = engine.world
+/**
+ *
+ * TL /\  TR
+ * L |\/| R  CL CR
+ * BL \/ BR CB
+ */
 
-  window.opentype.load('http://fonts.gstatic.com/s/firacode/v9/uU9eCBsR6Z2vfE9aq3bL0fxyUs4tcw4W_ONrFVfxN87gsj0.ttf',
-    (err, font) => {
-      if (err || !font) {
-        console.error(err)
-        return
+const TL = 1
+const TR = 1 << 1
+const L = 1 << 2
+const CL = 1 << 3
+const CR = 1 << 4
+const R = 1 << 5
+const BL = 1 << 6
+const CB = 1 << 7
+const BR = 1 << 8
+
+const C = CL | CR | CB
+const T = TL | TR
+const RR = R | TR | BR
+const LL = L | TL | BL
+const B = BR | BL
+
+export const shake = ref(false)
+
+onMounted(() => {
+  const canvas = el.value!
+  const { ctx } = initCanvas(canvas)
+
+  const line = (a: Vector, b: Vector) => {
+    ctx.beginPath()
+    ctx.moveTo(...a)
+    ctx.lineTo(...b)
+    ctx.stroke()
+  }
+
+  const drawBox = (x: number, y: number, size: number, lines = 0b111111111) => {
+    const c: Vector = [x, y]
+    const points: Vector[] = new Array(6)
+      .fill(0)
+      .map((_, i) => [
+        x + size * Math.cos(i % 6 * 2 * Math.PI / 6 + r30),
+        y + size * Math.sin(i * 2 * Math.PI / 6 + r30),
+      ])
+
+    ctx.strokeStyle = '#000000'
+    ctx.lineWidth = 1
+
+    if (lines & TL)
+      line(points[3], points[4])
+    if (lines & TR)
+      line(points[4], points[5])
+    if (lines & L)
+      line(points[2], points[3])
+    if (lines & CL)
+      line(c, points[3])
+    if (lines & CR)
+      line(c, points[5])
+    if (lines & R)
+      line(points[5], points[0])
+    if (lines & BL)
+      line(points[1], points[2])
+    if (lines & CB)
+      line(c, points[1])
+    if (lines & BR)
+      line(points[0], points[1])
+  }
+
+  let t = shot.value ? 2 : 0
+  let size = 150
+  const SQRT_3_2 = SQRT_3 / 2
+  let centers: Vector[] = [[cx, cy]]
+
+  const reset = () => {
+    t = 0
+    size = 150
+    centers = [[cx, cy]]
+  }
+
+  const controlA = useTimeoutFn(() => shake.value = false, 200, false)
+  const controlB = useTimeoutFn(() => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    const new_centers: Vector[] = []
+
+    const i = t % 4
+
+    if (i === 2)
+      size = size / 2
+
+    for (const [cx, cy] of centers) {
+      if (i === 0) {
+        drawBox(cx, cy, size)
       }
-
-      // generate the text using a font
-      const textModel = new maker.models.Text(font, 'Hello', 5, true, false, undefined, { kerning: false })
-
-      const svg = maker.exporter.toSVG(textModel)
-
-      const dom = document.createElement('div')
-      dom.innerHTML = svg
-      const paths = Array.from(dom.querySelectorAll('path'))
-
-      console.log(paths)
-
-      for (const path of paths) {
-        const points = Svg.pathToVertices(path, 30)
-        const vertexSets = [Vertices.scale(points, 0.4, 0.4, { x: 0, y: 0 })]
-        const body = Bodies.fromVertices(100, 200, vertexSets, {
-          render: {
-            fillStyle: '#fff',
-            strokeStyle: '#000',
-            lineWidth: 1,
-          },
-        }, true)
-        World.add(world, body)
+      else if (i === 1) {
+        drawBox(cx, cy, size)
+        drawBox(cx, cy, size / 2)
       }
-    },
-  )
+      else if (i === 2) {
+        // down
+        drawBox(cx, cy + size, size, C | B)
+        // right top
+        drawBox(cx + size * SQRT_3_2, cy - size / 2, size, C | TR | R | BL)
+        drawBox(cx + size * SQRT_3_2, cy + size / 2, size, BR | R)
+        drawBox(cx - size * SQRT_3_2, cy + size / 2, size, BL | CL | TL | L)
+        drawBox(cx, cy - size, size, T | L | BL | CL)
+      }
+      else if (i === 3) {
+        drawBox(cx, cy + size, size, C | B)
+        drawBox(cx + size * SQRT_3_2, cy + size / 2, size, BR | CR | TR | R)
+        drawBox(cx - size * SQRT_3_2, cy + size / 2, size, BL | CL | TL | L)
+        drawBox(cx, cy - size, size)
 
-  engine.world.gravity.y = 0
+        new_centers.push(
+          [cx + size * SQRT_3_2, cy + size / 2],
+          [cx - size * SQRT_3_2, cy + size / 2],
+          [cx, cy - size],
+        )
+      }
+    }
 
-  Engine.run(engine)
-  Render.run(render)
+    if (new_centers.length)
+      centers = new_centers
+
+    t += 1
+    if (t >= 30)
+      reset()
+  }, 100, false)
+
+  f.next = () => {
+    shake.value = true
+
+    controlA.start()
+    controlB.start()
+  }
+
+  f.next()
 })
 </script>
+
+<style lang='stylus' scoped>
+.shake {
+  animation: 0.3s shake ease infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+</style>
