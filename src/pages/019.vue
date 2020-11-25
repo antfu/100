@@ -108,7 +108,7 @@ onMounted(() => {
 
     const i = t % 4
 
-    if (i === 2)
+    if (i === 1)
       size = size / 2
 
     for (const [cx, cy] of centers) {
@@ -116,8 +116,15 @@ onMounted(() => {
         drawBox(cx, cy, size)
       }
       else if (i === 1) {
-        drawBox(cx, cy, size)
-        drawBox(cx, cy, size / 2)
+        // down
+        drawBox(cx, cy + size, size, C | B)
+        // right top
+        drawBox(cx + size * SQRT_3_2, cy - size / 2, size, C | TR | R | BL)
+        // left top
+        drawBox(cx - size * SQRT_3_2, cy - size / 2, size, C | TL | L | BR | R)
+        drawBox(cx + size * SQRT_3_2, cy + size / 2, size, BR | R)
+        drawBox(cx - size * SQRT_3_2, cy + size / 2, size, BL | L)
+        drawBox(cx, cy - size, size, T)
       }
       else if (i === 2) {
         // down
