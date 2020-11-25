@@ -35,6 +35,7 @@ interface Ball {
   body: Matter.Body
   roundness: number
   edges: number
+  isEgg?: boolean
 }
 
 export const seenEgg = ref(false)
@@ -60,8 +61,8 @@ onMounted(async() => {
 
   let balls: Ball[] = []
 
-  const createBall = (hue: number, size: number, roundness = 0.1, edges = 5, x = 200, y = 200) => {
-    const isEgg = ((hue <= 0.02 || hue >= 0.98) && roundness > 0.6)
+  const createBall = (hue: number, size: number, roundness = 0.1, edges = 5, x = 200, y = 200, isEgg = false) => {
+    isEgg = isEgg || ((hue <= 0.02 || hue >= 0.99) && roundness > 0.7)
 
     const options: any = {
       frictionAir: 0.1,
@@ -70,7 +71,6 @@ onMounted(async() => {
         fillStyle: `rgb(${hslToRgb(hue, 0.6, 0.6).join(',')})`,
         strokeStyle: 'white',
         lineWidth: 2,
-
       },
     }
 
@@ -82,7 +82,7 @@ onMounted(async() => {
       }
     }
 
-    const body = roundness >= 0.7
+    const body = (roundness >= 0.7 || isEgg)
       ? Bodies.circle(x, y, size, options)
       : Bodies.polygon(x, y, edges, size, {
         chamfer: { radius: range(edges).map(i => roundness * size) },
@@ -125,6 +125,7 @@ onMounted(async() => {
       edges,
       ball.body.position.x + offset * sin(r),
       ball.body.position.y + offset * cos(r),
+      ball.isEgg,
     )
   }
 
