@@ -3,15 +3,18 @@ paper
   .box.overflow-hidden(ref='el')
 
 note
-  p drag them, or shake your phone
-  br
-  a.link(@click='toggleShape') toggle shape
+  template(v-if='!seenEgg')
+    p it's not always perfect to make clones.
+  template(v-else)
+    p <b>Congrats!</b>
+    p It's our pet goldfish drew by my girlfriend <a href="https://twitter.com/iiiiiiines_____" target='_blank'>Inès</a>. Hope you had fun with this little game and you can definitely show off a bit on Twitter :)
+    p.text-gray-400 (let me know by pinning @antfu7)
 </template>
 
 <script setup lang='ts'>
 import { ref, onMounted } from 'vue'
 import Matter from 'matter-js'
-import { timestamp } from '@vueuse/core'
+import { clamp, timestamp } from '@vueuse/core'
 // @ts-ignore
 import MatterAttractors from 'matter-attractors'
 import { useRouteQuery } from '@vueuse/router'
@@ -20,13 +23,21 @@ import { hslToRgb, pick, random, range } from '../utils'
 const { Engine, Mouse, MouseConstraint, Render, World, Bodies, Events } = Matter
 Matter.use(MatterAttractors)
 
-const { sin, cos } = Math
+const { sin, cos, max, round } = Math
 
 export const el = ref(null)
 export const shot = useRouteQuery('shot')
 export const debug = useRouteQuery('debug')
 
-interface Ball {hue: number; size: number; body: Matter.Body}
+interface Ball {
+  hue: number
+  size: number
+  body: Matter.Body
+  roundness: number
+  edges: number
+}
+
+export const seenEgg = ref(false)
 
 onMounted(async() => {
   const engine = Engine.create()
@@ -49,30 +60,72 @@ onMounted(async() => {
 
   let balls: Ball[] = []
 
-  const createBall = (hue: number, size: number, x = 200, y = 200) => {
-    const body = Bodies.circle(x, y, size, {
+  const createBall = (hue: number, size: number, roundness = 0.1, edges = 5, x = 200, y = 200) => {
+    const isEgg = ((hue <= 0.02 || hue >= 0.98) && roundness > 0.6)
+
+    const options: any = {
       frictionAir: 0.1,
       friction: 0,
       render: {
         fillStyle: `rgb(${hslToRgb(hue, 0.6, 0.6).join(',')})`,
-        strokeStyle: 'black',
-        lineWidth: 0,
-      },
-    })
+        strokeStyle: 'white',
+        lineWidth: 2,
 
-    const ball = { body, hue, size }
+      },
+    }
+
+    if (isEgg) {
+      options.render.sprite = {
+        texture: '/020-goldfish.png',
+        xScale: size / 400 * 1.3,
+        yScale: size / 400 * 1.3,
+      }
+    }
+
+    const body = roundness >= 0.7
+      ? Bodies.circle(x, y, size, options)
+      : Bodies.polygon(x, y, edges, size, {
+        chamfer: { radius: range(edges).map(i => roundness * size) },
+        ...options,
+      })
+
+    const ball = { body, hue, size, roundness, edges, isEgg }
     balls.push(ball)
     World.add(world, body)
+
+    if (!seenEgg.value && isEgg) {
+      setTimeout(() => {
+        alert('Congarts on finding the easter egg! 🎉 \nThanks for playing!')
+      }, 500)
+      seenEgg.value = true
+    }
 
     return ball
   }
 
   const clone = (ball: Ball) => {
     const r = random(1, -1)
-    const hue = ball.hue + random(0.1, -0.1)
-    const size = ball.size * random(1.2, 0.8)
+    let hue = ball.hue + random(0.07, -0.07)
+    if (hue < 0)
+      hue += 1
+    if (hue > 1)
+      hue -= 1
+
+    const size = ball.size <= 20 ? ball.size * random(1.2, 1) : max(ball.size * random(1.2, 0.8), 20)
     const offset = (ball.size + size) * 0.9
-    return createBall(hue, size, ball.body.position.x + offset * sin(r), ball.body.position.y + offset * cos(r))
+    const roundness = clamp(ball.roundness + random(0.2, -0.2), 0, 0.75)
+    let edges = ball.edges
+    if (roundness >= 0.75)
+      edges = clamp(round(edges * random(2, -2)), 3, 7)
+
+    return createBall(
+      hue,
+      size,
+      roundness,
+      edges,
+      ball.body.position.x + offset * sin(r),
+      ball.body.position.y + offset * cos(r),
+    )
   }
 
   const gravity = 5e-6
