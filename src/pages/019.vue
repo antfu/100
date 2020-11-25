@@ -41,8 +41,8 @@ const BR = 1 << 8
 
 const C = CL | CR | CB
 const T = TL | TR
-const RR = R | TR | BR
-const LL = L | TL | BL
+// const RR = R | TR | BR
+// const LL = L | TL | BL
 const B = BR | BL
 
 export const shake = ref(false)

@@ -2972,6 +2972,11 @@ makerjs@^0.17.0:
     graham_scan "^1.0.4"
     kdbush "^2.0.1"
 
+matter-attractors@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/matter-attractors/-/matter-attractors-0.1.6.tgz#f87ba132fb6cf1e58f267c6d8ffc590768683989"
+  integrity sha1-+HuhMvts8eWPJnxtj/xZB2hoOYk=
+
 matter-js@^0.14.2:
   version "0.14.2"
   resolved "https://registry.yarnpkg.com/matter-js/-/matter-js-0.14.2.tgz#8169af9e06fdc356ba9e72b49624eb329839883b"
