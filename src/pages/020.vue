@@ -77,8 +77,8 @@ onMounted(async() => {
     if (isEgg) {
       options.render.sprite = {
         texture: '/020-goldfish.png',
-        xScale: size / 400 * 1.3,
-        yScale: size / 400 * 1.3,
+        xScale: (size / 200) * 0.9,
+        yScale: (size / 200) * 0.9,
       }
     }
 
@@ -96,7 +96,7 @@ onMounted(async() => {
     if (!seenEgg.value && isEgg) {
       setTimeout(() => {
         alert('Congarts on finding the easter egg! 🎉 \nThanks for playing!')
-      }, 500)
+      }, 800)
       seenEgg.value = true
     }
 
