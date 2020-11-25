@@ -79,7 +79,6 @@ export const info = [
   {
     name: 'Clone',
     date: '11/25',
-    draft: true,
   },
 ]
 
