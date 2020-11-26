@@ -24,10 +24,19 @@ const h = 400
 
 const MAX_LINES = 3000
 
+let pattern = 0
+
 type Line = [number, number, number]
 type LineSegment = {line: Line; left: Vector; right: Vector}
 
 const { tan, PI } = Math
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'r') {
+    pattern = (pattern + 1) % 4
+    f.reset()
+  }
+})
 
 function isTruthy<T>(x: T | undefined): x is T {
   return Boolean(x)
@@ -88,11 +97,41 @@ onMounted(() => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
   }
 
+  const randomPoint = (s = 0): Vector => {
+    // around
+    if (s === 1) {
+      let cx = random() > 0.5 ? w - 1 : 1
+      let cy = random() * h
+      if (random() > 0.5)
+        [cx, cy] = [cy, cx]
+      return [cx, cy]
+    }
+    // center
+    else if (s === 2) {
+      return [200 + random(1, -1) * 50, 200 + random(1, -1) * 50]
+    }
+    // cross center
+    else if (s === 3) {
+      if (random() > 0.5)
+        return [200, random() * h]
+      else
+        return [random() * w, 200]
+    }
+    // even
+    else {
+      return [random() * w, random() * h]
+    }
+  }
+
+  const randomRad = (s = 0): number => {
+    return random(1, -1) * PI
+  }
+
   f.next = () => {
-    const cx = random() * w
-    const cy = random() * h
-    const cp: Vector = [cx, cy]
-    const rad = random(1, -1) * PI
+    const cp = randomPoint(pattern) // change this to have different gen points
+    const [cx, cy] = cp
+
+    const rad = randomRad(pattern)
     // a / b = tan(rad)
     // a * cx + b * cy + c = 0
     // b = 1
