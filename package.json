@@ -31,7 +31,7 @@
     "@types/matter-js": "^0.14.6",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@vue/compiler-sfc": "3.0.2",
-    "@vuedx/typescript-plugin-vue": "^0.2.3",
+    "@vuedx/typescript-plugin-vue": "^0.2.4-0",
     "autoprefixer": "^10.0.2",
     "cheerio": "^1.0.0-rc.3",
     "cross-env": "^7.0.2",

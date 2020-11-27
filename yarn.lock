@@ -642,10 +642,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.0.2.tgz#419bd85a2ebdbd4f42963e98c5a1b103452176d9"
   integrity sha512-Zx869zlNoujFOclKIoYmkh8ES2RcS/+Jn546yOiPyZ+3+Ejivnr+fb8l+DdXUEFjo+iVDNR3KyLzg03aBFfZ4Q==
 
-"@vuedx/analyze@0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@vuedx/analyze/-/analyze-0.2.3.tgz#b64ccf32072e291a8e676833dcce2b25f23cf02d"
-  integrity sha512-w9raivZhLD/VQpAI/TMGZTmlK6WJqOWOc3OQuy837fhciYyV32WuwjURAQuJrBqvEMxJMtiUIR3KSS61TGoEmw==
+"@vuedx/analyze@0.2.4-0":
+  version "0.2.4-0"
+  resolved "https://registry.yarnpkg.com/@vuedx/analyze/-/analyze-0.2.4-0.tgz#52766a6dcd2867320409fe517540fd0bf0394d48"
+  integrity sha512-GX5lqZPwyHLrJaL36L5qcBLBGcvTz/LiGwv1nwxuZ2HpO4rr2mH6CemA0mOKXiQ5aaqbAYqeAzMQf+i/AEViQg==
   dependencies:
     "@babel/code-frame" "^7.10.4"
     "@babel/parser" "^7.10.5"
@@ -658,47 +658,47 @@
     fast-glob "^3.2.4"
     hash-sum "^2.0.0"
 
-"@vuedx/compiler-tsx@0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@vuedx/compiler-tsx/-/compiler-tsx-0.2.3.tgz#f0da4816862d20a27db39ec33678ae44168c0e41"
-  integrity sha512-u+ecTx3NKHr87AZrG+dTu2ZyLZFmJ/kF0LvfvRWRWCtc91AfuRBFLjccamOGuNQg3fJynxREbgfwXQSsB9DCHQ==
+"@vuedx/compiler-tsx@0.2.4-0":
+  version "0.2.4-0"
+  resolved "https://registry.yarnpkg.com/@vuedx/compiler-tsx/-/compiler-tsx-0.2.4-0.tgz#a4d734519f689e82287d5bbd8048cdcf1932aee6"
+  integrity sha512-XzJdijqmHPiNNV555TgBfv/7iMmwmpQYCimpTtccrVch7m1R+64YZqtgg43lkWZLwwANhPVborJh/Pw8wCUokQ==
   dependencies:
     "@babel/parser" "^7.11.0"
     "@babel/types" "^7.11.0"
     "@vue/compiler-core" "^3.0.0-rc.5"
-    "@vuedx/template-ast-types" "0.2.3"
+    "@vuedx/template-ast-types" "0.2.4-0"
     lodash.camelcase "^4.3.0"
 
-"@vuedx/template-ast-types@0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@vuedx/template-ast-types/-/template-ast-types-0.2.3.tgz#a14dad50dc82c1e4086cf212338cc4ce767a9043"
-  integrity sha512-ViWbGaFcNKvenYRaiDWqEGBBbOYQl15a6monHlGipZNTyW3Vk+/dIrxQvj3/WT+MBUIQboWrLHIooDCfSl5i9g==
+"@vuedx/template-ast-types@0.2.4-0":
+  version "0.2.4-0"
+  resolved "https://registry.yarnpkg.com/@vuedx/template-ast-types/-/template-ast-types-0.2.4-0.tgz#a1cead2e9631f8fa710a9c5622412f600e290a1f"
+  integrity sha512-9xFfTPH4rTxNsITOJMinlzDJf3+8VS/ao02gfHZMs57XgHszghYzVFKpfs2G0056xYAKrfoJSEJw51eGSB9KQA==
   dependencies:
     "@vue/compiler-core" "^3.0.0-rc.5"
 
-"@vuedx/typescript-plugin-vue@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@vuedx/typescript-plugin-vue/-/typescript-plugin-vue-0.2.3.tgz#b9ab41a8af29a4ddbc44e90ef41727f048879218"
-  integrity sha512-3P6DPnPv1JkGqUlOi/as9btiASJvPNyMT8WNRMZpAZI9eb7fj97c34N8oeLtNyI700CrnCiJvWUKZmJpRofAlQ==
+"@vuedx/typescript-plugin-vue@^0.2.4-0":
+  version "0.2.4-0"
+  resolved "https://registry.yarnpkg.com/@vuedx/typescript-plugin-vue/-/typescript-plugin-vue-0.2.4-0.tgz#e07485139e28de823e5153d96a2f71e82d0f75f2"
+  integrity sha512-BB5S29B2JRmmaglM8gJD/VT0Ika9RUnZYUCOMCopHCItyTbFC7RLJkIZg9rZS77R87/alD5W316WxqgE8C9XYA==
   dependencies:
     "@vue/compiler-core" "^3.0.0-rc.5"
-    "@vuedx/analyze" "0.2.3"
-    "@vuedx/template-ast-types" "0.2.3"
-    "@vuedx/vue-virtual-textdocument" "0.2.3"
+    "@vuedx/analyze" "0.2.4-0"
+    "@vuedx/template-ast-types" "0.2.4-0"
+    "@vuedx/vue-virtual-textdocument" "0.2.4-0"
     de-indent "^1.0.2"
     quick-lru "^5.1.1"
     typescript "^3.9.7"
     vscode-uri "^2.1.2"
 
-"@vuedx/vue-virtual-textdocument@0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@vuedx/vue-virtual-textdocument/-/vue-virtual-textdocument-0.2.3.tgz#8629dbd0101aacc77f4a7f928816e4a6903ac57f"
-  integrity sha512-FcFd0S34Ffs3stb3E1zC0LYeJdLNsvKr0CqHMRkdCmHHlp9h4vYKFigBkzzPiT8G6pNyWGrniwi33o4CmKvedQ==
+"@vuedx/vue-virtual-textdocument@0.2.4-0":
+  version "0.2.4-0"
+  resolved "https://registry.yarnpkg.com/@vuedx/vue-virtual-textdocument/-/vue-virtual-textdocument-0.2.4-0.tgz#ea5eb9d17b83b1ebf1e5b4e7313634bc2c4c2a54"
+  integrity sha512-eCgyvN5/O27UWlAohwuHzlPftoxEIrEz6zEDncXKFb7Gzzp5EoNlptXN16tJoYGHi1duz4aMnEg6p5xoBSqArQ==
   dependencies:
     "@vue/compiler-core" "^3.0.0-rc.5"
     "@vue/compiler-sfc" "^3.0.0-rc.5"
-    "@vuedx/analyze" "0.2.3"
-    "@vuedx/compiler-tsx" "0.2.3"
+    "@vuedx/analyze" "0.2.4-0"
+    "@vuedx/compiler-tsx" "0.2.4-0"
     vscode-languageserver-textdocument "^1.0.1"
     vscode-uri "^2.1.2"
 
