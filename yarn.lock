@@ -4738,10 +4738,10 @@ vfile-location@^3.2.0:
   resolved "https://registry.yarnpkg.com/vfile-location/-/vfile-location-3.2.0.tgz#d8e41fbcbd406063669ebf6c33d56ae8721d0f3c"
   integrity sha512-aLEIZKv/oxuCDZ8lkJGhuhztf/BW4M+iHdCwglA/eWc+vtuRFJj8EtgceYFX4LRjOhCAAiNHsKGssC6onJ+jbA==
 
-vite-plugin-components@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/vite-plugin-components/-/vite-plugin-components-0.4.0.tgz#52ff67f45ce4acb1ffdf492b4f76b1790b131426"
-  integrity sha512-V+XEXhFj+wiUG5xKyL4rTa3a4b7qKCHeTMK2Zlr2ejFa6+378iGwBcPIfTj3nSiOVIUVlEhHcTuWdEKAqUxpRA==
+vite-plugin-components@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-components/-/vite-plugin-components-0.4.1.tgz#a432ab93ae880b232c89aef365ce708a0f0b962b"
+  integrity sha512-ejkPUKPHTCv/bwR9XDTzZZlZabHS/aGvNhgvD3XVlDnoXhzqOOOhsQTOwEobVQBKVKfxpzDSsN/UEtLETry7vA==
   dependencies:
     debug "^4.3.1"
     fast-glob "^3.2.4"
