@@ -28,7 +28,7 @@ onMounted(async() => {
   await Promise.all([
     load('https://cdn.jsdelivr.net/gh/schteppe/poly-decomp.js@master/build/decomp.min.js'),
     load('https://cdn.jsdelivr.net/gh/progers/pathseg@master/pathseg.js'),
-    load('https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js'),
+    load('https://cdn.jsdelivr.net/npm/opentype.js/dist/opentype.min.js'),
   ])
 
   const engine = Engine.create()
@@ -56,7 +56,7 @@ onMounted(async() => {
       }
 
       // generate the text using a font
-      const textModel = new maker.models.Text(font, 'Hello', 5, true, false, undefined, { kerning: false })
+      const textModel = new maker.models.Text(font, 'I', 5, true, false, undefined, { kerning: false })
 
       const svg = maker.exporter.toSVG(textModel)
 
@@ -68,7 +68,8 @@ onMounted(async() => {
 
       for (const path of paths) {
         const points = Svg.pathToVertices(path, 30)
-        const vertexSets = [Vertices.scale(points, 0.4, 0.4, { x: 0, y: 0 })]
+        const vertexSets = [Vertices.scale(points, 2, 2, { x: 0, y: 0 })]
+        console.log(vertexSets)
         const body = Bodies.fromVertices(100, 200, vertexSets, {
           render: {
             fillStyle: '#fff',
