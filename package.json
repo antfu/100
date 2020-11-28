@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "@iconify/iconify": "^2.0.0-rc.2",
-    "@vueuse/core": "^4.0.0-rc.3",
-    "@vueuse/router": "^4.0.0-rc.3",
-    "@vueuse/shared": "^4.0.0-rc.3",
+    "@vueuse/core": "^4.0.0-rc.4",
+    "@vueuse/router": "^4.0.0-rc.4",
+    "@vueuse/shared": "^4.0.0-rc.4",
     "dayjs": "^1.9.6",
     "lodash-es": "^4.17.15",
     "makerjs": "^0.17.0",
@@ -18,33 +18,33 @@
     "matter-js": "^0.14.2",
     "opentype.js": "^1.3.3",
     "three": "^0.122.0",
-    "vue": "3.0.2",
+    "vue": "3.0.3",
     "vue-router": "^4.0.0-rc.5"
   },
   "devDependencies": {
     "@antfu/eslint-config-vue": "^0.4.3",
-    "@iconify/json": "^1.1.262",
+    "@iconify/json": "^1.1.265",
     "@purge-icons/generated": "^0.4.1",
     "@types/cheerio": "^0.22.22",
     "@types/fs-extra": "^9.0.4",
     "@types/lodash-es": "^4.17.3",
-    "@types/matter-js": "^0.14.6",
-    "@typescript-eslint/eslint-plugin": "^4.8.1",
-    "@vue/compiler-sfc": "3.0.2",
+    "@types/matter-js": "^0.14.7",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@vue/compiler-sfc": "3.0.3",
     "@vuedx/typescript-plugin-vue": "^0.2.4-0",
-    "autoprefixer": "^10.0.2",
+    "autoprefixer": "^10.0.4",
     "cheerio": "^1.0.0-rc.3",
     "cross-env": "^7.0.2",
     "eslint": "^7.14.0",
     "esno": "^0.2.4",
     "fs-extra": "^9.0.1",
     "playwright": "^1.6.2",
-    "postcss": "^8.1.9",
+    "postcss": "^8.1.10",
     "pug": "^3.0.0",
     "stylus": "^0.54.8",
     "tailwindcss": "^2.0.1",
     "typescript": "^4.1.2",
-    "vite": "^1.0.0-rc.9",
+    "vite": "^1.0.0-rc.13",
     "vite-plugin-components": "^0.3.0",
     "vite-plugin-psvg": "^0.1.2",
     "vite-plugin-purge-icons": "^0.4.5",
@@ -57,7 +57,9 @@
   "eslintConfig": {
     "extends": "@antfu/eslint-config-vue",
     "rules": {
-      "import/no-mutable-exports": "off"
+      "import/no-mutable-exports": "off",
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off"
     }
   }
 }

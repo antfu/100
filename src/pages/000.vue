@@ -21,14 +21,14 @@ note
 import { computed, ref } from 'vue'
 import { works } from '../works'
 
-export const loading = ref(true)
-export const iframe = ref<HTMLIFrameElement | null>()
-export const count = ref(1)
+const loading = ref(true)
+const iframe = ref<HTMLIFrameElement | null>()
+const count = ref(1)
 
-export const url = computed(() => `/${count.value.toString().padStart(3, '0')}`)
-export const src = computed(() => `${url.value}?hideFrame=true`)
+const url = computed(() => `/${count.value.toString().padStart(3, '0')}`)
+const src = computed(() => `${url.value}?hideFrame=true`)
 
-export const next = () => {
+const next = () => {
   count.value = (count.value + 1) % (works.length + 1)
   if (count.value === 0)
     count.value += 1

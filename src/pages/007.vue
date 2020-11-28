@@ -23,12 +23,12 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-export const debug = !!route.query.debug
-export const shot = !!route.query.shot
-export const { gamma, beta, alpha } = useDeviceOrientation()
+const debug = !!route.query.debug
+const shot = !!route.query.shot
+const { gamma, beta, alpha } = useDeviceOrientation()
 
-export const mobile = computed(() => gamma.value != null && beta.value != null && (gamma.value !== 0 || beta.value !== 0 || alpha.value !== 0))
-export const theta = computed(() => {
+const mobile = computed(() => gamma.value != null && beta.value != null && (gamma.value !== 0 || beta.value !== 0 || alpha.value !== 0))
+const theta = computed(() => {
   if (shot)
     return Math.PI / 2 * 4.55
 
@@ -41,7 +41,7 @@ export const theta = computed(() => {
   return Math.atan2(y, x)
 })
 
-export const transformStyle = computed(() => {
+const transformStyle = computed(() => {
   return {
     transform: `rotate(${theta.value}rad)`,
   }

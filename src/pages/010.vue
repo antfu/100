@@ -15,9 +15,9 @@ import { timestamp } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
 import { initCanvas, r180, r90, range, SQRT_2 } from '../utils'
 
-export const el = ref<HTMLCanvasElement | null>(null)
+const el = ref<HTMLCanvasElement | null>(null)
 
-export const shot = useRouteQuery('shot')
+const shot = useRouteQuery('shot')
 
 onMounted(() => {
   const canvas = el.value!

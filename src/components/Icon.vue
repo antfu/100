@@ -2,15 +2,18 @@
   <div ref="el" :class="$attrs.class" style="vertical-align: text-bottom" />
 </template>
 
-<script setup="props" lang="ts">
-import { watch, ref, onMounted, nextTick } from 'vue'
+<script setup lang="ts">
+import { watch, ref, onMounted, nextTick, defineProps } from 'vue'
 import Iconify from '@purge-icons/generated'
 
-declare const props: {
-  icon: string
-}
+const props = defineProps({
+  icon: {
+    type: String,
+    required: true,
+  },
+})
 
-export const el = ref<HTMLElement | null>(null)
+const el = ref<HTMLElement | null>(null)
 
 const update = async() => {
   if (el.value) {

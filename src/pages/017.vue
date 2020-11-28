@@ -10,8 +10,8 @@ import { useRouteQuery } from '@vueuse/router'
 import { onMounted, ref } from 'vue'
 import { initCanvas, pick } from '../utils'
 
-export const shot = useRouteQuery('shot')
-export const el = ref<HTMLCanvasElement | null>(null)
+const shot = useRouteQuery('shot')
+const el = ref<HTMLCanvasElement | null>(null)
 
 const { pow, sqrt } = Math
 
@@ -26,7 +26,7 @@ let colors = palette[0]
 let ts = timestamp()
 let pattern = 0x1111
 
-export const reset = () => {
+const reset = () => {
   ts = timestamp()
   pattern = pick([
     0x0101,

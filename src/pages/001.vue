@@ -12,9 +12,9 @@ import { ref, onMounted } from 'vue'
 import Matter from 'matter-js'
 
 const { Engine, Render, World, Bodies } = Matter
-export const canvas = ref(null)
+const canvas = ref(null)
 
-export const f = {
+const f = {
   add: noop,
 }
 

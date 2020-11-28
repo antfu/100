@@ -11,7 +11,7 @@ import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { r180, r90, random, range } from '../utils'
 
-export const box = ref<HTMLElement | null>(null)
+const box = ref<HTMLElement | null>(null)
 const { round } = Math
 
 // Lights

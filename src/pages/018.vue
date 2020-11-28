@@ -2,7 +2,7 @@
 paper
   .box.centered.overflow-hidden(@click='roll' ref='el')
     canvas.absolute.left-0.top-0.opacity-25(ref='canvas' width='400' height='400')
-  .box-description(v-if='debug')
+  .box-description(v-if='false')
     .flex.flex-col.mt-2
       p.text-gray-400 (t,x,y) =>
       .flex
@@ -33,12 +33,12 @@ import { initCanvas, random, range } from '../utils'
 
 const { Engine, Render, World, Bodies, Body } = Matter
 
-export const el = ref<HTMLDivElement | null>(null)
-export const canvas = ref<HTMLCanvasElement | null>(null)
-export const runner = ref<HTMLIFrameElement | null>(null)
+const el = ref<HTMLDivElement | null>(null)
+const canvas = ref<HTMLCanvasElement | null>(null)
+const runner = ref<HTMLIFrameElement | null>(null)
 
-export const debug = useRouteQuery('debug')
-export const showArrows = debug
+const debug = useRouteQuery('debug')
+const showArrows = debug
 
 let presetIndex = 0
 const presets = [
@@ -46,8 +46,8 @@ const presets = [
   ['sin(x / 15) / 1.5', 'sin(y / 15) / 1.5'],
 ]
 
-export const expX = ref('sin(x / 10) / 2')
-export const expY = ref('sin(y / 10) / 2')
+const expX = ref('sin(x / 10) / 2')
+const expY = ref('sin(y / 10) / 2')
 
 const thorrtledX = useThrottle(expX, 500)
 const thorrtledY = useThrottle(expY, 500)
@@ -69,11 +69,11 @@ const field = (_x = 0, _y = 0) => {
   ]
 }
 
-export const f = {
+const f = {
   reset: noop,
 }
 
-export function roll() {
+function roll() {
   presetIndex = (presetIndex + 1) % presets.length
   const [a, b] = presets[presetIndex]
   expX.value = a

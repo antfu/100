@@ -28,30 +28,41 @@ div
 <script setup='props' lang='ts'>
 import { useEventListener, useRafFn, useThrottle, noop, useVModel } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, defineProps } from 'vue'
 import { initCanvas, load, range } from '../utils'
 
-declare const props: {
-  x: string
-  y: string
-  controls?: boolean
-  iterations: number
-}
+const props = defineProps({
+  x: {
+    type: String,
+    required: true,
+  },
+  y: {
+    type: String,
+    required: true,
+  },
+  controls: {
+    type: Boolean,
+  },
+  iterations: {
+    type: Number,
+    required: true,
+  },
+})
 
-export const el = ref<HTMLCanvasElement | null>(null)
-export const runner = ref<HTMLIFrameElement | null>(null)
-export const input = ref<HTMLInputElement | null>(null)
+const el = ref<HTMLCanvasElement | null>(null)
+const runner = ref<HTMLIFrameElement | null>(null)
+const input = ref<HTMLInputElement | null>(null)
 
-export const expX = useVModel(props, 'x')
-export const expY = useVModel(props, 'y')
-export const fps = useRouteQuery('fps')
+const expX = useVModel(props, 'x')
+const expY = useVModel(props, 'y')
+const fps = useRouteQuery('fps')
 
 const thorrtledX = useThrottle(expX, 500)
 const thorrtledY = useThrottle(expY, 500)
 
 const MathContext = `const {${Object.getOwnPropertyNames(Math).join(',')}}=Math`
 
-export const f = {
+const f = {
   start: noop,
   stop: noop,
 }

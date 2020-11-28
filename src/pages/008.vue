@@ -18,14 +18,15 @@ import { useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { timestamp } from '@vueuse/shared'
 import { computed, onMounted, ref, watch } from 'vue'
-import { initCanvas, SQRT_3, Vector, r90, range, r30, r60, pick, shuffle } from '../utils'
+import { initCanvas, SQRT_3, r90, range, r30, r60, pick, shuffle } from '../utils'
+import type { Vector } from '../utils'
 
-export const el = ref<HTMLCanvasElement | null>(null)
+const el = ref<HTMLCanvasElement | null>(null)
 
-export const shot = useRouteQuery('shot')
-export const wireframe = ref(true)
-export const speeds = ['x0.5', 'x1', 'x2']
-export const speedLevel = ref('x1')
+const shot = useRouteQuery('shot')
+const wireframe = ref(true)
+const speeds = ['x0.5', 'x1', 'x2']
+const speedLevel = ref('x1')
 
 const speed = computed(() => {
   if (speedLevel.value === 'x0.5')

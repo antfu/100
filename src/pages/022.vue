@@ -11,14 +11,16 @@ import Matter from 'matter-js'
 // @ts-ignore
 import MatterAttractors from 'matter-attractors'
 import { useRoute } from 'vue-router'
-import { addVec, load, vec2mat, Vector, range } from '../utils'
+import { addVec, load, vec2mat, range } from '../utils'
+import type { Vector } from '../utils'
+
 Matter.use(MatterAttractors)
 
 const { Engine, Mouse, MouseConstraint, Render, World, Bodies } = Matter
 const route = useRoute()
 
-export const el = ref(null)
-export const debug = ref(!!route.query.debug)
+const el = ref(null)
+const debug = ref(!!route.query.debug)
 
 const viewport = reactive(useWindowSize())
 

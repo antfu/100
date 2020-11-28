@@ -78,17 +78,17 @@ const presets = shuffle([
   { code: 'r*(7*sin(7/r-t)^7*sin(7*th-t))/7', by: 'kennethdmiller3' },
 ])
 
-export const el = ref<HTMLCanvasElement | null>(null)
-export const runner = ref<HTMLIFrameElement | null>(null)
-export const input = ref<HTMLInputElement | null>(null)
+const el = ref<HTMLCanvasElement | null>(null)
+const runner = ref<HTMLIFrameElement | null>(null)
+const input = ref<HTMLInputElement | null>(null)
 
 const route = useRoute()
 const router = useRouter()
 let expressionIndex = -1
 
-export const rounded = ref(false)
+const rounded = ref(false)
 
-export const author = computed(() =>
+const author = computed(() =>
   presets.find(i => i.code === expression.value)?.by,
 )
 
@@ -109,28 +109,28 @@ const colors = shuffle([
 let colorA = [0, 0, 0]
 let colorB = [0, 0, 0]
 
-export const expression = ref<string>(route.query?.q?.toString()?.trimEnd() || '')
-export const fps = useRouteQuery('fps')
+const expression = ref<string>(route.query?.q?.toString()?.trimEnd() || '')
+const fps = useRouteQuery('fps')
 
 const thorrtled = useThrottle(expression, 500)
 
 const MathContext = `const {${Object.getOwnPropertyNames(Math).join(',')}}=Math`
 
-export const toggleShape = () => rounded.value = !rounded.value
+const toggleShape = () => rounded.value = !rounded.value
 
-export const next = () => {
+const next = () => {
   expressionIndex += 1
   const { code } = get(presets, expressionIndex)
   expression.value = code
   recolor()
 }
 
-export const recolor = () => {
+const recolor = () => {
   colorA = pick(colors)
   colorB = pick(colors, colorA)
 }
 
-export const f = {
+const f = {
   start: noop,
   stop: noop,
 }

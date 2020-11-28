@@ -16,7 +16,7 @@ import { onMounted, ref } from 'vue'
 import { useRafFn } from '@vueuse/core'
 import * as THREE from 'three'
 
-export const box = ref<HTMLElement | null>(null)
+const box = ref<HTMLElement | null>(null)
 
 const fragmentShader = `
 precision mediump float;

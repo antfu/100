@@ -15,17 +15,18 @@ note
 <script setup lang='ts'>
 import { noop } from '@vueuse/shared'
 import { onMounted, ref, watch } from 'vue'
-import { get, initCanvas, pick, r30, r60, range, shuffle, Vector } from '../utils'
+import { get, initCanvas, pick, r30, r60, range, shuffle } from '../utils'
+import type { Vector } from '../utils'
 
-export const el = ref<HTMLCanvasElement | null>(null)
+const el = ref<HTMLCanvasElement | null>(null)
 
-export const f = {
+const f = {
   run: noop,
 }
 
-export const showHexagon = ref(false)
-export const patterns = ['*?', 'p0', 'p1', 'p2', 'p3']
-export const mode = ref(pick(patterns))
+const showHexagon = ref(false)
+const patterns = ['*?', 'p0', 'p1', 'p2', 'p3']
+const mode = ref(pick(patterns))
 
 watch([showHexagon, mode], () => f.run())
 

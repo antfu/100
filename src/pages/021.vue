@@ -8,13 +8,14 @@ paper
 import { useRouteQuery } from '@vueuse/router'
 import { noop } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
-import { distance, initCanvas, random, range, Vector } from '../utils'
+import { distance, initCanvas, random, range } from '../utils'
+import type { Vector } from '../utils'
 
-export const el = ref<HTMLCanvasElement | null>(null)
+const el = ref<HTMLCanvasElement | null>(null)
 
-export const shot = useRouteQuery('shot')
-export const debug = useRouteQuery('debug')
-export const f = {
+const shot = useRouteQuery('shot')
+const debug = useRouteQuery('debug')
+const f = {
   next: noop,
   reset: noop,
 }

@@ -28,7 +28,7 @@ import { useEventListener, useFullscreen, useTitle } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import { works } from '../works'
 
-export const fullscreen = useFullscreen(ref(document.querySelector('html')))
+const fullscreen = useFullscreen(ref(document.querySelector('html')))
 
 useEventListener('keydown', (e) => {
   if (document.activeElement === document.body) {
@@ -46,13 +46,13 @@ let no = route.path.slice(1)
 if (no.startsWith('x'))
   no = no.slice(1)
 
-export const shot = Boolean(route.query.shot)
-export const hideFrame = Boolean(route.query.hideFrame)
-export const index = works.findIndex(i => i.no === no)
+const shot = Boolean(route.query.shot)
+const hideFrame = Boolean(route.query.hideFrame)
+const index = works.findIndex(i => i.no === no)
 
-export const work = works[index]
-export const prev = works[index - 1]
-export const next = works[index + 1]
+const work = works[index]
+const prev = works[index - 1]
+const next = works[index + 1]
 
 useTitle(work ? `${no}. ${work.name}` : '404')
 </script>

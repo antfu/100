@@ -3,7 +3,7 @@ paper
   .box.overflow-hidden(@click='roll')
     canvas(ref='el' width='400' height='400' :style='filterStyle')
   .box-description.py-4(v-if='!shot')
-    tempate(v-for='c,idx in coeff')
+    template(v-for='c,idx in coeff')
       .inline-block.w-12.mx-2.text-right(
         :class='[c < 0 ? "text-gray-300" : "text-gray-500"]'
         @click='rollAt(idx)'
@@ -19,37 +19,37 @@ import { initCanvas } from '../utils'
 
 type Color = {r?: number; g?: number; b?: number}
 
-export const shot = useRouteQuery('shot')
-export const el = ref<HTMLCanvasElement | null>(null)
-export const runner = ref<HTMLIFrameElement | null>(null)
-export const input = ref<HTMLInputElement | null>(null)
+const shot = useRouteQuery('shot')
+const el = ref<HTMLCanvasElement | null>(null)
+const runner = ref<HTMLIFrameElement | null>(null)
+const input = ref<HTMLInputElement | null>(null)
 
 const { cos, sin, abs, random, max, round } = Math
 
-export const coeff = ref([
+const coeff = ref([
   1, 4.3, 4, 2, 6, 4,
   2, 3, 2, 2, 6, -2,
   8, 2, 1, 2, -5.3, 3,
 ])
 
-export const randomCoeff = (idx: number) => {
+const randomCoeff = (idx: number) => {
   if (idx % 2)
     return (random() - 0.5) * 12
   else
     return (random() - 0.5) * 20
 }
 
-export const roll = () => {
+const roll = () => {
   coeff.value = new Array(coeff.value.length).fill(0).map((_, i) => randomCoeff(i))
 }
 
-export const rollAt = (idx: number) => {
+const rollAt = (idx: number) => {
   coeff.value = coeff.value.map((v, i) => i === idx ? randomCoeff(i) : v)
 }
 
-export const hue = ref(0)
+const hue = ref(0)
 
-export const filterStyle = computed(() => ({
+const filterStyle = computed(() => ({
   filter: `hue-rotate(${hue.value}rad) invert(1)`,
 }))
 

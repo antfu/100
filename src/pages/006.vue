@@ -18,9 +18,9 @@ import { range, useShake } from '../utils'
 const { Bodies, Body, Engine, Mouse, MouseConstraint, Render, World } = Matter
 const route = useRoute()
 
-export const el = ref(null)
-export const sphere = ref(!route.query.square)
-export const debug = ref(!!route.query.debug)
+const el = ref(null)
+const sphere = ref(!route.query.square)
+const debug = ref(!!route.query.debug)
 
 const size = 50
 const rows = 8
@@ -32,7 +32,7 @@ const offest = reactive({
   y: computed(() => (viewport.height - size * rows) / 2),
 })
 
-export const toggleShape = () => {
+const toggleShape = () => {
   sphere.value = !sphere.value
 }
 

@@ -10,12 +10,13 @@ paper
 import { useRouteQuery } from '@vueuse/router'
 import { noop, useTimeoutFn } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
-import { initCanvas, r30, SQRT_3, Vector } from '../utils'
+import { initCanvas, r30, SQRT_3 } from '../utils'
+import type { Vector } from '../utils'
 
-export const el = ref<HTMLCanvasElement | null>(null)
+const el = ref<HTMLCanvasElement | null>(null)
 
-export const shot = useRouteQuery('shot')
-export const f = {
+const shot = useRouteQuery('shot')
+const f = {
   next: noop,
 }
 
@@ -45,7 +46,7 @@ const T = TL | TR
 // const LL = L | TL | BL
 const B = BR | BL
 
-export const shake = ref(false)
+const shake = ref(false)
 
 onMounted(() => {
   const canvas = el.value!

@@ -11,8 +11,8 @@ import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-export const hide = Boolean(route.query.shot || route.query.hideFrame)
-export const active = ref(false)
+const hide = Boolean(route.query.shot || route.query.hideFrame)
+const active = ref(false)
 </script>
 
 <style lang='stylus' scoped>

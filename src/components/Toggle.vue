@@ -3,14 +3,15 @@
   slot
 </template>
 
-<script setup='props, {emit}' lang='ts'>
-declare const props: {
-  modelValue: boolean
-}
+<script setup lang='ts'>
+import { defineEmit, defineProps } from 'vue'
 
-declare const emit: (key: string, v: any) => {}
+const emit = defineEmit(['update:modelValue'])
+const props = defineProps({
+  modelValue: Boolean,
+})
 
-export const toggle = () => {
+const toggle = () => {
   emit('update:modelValue', !props.modelValue)
 }
 </script>

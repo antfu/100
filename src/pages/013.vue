@@ -25,18 +25,18 @@ import { useRouteQuery } from '@vueuse/router'
 import { onMounted, ref, watch } from 'vue'
 import { initCanvas, polar2cart, r15, r180, r90 } from '../utils'
 
-export const shot = useRouteQuery('shot')
-export const el = ref<HTMLCanvasElement | null>(null)
+const shot = useRouteQuery('shot')
+const el = ref<HTMLCanvasElement | null>(null)
 
 const { random } = Math
 
-export const f = {
+const f = {
   start: () => {},
 }
 
-export const init = ref(5)
-export const len = ref(5)
-export const stopped = ref(false)
+const init = ref(5)
+const len = ref(5)
+const stopped = ref(false)
 
 watch([init, len], () => f.start())
 

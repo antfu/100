@@ -9,14 +9,15 @@ import { useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { onMounted, ref } from 'vue'
 import { sampleSize } from 'lodash-es'
-import { colorInterpration, hexToRgb, initCanvas, range, Vector, random, inbound } from '../utils'
+import { colorInterpration, hexToRgb, initCanvas, range, random, inbound } from '../utils'
+import type { Vector } from '../utils'
 
-export const shot = useRouteQuery('shot')
-export const el = ref<HTMLCanvasElement | null>(null)
+const shot = useRouteQuery('shot')
+const el = ref<HTMLCanvasElement | null>(null)
 
 const { trunc } = Math
 
-export const f = {
+const f = {
   start: () => {},
 }
 

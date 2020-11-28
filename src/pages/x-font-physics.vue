@@ -14,13 +14,13 @@ import { load } from '../utils'
 
 const { Engine, Render, Svg, Vertices, Bodies, World } = Matter
 
-export const el = ref<HTMLDivElement | null>(null)
-export const canvas = ref<HTMLCanvasElement | null>(null)
-export const runner = ref<HTMLIFrameElement | null>(null)
+const el = ref<HTMLDivElement | null>(null)
+const canvas = ref<HTMLCanvasElement | null>(null)
+const runner = ref<HTMLIFrameElement | null>(null)
 
-export const debug = useRouteQuery('debug')
+const debug = useRouteQuery('debug')
 
-export const f = {
+const f = {
   reset: noop,
 }
 

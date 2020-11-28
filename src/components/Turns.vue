@@ -2,17 +2,24 @@
 .turns(:class='{active: modelValue}' @click='toggle') {{modelValue}}
 </template>
 
-<script setup='props, {emit}' lang='ts'>
+<script setup lang='ts'>
+import { defineEmit, defineProps } from 'vue'
+import type { PropType } from 'vue'
 import { get } from '../utils'
 
-declare const props: {
-  modelValue: string
-  options: string[]
-}
+const emit = defineEmit(['update:modelValue'])
+const props = defineProps({
+  modelValue: {
+    type: String,
+    required: true,
+  },
+  options: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
+})
 
-declare const emit: (key: string, v: any) => {}
-
-export const toggle = () => {
+const toggle = () => {
   const index = props.options.indexOf(props.modelValue) || 0
   emit('update:modelValue', get(props.options, index + 1))
 }

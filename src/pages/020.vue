@@ -25,9 +25,9 @@ Matter.use(MatterAttractors)
 
 const { sin, cos, max, round } = Math
 
-export const el = ref(null)
-export const shot = useRouteQuery('shot')
-export const debug = useRouteQuery('debug')
+const el = ref(null)
+const shot = useRouteQuery('shot')
+const debug = useRouteQuery('debug')
 
 interface Ball {
   hue: number
@@ -38,7 +38,7 @@ interface Ball {
   isEgg?: boolean
 }
 
-export const seenEgg = ref(false)
+const seenEgg = ref(false)
 
 onMounted(async() => {
   const engine = Engine.create()

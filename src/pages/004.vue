@@ -30,30 +30,30 @@ import { computed, reactive, ref, watch } from 'vue'
 import { useWindowPosition } from '../utils'
 
 const BOX_SIZE = 400
-export const box = ref<HTMLDivElement | null>(null)
-export const { width, height } = useWindowSize()
-export const { screenLeft, screenTop } = useWindowPosition()
-export const mouse = reactive(useMouseInElement(box, { touch: true }))
+const box = ref<HTMLDivElement | null>(null)
+const { width, height } = useWindowSize()
+const { screenLeft, screenTop } = useWindowPosition()
+const mouse = reactive(useMouseInElement(box, { touch: true }))
 
-export const boxX = ref((width.value - BOX_SIZE) / 2)
-export const boxY = ref((height.value - BOX_SIZE) / 2)
+const boxX = ref((width.value - BOX_SIZE) / 2)
+const boxY = ref((height.value - BOX_SIZE) / 2)
 
-export const screenWidth = window.screen.width
-export const screenHeight = window.screen.height
+const screenWidth = window.screen.width
+const screenHeight = window.screen.height
 
-export const px = (v: number) => `${v}px`
+const px = (v: number) => `${v}px`
 
-export const dragging = ref(false)
-export const draggingOffests = ref([0, 0])
+const dragging = ref(false)
+const draggingOffests = ref([0, 0])
 
-export const motion = reactive(useDeviceMotion())
+const motion = reactive(useDeviceMotion())
 
-export const mousedown = () => {
+const mousedown = () => {
   draggingOffests.value = [mouse.elementX, mouse.elementY]
   dragging.value = true
 }
 
-export const mouseup = () => {
+const mouseup = () => {
   dragging.value = false
 }
 
@@ -67,6 +67,6 @@ watch(
   },
 )
 
-export const innerX = computed(() => -(boxX.value + screenLeft.value))
-export const innerY = computed(() => -(boxY.value + screenTop.value))
+const innerX = computed(() => -(boxX.value + screenLeft.value))
+const innerY = computed(() => -(boxY.value + screenTop.value))
 </script>

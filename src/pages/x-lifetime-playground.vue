@@ -15,11 +15,11 @@ import { useRouteQuery } from '@vueuse/router'
 import { onMounted, reactive, ref } from 'vue'
 import { initCanvas, SQRT_3, Vector, r360, r60, r120 } from '../utils'
 
-export const el = ref<HTMLCanvasElement | null>(null)
+const el = ref<HTMLCanvasElement | null>(null)
 
-export const shot = useRouteQuery('shot')
+const shot = useRouteQuery('shot')
 
-export const data = reactive<any>({
+const data = reactive<any>({
   t: 0,
   scale: 0,
 })

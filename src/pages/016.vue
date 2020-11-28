@@ -10,8 +10,8 @@ import { useRouteQuery } from '@vueuse/router'
 import { onMounted, ref } from 'vue'
 import { distance, initCanvas, random, toHex } from '../utils'
 
-export const shot = useRouteQuery('shot')
-export const el = ref<HTMLCanvasElement | null>(null)
+const shot = useRouteQuery('shot')
+const el = ref<HTMLCanvasElement | null>(null)
 
 const { round, max } = Math
 

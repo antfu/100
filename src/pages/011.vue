@@ -12,9 +12,9 @@ import { OutlineEffect } from 'three/examples/jsm/effects/OutlineEffect'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { r90 } from '../utils'
 
-export const el = ref<HTMLElement | null>(null)
+const el = ref<HTMLElement | null>(null)
 
-export const debug = useRouteQuery('debug')
+const debug = useRouteQuery('debug')
 
 onMounted(async() => {
   function createMesh(geometry: THREE.Geometry, solid = true) {
