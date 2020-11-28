@@ -17,8 +17,8 @@ import { computed, ref } from 'vue'
 
 const playground = ref(null)
 
-const expX = 'x + (random() - 0.5) * 8'
-const expY = 'y + (random() - 0.5) * 8'
+const expX = ref('x + (random() - 0.5) * 8')
+const expY = ref('y + (random() - 0.5) * 8')
 
 const shot = useRouteQuery('shot')
 
