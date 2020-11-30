@@ -90,7 +90,11 @@ export const info = [
   },
   {
     name: 'Knitting',
-    data: '11/28',
+    date: '11/28',
+  },
+  {
+    name: 'Cast',
+    date: '11/30',
   },
 ]
 
