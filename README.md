@@ -2,19 +2,37 @@
 
 My 100 day project of exploring design, compform, and new things.
 
-[100.antfu.me](http://100.antfu.me/)
+[100.antfu.me](http://100.antfu.me/) &nbsp;|&nbsp; [updates on Twitter](https://twitter.com/antfu7/status/1325977074813739009)
 
-Updates on [Twitter](https://twitter.com/antfu7/status/1325977074813739009)
+<br>
 
-![](./public/shots/009.png)
+<p align="center">
+<img src="https://codecember.ink/anthony-plum-13.jpg" width="300" alt="Day 13, plum"/>
+</p>
 
-## Early Access
+## Join us!
 
-This is the early access to source code of this project. Will keep sync every couple days. And when I finished all the 100 days, this project will be open sourced. Thanks for your sponsoring and hope you find them inspiring in some means.
+[@octref](https://github.com/octref)(100.matsu.io) and me started our 100-day challenges as we wanted to learn creative coding while having fun.
 
-## PR Disabled
+We would love to share the journey with you and have you learning and doing sketches together. **Join us in [Codecember](https://codecember.ink/)**, 
+we'll give you a prompt every day that includes an artwork, its source code and a blurb, throughout December, 2020.
 
-I have disabled the Pull Requests feature for me to focus on delivering content first. But feel free to use Issues to get suggestions, discuss about the works, I will be grateful! If you would like to have some explanation of the code, I am happy to do so.
+<p align="center">
+<a href="https://codecember.ink/">
+<img src="https://codecember.ink/og.png" width="600" alt="Day 13, plum"/>
+</a>
+</p>
+
+
+## Sponsors
+
+This project is part of my <a href='https://github.com/antfu-sponsors'>Sponsor Program</a>
+
+<p align="center">
+  <a href="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg">
+    <img src='https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg'/>
+  </a>
+</p>
 
 ## License
 

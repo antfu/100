@@ -5,6 +5,7 @@ paper
 </template>
 
 <script setup lang='ts'>
+// https://ncase.me/sight-and-light/
 import { useRouteQuery } from '@vueuse/router'
 import { noop, timestamp } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
