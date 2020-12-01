@@ -14,6 +14,8 @@ paper(:style='transformStyle')
       p Beta {{ beta }}
       p Theta {{ theta }}
       p Alpha {{ alpha }}
+
+note
 </template>
 
 <script setup lang='ts'>

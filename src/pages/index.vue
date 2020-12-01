@@ -22,4 +22,5 @@ useTitle('100 days')
       span // from Nov. 6th, 2020
       br
       span // updates on <a href='https://twitter.com/antfu7/status/1325977074813739009' target='_blank' class='link'>twitter</a>
+      span // source on <a href='https://github.com/antfu/100' target='_blank' class='link'>github</a>
 </template>
