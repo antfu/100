@@ -12,7 +12,7 @@ useTitle('100 days')
 .paper
   .centered
     h1.font-mono.mb-2.text-lg.font-bold.mb-4 100 days
-    pre.grid.grid-cols-2.gap-x-4.gap-y-1
+    pre.grid.gap-x-4.gap-y-1(class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3")
       router-link.link.block.mr-4(v-for='work of avaliable_works' :key='work.no' :to='`/${work.no}`')
         span.mr-2.opacity-50 {{ work.no }}
         b {{ work.name }}
