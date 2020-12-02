@@ -54,7 +54,8 @@ async function run() {
   //   take('023', 3, 10000, 1, '', 2000, 'e'),
   // ])
   // await take('024', 5, 3000, 3, '', 500)
-  await take('025', 5, 10000, 3, '', 1000)
+  // await take('025', 5, 10000, 3, '', 1000)
+  await take('026', 1, 5000, 3, '', 1000)
 
   await browser.close()
 }
