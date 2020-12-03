@@ -7,8 +7,8 @@ note
 </template>
 
 <script setup lang="ts">
-import { createP5 } from 'p5i'
-import type { P5i } from 'p5i'
+import { p5i } from 'p5i'
+import type { P5I } from 'p5i'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { distance, r60, SQRT_3 } from '../utils'
 
@@ -30,13 +30,13 @@ const n = 10
 const cx = w / 2
 const cy = h / 2
 
-const { createCanvas, background, strokeWeight, map, stroke, push, translate, pop, line, rotate, fill, noStroke, mount, unmount } = createP5()
+const { createCanvas, background, strokeWeight, map, stroke, push, translate, pop, line, rotate, fill, noStroke, mount, unmount } = p5i()
 
 function setup() {
   createCanvas(w, h)
 }
 
-function draw({ mouseX, mouseY }: P5i) {
+function draw({ mouseX, mouseY }: P5I) {
   background('transparent')
 
   for (let i = 0; i < rows - 1; i++) {
@@ -90,11 +90,6 @@ function draw({ mouseX, mouseY }: P5i) {
   }
 }
 
-onMounted(() => {
-  mount(el.value!, { setup, draw })
-})
-
-onUnmounted(() => {
-  unmount()
-})
+onMounted(() => mount(el.value!, { setup, draw }))
+onUnmounted(() => unmount())
 </script>

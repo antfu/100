@@ -104,6 +104,10 @@ export const info = [
     name: 'Lines',
     date: '12/02',
   },
+  {
+    name: 'Flat',
+    date: '12/03',
+  },
 ]
 
 export const works = info.map((info, idx) => {
