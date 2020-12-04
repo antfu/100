@@ -25,6 +25,13 @@ async function run() {
     }
   }
 
+  async function open(no: string, query = '') {
+    const page = await context.newPage()
+    await page.goto(`http://localhost:3333/${no}?shot=true${query}`)
+    await page.waitForEvent('close')
+    return page
+  }
+
   // await take('', 1)
   // await take('001', 3, 800, 4)
   // await take('002', 8, 500)
@@ -56,7 +63,9 @@ async function run() {
   // await take('024', 5, 3000, 3, '', 500)
   // await take('025', 5, 10000, 3, '', 1000)
   // await take('026', 1, 5000, 3, '', 1000)
-  await take('027', 1, 1000, 50, '', 1000)
+  // await take('027', 1, 1000, 50, '', 1000)
+  // await take('028', 4, 1000)
+  await open('028')
 
   await browser.close()
 }
