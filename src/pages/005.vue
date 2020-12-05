@@ -1,6 +1,6 @@
 <template lang='pug'>
 paper
-  .box.centered.overflow-hidden(ref='box' @click='next' :class='{"rounded-full": rounded}')
+  .box.centered.overflow-hidden(@click='next' :class='{"rounded-full": rounded}')
     .canvas-wrapper
       canvas(ref='el')
   .box-description
