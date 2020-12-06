@@ -96,12 +96,3 @@ function restart() {
 onMounted(restart)
 onUnmounted(() => unmount())
 </script>
-
-<style scoped>
-#sketch {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-</style>
