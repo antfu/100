@@ -69,6 +69,7 @@ async function run() {
   // await take('029', 20, 1000)
   // await take('030', 10, 2000)
   // await open('030')
+  await take('031', 5, 1000)
 
   await browser.close()
 }

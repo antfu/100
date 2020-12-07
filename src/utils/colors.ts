@@ -42,7 +42,7 @@ export function colorInterpration(vectors: ColorVector[], n: number) {
   ]
 }
 
-export function hslToRgb(h: number, s: number, l: number) {
+export function hslToRgb(h: number, s: number, l: number): [number, number, number] {
   let r, g, b
 
   if (s === 0) {
