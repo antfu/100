@@ -1,6 +1,11 @@
 <template lang='pug'>
 paper
   .box.overflow-hidden(ref='el')
+
+note
+  p <b>Tonhalle – Beethoven</b>
+  br
+  p Day 6 of <a href='https://codecember.ink/2020/6' class="link" target='_blank'>#Codecember</a>
 </template>
 
 <script setup lang="ts">

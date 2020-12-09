@@ -257,7 +257,7 @@ onMounted(async() => {
         fn = runner.value!.contentWindow!.eval(`()=>{
           ${MathContext};
           return (t,r,th) => {
-            return ${exp.replace(/(\d+)(\w)/, (_, n, x) => `${n} * ${x}`)}
+            return ${exp.replace(/(\d+)(\w+)/g, (_, n, x) => `${n} * ${x}`)}
           }
         }`)()
         f.start()
