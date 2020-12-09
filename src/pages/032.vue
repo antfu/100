@@ -28,6 +28,7 @@ note
   p `2 * t` can be written as `2t`
   p link is sharable
   br
+  p 👇🏼 add your formulas!
 </template>
 
 <script setup lang='ts'>
@@ -44,9 +45,12 @@ const presets = shuffle([
   { code: 'sin(t) * 0.75x' },
   { code: 'random() * 2 - 1' },
   { code: '(x+1) * (y+1) * sin(t)' },
+  { code: 'tan(t+x)' },
+  { code: 'tan(t+x)*(y+1)' },
+  { code: '((x-6)**2+(y-6)**2)*sin(t)' },
 
   // community
-  // { code: '', by: '' },
+  // { code: '', by: 'twitter_id' },
 ])
 
 const author = computed(() =>
