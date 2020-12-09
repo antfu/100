@@ -21,14 +21,15 @@ note
   br
   p another port from <a href='https://tixy.land/' target='_blank'>tixy.land</a>
   br
-  p <b>x, y</b> - 1 -> 18
-  p <b>t</b> - seconds
-  p <b>i</b> - 1 -> 324
-  p return value will be the z position of the boxes
-  p null values and errors will make the box invisiable
+  p <b>t</b>&nbsp;&nbsp;&nbsp;&nbsp; time passed in seconds
+  p <b>i</b>&nbsp;&nbsp;&nbsp;&nbsp; 1 -> 324
+  p <b>x, y</b> &nbsp;1 -> 18
   br
-  p `Math.` can be omitted
-  p `2 * t` can be written as `2t`
+  p return value -> <b>z axis</b> of the boxes
+  p null and error will make box invisiable
+  br
+  p <del>Math.</del> can be omitted
+  p <b>2 * t</b> can be written as <b>2t</b>
   p link is sharable
   br
   p 👇🏼 add your formulas!
