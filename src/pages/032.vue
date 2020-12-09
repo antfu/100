@@ -21,6 +21,9 @@ note
   br
   p another port from <a href='https://tixy.land/' target='_blank'>tixy.land</a>
   br
+  p <b>x, y</b> - 1 -> 18
+  p <b>t</b> - seconds
+  p <b>i</b> - 1 -> 324
   p return value will be the z position of the boxes
   p null values and errors will make the box invisiable
   br
@@ -44,10 +47,11 @@ const presets = shuffle([
   { code: 'sin(t + x + y)', by: '' },
   { code: 'sin(t) * 0.75x' },
   { code: 'random() * 2 - 1' },
-  { code: '(x+1) * (y+1) * sin(t)' },
+  { code: 'x * y * sin(t)' },
   { code: 'tan(t+x)' },
-  { code: 'tan(t+x)*(y+1)' },
+  { code: 'tan(t+x)*y' },
   { code: '((x-6)**2+(y-6)**2)*sin(t)' },
+  { code: 'tan(x)*tan(y)*sin(t)' },
 
   // community
   // { code: '', by: 'twitter_id' },
@@ -170,7 +174,7 @@ onMounted(async() => {
             const box = boxes[y][x]
             let v = NaN
             try {
-              v = +fn(t, y * edges + x, x, y)
+              v = +fn(t, y * edges + x + 1, x + 1, y + 1)
             }
             catch (e) {}
             if (isNaN(v)) {
