@@ -22,8 +22,8 @@ note
   p another port from <a href='https://tixy.land/' target='_blank'>tixy.land</a>
   br
   p <b>t</b>&nbsp;&nbsp;&nbsp;&nbsp; time passed in seconds
-  p <b>i</b>&nbsp;&nbsp;&nbsp;&nbsp; 1 -> 324
-  p <b>x, y</b> &nbsp;1 -> 18
+  p <b>i</b>&nbsp;&nbsp;&nbsp;&nbsp; 1 -> 144
+  p <b>x, y</b> &nbsp;1 -> 12
   br
   p return value -> <b>z axis</b> of the boxes
   p null and error will make box invisiable
@@ -51,7 +51,7 @@ const presets = shuffle([
   { code: 'x * y * sin(t)' },
   { code: 'tan(t+x)' },
   { code: 'tan(t+x)*y' },
-  { code: '((x-6)**2+(y-6)**2)*sin(t)' },
+  { code: '((x-6.5)**2+(y-6.5)**2)*sin(t)' },
   { code: 'tan(x)*tan(y)*sin(t)' },
 
   // community
@@ -202,7 +202,7 @@ onMounted(async() => {
         fn = runner.value!.contentWindow!.eval(`()=>{
           ${MathContext};
           return (t,i,x,y) => {
-            return ${exp.replace(/(\d+)(\w+)/g, (_, n, x) => `${n} * ${x}`)}
+            return ${exp.replace(/(\d+)([a-zA-Z]+)/g, (_, n, x) => `${n} * ${x}`)}
           }
         }`)()
         f.reset()
