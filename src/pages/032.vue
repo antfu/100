@@ -6,7 +6,6 @@ paper
       p.text-gray-400 (t,i,x,y) =>
       input.flex-auto.outline-none.ml-2.bg-transparent(
         v-model='expression'
-        ref='input'
         maxlength='32'
         autocomplete='false'
         spellcheck='false'
