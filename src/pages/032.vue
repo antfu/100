@@ -1,6 +1,7 @@
 <template lang='pug'>
 paper
-  #day32(ref='el' @click='next')
+  .box.borderless.z-10(@click='next')
+  #day32(ref='el')
   .box-description(v-show='!shot')
     .flex.mt-6
       p.text-gray-400 (t,i,x,y) =>
