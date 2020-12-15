@@ -128,6 +128,18 @@ export const info = [
     name: 'z = tixy',
     date: '12/08',
   },
+  {
+    name: 'Glass',
+    date: '12/15',
+  },
+  {
+    name: 'Moiré',
+    date: '12/15',
+  },
+  {
+    name: 'Window',
+    date: '12/15',
+  },
 ]
 
 export const works = info.map((info, idx) => {
