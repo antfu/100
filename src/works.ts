@@ -140,6 +140,10 @@ export const info = [
     name: 'Window',
     date: '12/15',
   },
+  {
+    name: 'Arch',
+    date: '1/30',
+  },
 ]
 
 export const works = info.map((info, idx) => {
