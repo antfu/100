@@ -6,6 +6,9 @@ paper
       src='/036.svg' ref='el'
       style='opacity: 0.9; transform: matrix(0.998506, -0.0546418, 0.0546418, 0.998506, 0, 0) rotate(1.50557deg); left: -2px; top: 1px;'
     )
+
+note
+  p Reproduce of an art device in the <a href="https://www.area-arch.it/en/audio-architecture" target="_blank">AUDIO ARCHITECTURE</a> exhibition.
 </template>
 
 <script setup lang='ts'>
