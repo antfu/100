@@ -141,7 +141,11 @@ export const info = [
     date: '12/15',
   },
   {
-    name: 'Arch',
+    name: 'Arch 1',
+    date: '1/30',
+  },
+  {
+    name: 'Arch 2',
     date: '1/30',
   },
 ]
