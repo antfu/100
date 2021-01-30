@@ -1,6 +1,10 @@
+[build.environment]
+  NPM_FLAGS = "--prefix=/dev/null"
+  NODE_VERSION = "14"
+
 [build]
   publish = "dist"
-  command = "yarn build"
+  command = "npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run build"
 
 [[redirects]]
   from = "/*"

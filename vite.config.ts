@@ -1,18 +1,27 @@
 import { UserConfig } from 'vite'
-import Voie from 'vite-plugin-voie'
+import Pages from 'vite-plugin-pages'
 import PurgeIcons from 'vite-plugin-purge-icons'
 import ViteComponents from 'vite-plugin-components'
 import PSVG from 'vite-plugin-psvg'
+import Vue from '@vitejs/plugin-vue'
 
 const config: UserConfig = {
+  optimizeDeps: {
+    include: [
+      '@vueuse/core',
+      '@vueuse/shared',
+      '@vueuse/router',
+      'three',
+      '@iconify/iconify',
+      'lodash-es',
+      'p5i',
+      'matter-js',
+      'matter-attractors',
+    ],
+  },
   plugins: [
-    Voie({
-      importMode(path: string) {
-        if (path === '/src/pages/index.vue')
-          return 'sync'
-        return 'async'
-      },
-    }),
+    Vue(),
+    Pages(),
     ViteComponents(),
     PurgeIcons(),
     PSVG(),
