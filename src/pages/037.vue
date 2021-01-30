@@ -4,7 +4,7 @@ paper
     img.select-none(src='/037.svg')
     img.fixed.top-0.left-0(
       src='/037.svg' ref='el'
-      style='opacity: 0.9; transform: matrix(0.998506, -0.0546418, 0.0546418, 0.998506, 0, 0) rotate(1.50557deg); left: -2px; top: 1px;'
+      style='opacity: 0.9; transform: matrix(0.997729, -0.0673475, 0.0673475, 0.997729, 0, 0) rotate(-4.64737deg); left: 3px; top: 2px;'
     )
 
 note
