@@ -1,6 +1,6 @@
 <template lang='pug'>
 div
-  .box.overflow-hidden(ref='box')
+  .box.overflow-hidden
     .canvas-wrapper
       canvas(ref='el')
   .box-description(v-show='controls')
@@ -10,7 +10,7 @@ div
         .mr-2.text-gray-400 x =
         input.flex-auto.outline-none(
           v-model='expX'
-          maxlength='32'
+          :maxlength='32'
           autocomplete='false'
           spellcheck='false'
         )

@@ -2,7 +2,7 @@ import './main.postcss'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
-import routes from 'vite-plugin-pages/client'
+import routes from 'pages-generated'
 import '@purge-icons/generated'
 
 import App from './App.vue'

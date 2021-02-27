@@ -8,9 +8,9 @@
     "esModuleInterop": true,
     "incremental": true,
     "skipLibCheck": true,
-    "plugins": [{
-      "name": "@vuedx/typescript-plugin-vue"
-    }],
+    "types": [
+      "vite-plugin-pages/client"
+    ],
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "paths": {

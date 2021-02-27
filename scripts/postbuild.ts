@@ -5,7 +5,7 @@ import { works } from '../src/works'
 const DOMAIN = 'https://100.antfu.me'
 
 export async function postBuild() {
-  console.log('post build!')
+  // console.log('post build!')
 
   const indexHTML = await fs.readFile('dist/index.html', 'utf-8')
 
