@@ -11,7 +11,7 @@ note
   a.link(@click='playground.f.start()') restart
 </template>
 
-<script setup='props' lang='ts'>
+<script setup lang='ts'>
 import { useRouteQuery } from '@vueuse/router'
 import { computed, ref } from 'vue'
 
