@@ -17,7 +17,7 @@
       span.text-gray-300 {{work.date}}
   .nav.font-mono(v-if='!shot && !hideFrame')
     router-link.link.text-xl.block.pt-1(to='/')
-      icon(icon='carbon:chevron-left')
+      carbon-chevron-left
 
   slot(:work='work')
 </template>

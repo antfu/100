@@ -1,9 +1,10 @@
 import { UserConfig } from 'vite'
 import Pages from 'vite-plugin-pages'
-import PurgeIcons from 'vite-plugin-purge-icons'
 import ViteComponents from 'vite-plugin-components'
+import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 import PSVG from 'vite-plugin-psvg'
 import Vue from '@vitejs/plugin-vue'
+import WindiCSS from 'vite-plugin-windicss'
 
 const config: UserConfig = {
   optimizeDeps: {
@@ -22,9 +23,16 @@ const config: UserConfig = {
   plugins: [
     Vue(),
     Pages(),
-    ViteComponents(),
-    PurgeIcons(),
+    ViteComponents({
+      customComponentResolvers: [
+        ViteIconsResolver({
+          componentPrefix: '',
+        }),
+      ],
+    }),
+    ViteIcons(),
     PSVG(),
+    WindiCSS(),
   ],
 }
 

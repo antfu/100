@@ -7,13 +7,12 @@ note
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, reactive, ref, watch, watchEffect, withCtx } from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
 import { useMouse } from '@vueuse/core'
 import type { Vector } from '../utils'
 
-const { sqrt, PI, pow, random, trunc, E } = Math
 const size = 400
 const spacing = 30
 const el = ref<HTMLElement | null>(null)

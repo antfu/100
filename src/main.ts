@@ -1,9 +1,9 @@
 import './main.postcss'
+import 'windi.css'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import routes from 'pages-generated'
-import '@purge-icons/generated'
 
 import App from './App.vue'
 
