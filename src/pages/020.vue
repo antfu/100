@@ -12,15 +12,15 @@ note
 </template>
 
 <script setup lang='ts'>
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import Matter from 'matter-js'
 import { clamp, timestamp } from '@vueuse/core'
-// @ts-ignore
+// @ts-expect-error missing types
 import MatterAttractors from 'matter-attractors'
 import { useRouteQuery } from '@vueuse/router'
 import { hslToRgb, pick, random, range } from '../utils'
 
-const { Engine, Mouse, MouseConstraint, Render, World, Bodies, Events } = Matter
+const { Engine, Mouse, MouseConstraint, Render, World, Bodies, Events, Runner } = Matter
 Matter.use(MatterAttractors)
 
 const { sin, cos, max, round } = Math
@@ -50,9 +50,9 @@ onMounted(async() => {
       height: 400,
       background: 'transparent',
       wireframes: false,
-      // @ts-ignore untyped
+      // @ts-expect-error untyped
       showVelocity: debug.value,
-      // @ts-ignore untyped
+      // @ts-expect-error untyped
       pixelRatio: 'auto',
     },
   })
@@ -156,7 +156,7 @@ onMounted(async() => {
   const mouse = Mouse.create(render.canvas)
   const mouseConstraint = MouseConstraint.create(engine, {
     mouse,
-    // @ts-ignore
+    // @ts-expect-error anyway
     constraint: {
       stiffness: 0.2,
       render: {
@@ -181,7 +181,7 @@ onMounted(async() => {
     }
   })
 
-  const cleanup = () => {
+  function cleanup() {
     balls = balls.filter((b) => {
       const { x, y } = b.body.position
       if (x > -100 && x < 500 && y > -100 && y < 500)
@@ -194,13 +194,10 @@ onMounted(async() => {
 
   World.add(world, mouseConstraint)
 
-  // @ts-ignore
   render.mouse = mouse
+  render.element.style.zIndex = '-1'
 
-  // @ts-ignore
-  render.element.style.zIndex = -1
-
-  Engine.run(engine)
+  Runner.run(engine)
   Render.run(render)
 })
 </script>

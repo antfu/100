@@ -13,7 +13,7 @@ import { useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { timestamp } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
-import { initCanvas, r180, r90, range, SQRT_2 } from '../utils'
+import { SQRT_2, initCanvas, r180, r90, range } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -69,7 +69,7 @@ onMounted(() => {
   let ts = timestamp()
   const duration = 1500
 
-  const frame = () => {
+  function frame() {
     const t = timestamp() - ts
 
     ctx.clearRect(0, 0, width, height)
@@ -81,7 +81,7 @@ onMounted(() => {
       iterations(t - duration * 3 * i)
   }
 
-  const iterations = (t: number) => {
+  function iterations(t: number) {
     if (t < 0)
       return
 
@@ -96,6 +96,7 @@ onMounted(() => {
 
     if (turn)
       roundRect(size, Math.round(size * Math.pow(rt / 550, 2)))
+
     else
       rectRound(size, Math.round(Math.pow(rt / 60, 4)))
   }
@@ -108,7 +109,7 @@ onMounted(() => {
 
   const controls = useRafFn(frame)
 
-  controls.start()
+  controls.resume()
 })
 </script>
 

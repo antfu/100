@@ -4,9 +4,7 @@
 </template>
 
 <script setup lang='ts'>
-import { defineEmit, defineProps } from 'vue'
-
-const emit = defineEmit(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: Boolean,
 })

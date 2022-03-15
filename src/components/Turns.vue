@@ -3,11 +3,10 @@
 </template>
 
 <script setup lang='ts'>
-import { defineEmit, defineProps } from 'vue'
 import type { PropType } from 'vue'
 import { get } from '../utils'
 
-const emit = defineEmit(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: {
     type: String,

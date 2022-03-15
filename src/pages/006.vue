@@ -10,12 +10,12 @@ note
 
 <script setup lang='ts'>
 import { useEventListener, useWindowSize } from '@vueuse/core'
-import { ref, onMounted, reactive, computed, watch } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import Matter from 'matter-js'
 import { useRoute } from 'vue-router'
 import { range, useShake } from '../utils'
 
-const { Bodies, Body, Engine, Mouse, MouseConstraint, Render, World } = Matter
+const { Bodies, Body, Engine, Mouse, MouseConstraint, Render, World, Runner } = Matter
 const route = useRoute()
 
 const el = ref(null)
@@ -46,9 +46,8 @@ onMounted(async() => {
       height: viewport.height,
       background: 'transparent',
       wireframes: false,
-      // @ts-ignore untyped
       showVelocity: debug.value,
-      // @ts-ignore untyped
+      // @ts-expect-error untyped
       pixelRatio: 'auto',
     },
   })
@@ -117,9 +116,9 @@ onMounted(async() => {
       World.add(engine.world, [body])
     }
 
-    const shake = (mutiplier = 30) => {
+    const shake = (multiplier = 30) => {
       Body.setAngularVelocity(body, (Math.random() - 0.5) * 2)
-      Body.setVelocity(body, { x: (Math.random() - 0.5) * 2 * mutiplier, y: (Math.random() - 0.5) * 2 * mutiplier })
+      Body.setVelocity(body, { x: (Math.random() - 0.5) * 2 * multiplier, y: (Math.random() - 0.5) * 2 * multiplier })
     }
 
     watch([sphere, viewport], init, { immediate: true })
@@ -135,7 +134,7 @@ onMounted(async() => {
   const mouse = Mouse.create(render.canvas)
   const mouseConstraint = MouseConstraint.create(engine, {
     mouse,
-    // @ts-ignore
+    // @ts-expect-error anyway
     constraint: {
       stiffness: 0.2,
       render: {
@@ -171,7 +170,7 @@ onMounted(async() => {
       }, 100)
     }, 2000)
   }
-  const stop = () => {
+  function stop() {
     if (timer)
       clearInterval(timer)
     if (timeout)
@@ -189,7 +188,6 @@ onMounted(async() => {
     start()
   }
 
-  // @ts-ignore
   render.mouse = mouse
 
   useEventListener('keydown', (e) => {
@@ -209,10 +207,10 @@ onMounted(async() => {
 
   useShake(shake)
 
-  // @ts-ignore
+  // @ts-expect-error ignore
   render.element.style.zIndex = -1
 
-  Engine.run(engine)
+  Runner.run(engine)
   Render.run(render)
 
   if (route.query.shake) {

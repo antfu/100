@@ -13,9 +13,7 @@ note
 </template>
 
 <script setup lang='ts'>
-import { noop } from '@vueuse/shared'
-import { onMounted, ref, watch } from 'vue'
-import { get, initCanvas, pick, r30, r60, range, shuffle } from '../utils'
+import { get, initCanvas, noop, pick, r30, r60, range, shuffle } from '../utils'
 import type { Vector } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)

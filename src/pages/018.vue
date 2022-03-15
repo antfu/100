@@ -26,12 +26,12 @@ paper
 
 <script setup lang='ts'>
 import { noop, useIntervalFn, useThrottle } from '@vueuse/shared'
-import { ref, onMounted, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import Matter from 'matter-js'
 import { useRouteQuery } from '@vueuse/router'
 import { initCanvas, random, range } from '../utils'
 
-const { Engine, Render, World, Bodies, Body } = Matter
+const { Engine, Render, World, Bodies, Body, Runner } = Matter
 
 const el = ref<HTMLDivElement | null>(null)
 const canvas = ref<HTMLCanvasElement | null>(null)
@@ -49,8 +49,8 @@ const presets = [
 const expX = ref('sin(x / 10) / 2')
 const expY = ref('sin(y / 10) / 2')
 
-const thorrtledX = useThrottle(expX, 500)
-const thorrtledY = useThrottle(expY, 500)
+const throttledX = useThrottle(expX, 500)
+const throttledY = useThrottle(expY, 500)
 
 const MathContext = `const {${Object.getOwnPropertyNames(Math).join(',')}}=Math`
 
@@ -83,14 +83,14 @@ function roll() {
 onMounted(async() => {
   const { ctx } = initCanvas(canvas.value!)
 
-  const arrow = (fromx = 0, fromy = 0, tox = 0, toy = 0) => {
+  const arrow = (fromX = 0, fromY = 0, tox = 0, toy = 0) => {
     const headlen = 2 // length of head in pixels
-    const dx = tox - fromx
-    const dy = toy - fromy
+    const dx = tox - fromX
+    const dy = toy - fromY
     const angle = Math.atan2(dy, dx)
     ctx.strokeStyle = '#ff505050'
     ctx.lineWidth = 0.3
-    ctx.moveTo(fromx, fromy)
+    ctx.moveTo(fromX, fromY)
     ctx.lineTo(tox, toy)
     ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6))
     ctx.moveTo(tox, toy)
@@ -126,12 +126,12 @@ onMounted(async() => {
       // showAngleIndicator: true,
     },
   })
-  engine.world.gravity.y = 0
+  engine.gravity.y = 0
 
   const dot = (x = 0, y = 0) => {
     return Bodies.circle(x, y, 0.5, {
-      frictionAir: 0,
-      friction: 0,
+      frictionAir: 0.001,
+      friction: 2,
       render: {
         fillStyle: 'transparent',
         strokeStyle: 'black',
@@ -143,7 +143,7 @@ onMounted(async() => {
   const dots = range(1000).map(i => dot(random(400), random(400)))
 
   watch(
-    [thorrtledX, thorrtledY],
+    [throttledX, throttledY],
     ([expX, expY]) => {
       stop()
       fnX = () => 0
@@ -151,14 +151,14 @@ onMounted(async() => {
 
       try {
         // eslint-disable-next-line no-eval
-        // @ts-ignore
+        // @ts-expect-error anyway
         fnX = runner.value!.contentWindow!.eval(`()=>{
           ${MathContext};
           return (t,x,y) => {
             return ${expX}
           }
         }`)()
-        // @ts-ignore
+        // @ts-expect-error anyway
         fnY = runner.value!.contentWindow!.eval(`()=>{
           ${MathContext};
           return (t,x,y) => {
@@ -166,12 +166,12 @@ onMounted(async() => {
           }
         }`)()
 
-        console.log(expX, expY, 'ok')
+        // console.log(expX, expY, 'ok')
         // f.reset()
         fieldArrow()
       }
       catch (e) {
-        console.log(expX, expY, e.message)
+        // console.log(expX, expY, e.message)
       }
     },
     { immediate: true },
@@ -190,13 +190,13 @@ onMounted(async() => {
       const [fx, fy] = field(dot.position.x, dot.position.y)
       Body.setVelocity(dot, { x: fx, y: fy })
     }
-  }, 1000, true)
+  }, 1000, { immediate: true })
 
   useIntervalFn(() => {
     roll()
   }, 10000)
 
-  Engine.run(engine)
+  Runner.run(engine)
   Render.run(render)
 })
 </script>

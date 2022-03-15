@@ -6,17 +6,17 @@ paper
 
 <script setup lang='ts'>
 import { useEventListener, useWindowSize } from '@vueuse/core'
-import { ref, onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import Matter from 'matter-js'
-// @ts-ignore
+// @ts-expect-error untyped
 import MatterAttractors from 'matter-attractors'
 import { useRoute } from 'vue-router'
-import { addVec, load, vec2mat, range } from '../utils'
+import { addVec, load, range, vec2mat } from '../utils'
 import type { Vector } from '../utils'
 
 Matter.use(MatterAttractors)
 
-const { Engine, Mouse, MouseConstraint, Render, World, Bodies } = Matter
+const { Engine, Mouse, MouseConstraint, Render, World, Bodies, Runner } = Matter
 const route = useRoute()
 
 const el = ref(null)
@@ -39,9 +39,8 @@ onMounted(async() => {
       height: viewport.height,
       background: 'transparent',
       wireframes: true,
-      // @ts-ignore untyped
       showVelocity: debug.value,
-      // @ts-ignore untyped
+      // @ts-expect-error untyped
       pixelRatio: 'auto',
     },
   })
@@ -49,7 +48,7 @@ onMounted(async() => {
   const mouse = Mouse.create(render.canvas)
   const mouseConstraint = MouseConstraint.create(engine, {
     mouse,
-    // @ts-ignore
+    // @ts-expect-error anyway
     constraint: {
       stiffness: 0.2,
       render: {
@@ -57,10 +56,8 @@ onMounted(async() => {
       },
     },
   })
-  // @ts-ignore
   render.mouse = mouse
-  // @ts-ignore
-  render.element.style.zIndex = -1
+  render.element.style.zIndex = '-1'
   engine.world.gravity.y = 0
 
   World.add(engine.world, mouseConstraint)
@@ -173,7 +170,7 @@ onMounted(async() => {
     })
   }
 
-  const addBody = (body: Matter.Body) => {
+  function addBody(body: Matter.Body) {
     bodies.push(body)
 
     World.add(engine.world, body)
@@ -186,7 +183,7 @@ onMounted(async() => {
       reset()
   })
 
-  Engine.run(engine)
+  Runner.run(engine)
   Render.run(render)
 })
 </script>

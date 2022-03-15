@@ -1,7 +1,9 @@
-import { UserConfig } from 'vite'
+import type { UserConfig } from 'vite'
 import Pages from 'vite-plugin-pages'
-import ViteComponents from 'vite-plugin-components'
-import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
+import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import PSVG from 'vite-plugin-psvg'
 import Vue from '@vitejs/plugin-vue'
 import WindiCSS from 'vite-plugin-windicss'
@@ -23,16 +25,22 @@ const config: UserConfig = {
   plugins: [
     Vue(),
     Pages(),
-    ViteComponents({
-      customComponentResolvers: [
-        ViteIconsResolver({
-          componentPrefix: '',
+    Components({
+      resolvers: [
+        IconsResolver({
+          prefix: '',
         }),
       ],
     }),
-    ViteIcons(),
+    Icons(),
     PSVG(),
     WindiCSS(),
+    AutoImport({
+      imports: [
+        'vue',
+        '@vueuse/core',
+      ],
+    }),
   ],
 }
 

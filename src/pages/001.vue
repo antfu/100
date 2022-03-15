@@ -8,10 +8,10 @@ note
 
 <script setup lang='ts'>
 import { noop } from '@vueuse/shared'
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import Matter from 'matter-js'
 
-const { Engine, Render, World, Bodies } = Matter
+const { Engine, Render, World, Bodies, Runner } = Matter
 const canvas = ref(null)
 
 const f = {
@@ -52,7 +52,7 @@ onMounted(async() => {
 
   f.add()
 
-  Engine.run(engine)
+  Runner.run(engine)
   Render.run(render)
 })
 </script>

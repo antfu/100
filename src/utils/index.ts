@@ -8,6 +8,8 @@ export * from './canvas'
 export * from './shake'
 export * from './colors'
 
+export const noop = () => {}
+
 export function shuffle<T>(arr: T[]): T[] {
   const array = arr.slice(0)
   for (let i = array.length - 1; i > 0; i--) {

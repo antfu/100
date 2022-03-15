@@ -6,13 +6,13 @@ paper
 <script setup lang='ts'>
 // https://github.com/danmarshall/google-font-to-svg-path/blob/master/index.ts
 import { noop } from '@vueuse/shared'
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import Matter from 'matter-js'
 import { useRouteQuery } from '@vueuse/router'
 import maker from 'makerjs'
 import { load } from '../utils'
 
-const { Engine, Render, Svg, Vertices, Bodies, World } = Matter
+const { Engine, Render, Svg, Vertices, Bodies, World, Runner } = Matter
 
 const el = ref<HTMLDivElement | null>(null)
 const canvas = ref<HTMLCanvasElement | null>(null)
@@ -64,12 +64,12 @@ onMounted(async() => {
       dom.innerHTML = svg
       const paths = Array.from(dom.querySelectorAll('path'))
 
-      console.log(paths)
+      // console.log(paths)
 
       for (const path of paths) {
         const points = Svg.pathToVertices(path, 30)
         const vertexSets = [Vertices.scale(points, 2, 2, { x: 0, y: 0 })]
-        console.log(vertexSets)
+        // console.log(vertexSets)
         const body = Bodies.fromVertices(100, 200, vertexSets, {
           render: {
             fillStyle: '#fff',
@@ -82,9 +82,9 @@ onMounted(async() => {
     },
   )
 
-  engine.world.gravity.y = 0
+  engine.gravity.y = 0
 
-  Engine.run(engine)
+  Runner.run(engine)
   Render.run(render)
 })
 </script>

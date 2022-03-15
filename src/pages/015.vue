@@ -9,7 +9,7 @@ import { useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { onMounted, ref } from 'vue'
 import { sampleSize } from 'lodash-es'
-import { colorInterpration, hexToRgb, initCanvas, range, random, inbound } from '../utils'
+import { colorInterpration, hexToRgb, inbound, initCanvas, random, range } from '../utils'
 import type { Vector } from '../utils'
 
 const shot = useRouteQuery('shot')
@@ -125,7 +125,9 @@ onMounted(async() => {
 
   let stains: Stain[] = []
 
-  const frame = () => {
+  const controls = useRafFn(frame, { immediate: false })
+
+  function frame() {
     tick.value += 1
     for (let i = 0; i < iterations; i++) {
       stains.forEach((s) => {
@@ -142,8 +144,6 @@ onMounted(async() => {
       controls.pause()
   }
 
-  const controls = useRafFn(frame, { immediate: false })
-
   f.start = () => {
     tick.value = 0
     controls.pause()
@@ -158,7 +158,7 @@ onMounted(async() => {
       new Stain(randomVectors(40), maxTicks * iterations / 2),
       new Stain(randomVectors(3), maxTicks * iterations / 1.5),
     ]
-    controls.start()
+    controls.resume()
   }
 
   f.start()

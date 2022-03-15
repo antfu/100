@@ -13,7 +13,8 @@ note
 import { timestamp, useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { onMounted, reactive, ref } from 'vue'
-import { initCanvas, SQRT_3, Vector, r360, r60, r120 } from '../utils'
+import type { Vector } from '../utils'
+import { SQRT_3, initCanvas, r120, r360, r60 } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -175,7 +176,7 @@ onMounted(() => {
 
   const controls = useRafFn(frame)
 
-  controls.start()
+  controls.resume()
 })
 </script>
 
