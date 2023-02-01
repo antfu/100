@@ -39,7 +39,7 @@ note
 </template>
 
 <script setup lang='ts'>
-import { useEventListener, useRafFn, useThrottle, noop } from '@vueuse/core'
+import { noop, useEventListener, useRafFn, useThrottle } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -76,6 +76,7 @@ const presets = shuffle([
   { code: '5*r*sin(5*r-3th-t)^(5*r-t)%3', by: 'kennethdmiller3' },
   { code: 'r*sin(1/r-th-t)*sin(2/r+th+t)', by: 'kennethdmiller3' },
   { code: 'r*(7*sin(7/r-t)^7*sin(7*th-t))/7', by: 'kennethdmiller3' },
+  { code: '.1r**(7cos(7/r+t)^7cos(7th+t))/7', by: 'posva' },
 ])
 
 const el = ref<HTMLCanvasElement | null>(null)
@@ -161,7 +162,7 @@ useEventListener('keydown', (e) => {
 onMounted(async() => {
   await load('https://cdn.jsdelivr.net/npm/stats.js@0.17.0/build/stats.min.js')
 
-  // @ts-ignore
+  // @ts-expect-error
   const stats = new window.Stats()
   if (fps.value) {
     stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -253,7 +254,7 @@ onMounted(async() => {
 
       try {
         // eslint-disable-next-line no-eval
-        // @ts-ignore
+        // @ts-expect-error
         fn = runner.value!.contentWindow!.eval(`()=>{
           ${MathContext};
           return (t,r,th) => {

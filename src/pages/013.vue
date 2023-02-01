@@ -93,13 +93,15 @@ onMounted(async() => {
     ctx.lineWidth = 1
     ctx.strokeStyle = '#00000040'
     prevSteps = []
-    steps = random() < 0.5 ? [
-      () => step(0, random() * 400, 0),
-      () => step(400, random() * 400, r180),
-    ] : [
-      () => step(random() * 400, 0, r90),
-      () => step(random() * 400, 400, -r90),
-    ]
+    steps = random() < 0.5
+      ? [
+        () => step(0, random() * 400, 0),
+        () => step(400, random() * 400, r180),
+      ]
+      : [
+        () => step(random() * 400, 0, r90),
+        () => step(random() * 400, 400, -r90),
+      ]
     controls.resume()
     stopped.value = false
   }
