@@ -23,7 +23,7 @@ useTitle('100 days')
       span.mx-1 .
       a.link(href='https://github.com/antfu/100' target='_blank') github
       span.mx-1 .
-      a.link(href='https://codecember.ink' target='_blank') codecember
+      a.link(href='https://codecember.netlify.app' target='_blank') codecember
       br
       span.text-gray-300 from 2020/11/06
 </template>

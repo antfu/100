@@ -17,7 +17,7 @@ paper
 note
   p <b>z = tixy</b>
   br
-  p Day 7 of <a href='https://codecember.ink/2020/7' class="link" target='_blank'>#Codecember</a>
+  p Day 7 of <a href='https://codecember.netlify.app/2020/7' class="link" target='_blank'>#Codecember</a>
   br
   p another port from <a href='https://tixy.land/' target='_blank'>tixy.land</a>
   br

@@ -3,7 +3,7 @@ paper
   .box.borderless.centered.overflow-hidden(ref='el')
 
 note
-  p Day 1 of <a href='https://codecember.ink/2020/1' class="link" target='_blank'>#Codecember</a>
+  p Day 1 of <a href='https://codecember.netlify.app/2020/1' class="link" target='_blank'>#Codecember</a>
 </template>
 
 <script setup lang="ts">

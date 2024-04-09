@@ -5,7 +5,7 @@ paper
 note
   p <b>Unknown Pleasures</b>
   br
-  p Day 3 of <a href='https://codecember.ink/2020/3' class="link" target='_blank'>#Codecember</a>
+  p Day 3 of <a href='https://codecember.netlify.app/2020/3' class="link" target='_blank'>#Codecember</a>
   br
   p Strength
   p ↑

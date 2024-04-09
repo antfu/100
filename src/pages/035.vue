@@ -3,7 +3,7 @@ paper
   .box.overflow-hidden(ref="el" @click='start')
 
 note
-  p Day 11 of <a href='https://codecember.ink/2020/11' class="link" target='_blank'>#Codecember</a>
+  p Day 11 of <a href='https://codecember.netlify.app/2020/11' class="link" target='_blank'>#Codecember</a>
 </template>
 
 <script setup lang="ts">

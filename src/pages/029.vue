@@ -10,7 +10,7 @@ paper
 note
   p <b>Peter de Jong Attractor</b>
   br
-  p Day 4 of <a href='https://codecember.ink/2020/4' class="link" target='_blank'>#Codecember</a>
+  p Day 4 of <a href='https://codecember.netlify.app/2020/4' class="link" target='_blank'>#Codecember</a>
 </template>
 
 <script setup lang="ts">

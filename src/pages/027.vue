@@ -5,7 +5,7 @@ paper
 note
   p <b>line ⟷ circle</b>
   br
-  p Day 2 of <a href='https://codecember.ink/2020/2' class="link" target='_blank'>#Codecember</a>
+  p Day 2 of <a href='https://codecember.netlify.app/2020/2' class="link" target='_blank'>#Codecember</a>
 </template>
 
 <script setup lang="ts">

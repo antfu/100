@@ -5,7 +5,7 @@ paper
 note
   p <b>Perlin Noise</b>
   br
-  p Day 5 of <a href='https://codecember.ink/2020/5' class="link" target='_blank'>#Codecember</a>
+  p Day 5 of <a href='https://codecember.netlify.app/2020/5' class="link" target='_blank'>#Codecember</a>
 </template>
 
 <script setup lang="ts">
