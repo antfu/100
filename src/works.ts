@@ -1,64 +1,63 @@
 export const info = [
   {
     name: 'Mass',
-    date: '11/06',
-    draft: false,
+    date: '2020/11/06',
   },
   {
     name: 'Hex',
-    date: '11/07',
+    date: '2020/11/07',
   },
   {
     name: 'Three',
-    date: '11/08',
+    date: '2020/11/08',
   },
   {
     name: 'Scope',
-    date: '11/09',
+    date: '2020/11/09',
   },
   {
     name: 'Polar',
-    date: '11/10',
+    date: '2020/11/10',
   },
   {
     name: 'M & M',
-    date: '11/11',
+    date: '2020/11/11',
   },
   {
     name: 'Ship',
-    date: '11/12',
+    date: '2020/11/12',
   },
   {
     name: 'Negative',
-    date: '11/13',
+    date: '2020/11/13',
   },
   {
     name: 'Unreproducible',
-    date: '11/14',
+    date: '2020/11/14',
   },
   {
     name: '方圓',
-    date: '11/15',
+    date: '2020/11/15',
   },
   {
     name: 'Box',
-    date: '11/16',
+    date: '2020/11/16',
   },
   {
     name: 'Displace',
-    date: '11/17',
+    date: '2020/11/17',
   },
   {
     name: 'Plum',
-    date: '11/18',
+    date: '2020/11/18',
   },
   {
     name: 'Orbit',
-    date: '11/19',
+    date: '2020/11/19',
   },
   {
     name: 'Rust',
-    date: '11/20',
+    date: '2020/11/20',
   },
   {
     name: 'Connect',
@@ -66,87 +65,95 @@ export const info = [
   },
   {
     name: 'Gravity',
-    date: '11/22',
+    date: '2020/11/22',
   },
   {
     name: 'Field 1',
-    date: '11/23',
+    date: '2020/11/23',
   },
   {
     name: 'Fractal 1',
-    date: '11/24',
+    date: '2020/11/24',
   },
   {
     name: 'Clone',
-    date: '11/25',
+    date: '2020/11/25',
   },
   {
     name: 'Cross',
-    date: '11/26',
+    date: '2020/11/26',
   },
   {
     name: 'ㄇㄈㄩコロ',
-    date: '11/27',
+    date: '2020/11/27',
   },
   {
     name: 'Knitting',
-    date: '11/28',
+    date: '2020/11/28',
   },
   {
     name: 'Cast',
-    date: '11/30',
+    date: '2020/11/30',
   },
   {
     name: 'Kaleidoscope',
-    date: '12/01',
+    date: '2020/12/01',
   },
   {
     name: 'Lines',
-    date: '12/02',
+    date: '2020/12/02',
   },
   {
     name: 'Flat',
-    date: '12/03',
+    date: '2020/12/03',
   },
   {
     name: 'Joy',
-    date: '12/04',
+    date: '2020/12/04',
   },
   {
     name: 'Attractor',
-    date: '12/05',
+    date: '2020/12/05',
   },
   {
     name: 'River',
-    date: '12/06',
+    date: '2020/12/06',
   },
   {
     name: 'Arc',
-    date: '12/07',
+    date: '2020/12/07',
   },
   {
     name: 'z = tixy',
-    date: '12/08',
+    date: '2020/12/08',
   },
   {
     name: 'Glass',
-    date: '12/15',
+    date: '2020/12/15',
   },
   {
     name: 'Moiré',
-    date: '12/15',
+    date: '2020/12/15',
   },
   {
     name: 'Window',
-    date: '12/15',
+    date: '2020/12/15',
   },
   {
     name: 'Arch 1',
-    date: '1/30',
+    date: '2021/01/30',
   },
   {
     name: 'Arch 2',
-    date: '1/30',
+    date: '2021/01/30',
+  },
+  {
+    name: 'Boxes',
+    date: '2020/12/06',
+  },
+  {
+    name: 'Dots',
+    date: '2020/12/06',
   },
 ]
 

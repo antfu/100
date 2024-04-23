@@ -156,7 +156,6 @@ onMounted(async() => {
   const mouse = Mouse.create(render.canvas)
   const mouseConstraint = MouseConstraint.create(engine, {
     mouse,
-    // @ts-expect-error anyway
     constraint: {
       stiffness: 0.2,
       render: {
@@ -173,7 +172,7 @@ onMounted(async() => {
   Events.on(mouseConstraint, 'enddrag', (e) => {
     if (timestamp() - start > 300)
       return
-    const body = e.body
+    const body = (e as any).body
     const ball = balls.find(i => i.body === body)
     if (ball) {
       clone(ball)

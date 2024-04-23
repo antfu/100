@@ -7,14 +7,14 @@ note
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, reactive, ref, watch, watchEffect, withCtx } from 'vue'
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue'
 import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
 import { useMouse } from '@vueuse/core'
-import SimplexNoise from 'simplex-noise'
+import {createNoise4D} from 'simplex-noise'
 import type { Vector } from '../utils'
 
-const { sqrt, PI, pow, random, trunc, E } = Math
+const { PI } = Math
 const size = 400
 const spacing = 30
 const el = ref<HTMLElement | null>(null)
@@ -29,7 +29,7 @@ const {
 
 const mouse = reactive(useMouse())
 let t = 0
-const simplex = new SimplexNoise()
+const simplex = createNoise4D()
 
 function setup({ createCanvas }: P5I) {
   createCanvas(size, size)
@@ -69,7 +69,7 @@ function cast(t: number) {
     const y = map(i, 0, N - 1, -100, size + 100)
     const points = []
     for (let x = -100; x <= size + 100; x += 2) {
-      const angle = simplex.noise4D(x / 800, y / 800, cosT, sinT) * TAU
+      const angle = simplex(x / 800, y / 800, cosT, sinT) * TAU
       points.push(createVector(x, y).add(fromAngle(angle).setMag(40)))
     }
 

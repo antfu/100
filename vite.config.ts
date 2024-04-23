@@ -15,7 +15,6 @@ const config: UserConfig = {
       '@vueuse/shared',
       '@vueuse/router',
       'three',
-      '@iconify/iconify',
       'lodash-es',
       'p5i',
       'matter-js',

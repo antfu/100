@@ -234,14 +234,14 @@ onMounted(async() => {
 
   f.stop = () => {
     stopped = true
-    rafControl.stop()
+    rafControl.pause()
     ctx.clearRect(0, 0, width, height)
   }
 
   f.start = () => {
     ts = +new Date()
     stopped = false
-    rafControl.start()
+    rafControl.resume()
   }
 
   watch(

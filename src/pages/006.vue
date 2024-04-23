@@ -134,7 +134,6 @@ onMounted(async() => {
   const mouse = Mouse.create(render.canvas)
   const mouseConstraint = MouseConstraint.create(engine, {
     mouse,
-    // @ts-expect-error anyway
     constraint: {
       stiffness: 0.2,
       render: {

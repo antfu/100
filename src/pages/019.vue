@@ -102,7 +102,7 @@ onMounted(() => {
     centers = [[cx, cy]]
   }
 
-  const controlA = useTimeoutFn(() => shake.value = false, 200, false)
+  const controlA = useTimeoutFn(() => shake.value = false, 200, { immediate: false })
   const controlB = useTimeoutFn(() => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     const new_centers: Vector[] = []
@@ -156,7 +156,7 @@ onMounted(() => {
     t += 1
     if (t >= 30)
       reset()
-  }, 100, false)
+  }, 100, { immediate: false })
 
   f.next = () => {
     shake.value = true

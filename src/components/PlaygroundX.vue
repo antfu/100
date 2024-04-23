@@ -170,7 +170,7 @@ onMounted(async() => {
 
   f.stop = () => {
     stopped = true
-    rafControl.stop()
+    rafControl.pause()
   }
 
   f.start = () => {
@@ -181,7 +181,7 @@ onMounted(async() => {
     ctx.strokeStyle = 'black'
     ctx.lineWidth = 1
     stopped = false
-    rafControl.start()
+    rafControl.resume()
   }
 
   watch(
@@ -212,7 +212,7 @@ onMounted(async() => {
         f.start()
       }
       catch (e) {
-        console.log(expX, expY, e.message)
+        console.log(expX, expY, e)
       }
     },
     { immediate: true },
