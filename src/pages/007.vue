@@ -5,10 +5,10 @@ paper(:style='transformStyle')
       .text
         p.pt-12 A ship in harbor is safe,<br>but that is not what ships<br>are built for.
         br
-        em.text-gray-400 — John A. Shedd
+        em.op50 — John A. Shedd
 
   .box-description.py-3
-    .text-gray-400.text-center.tip(v-if='!mobile && !shot') use phone to visit
+    .op50.text-center.tip(v-if='!mobile && !shot') use phone to visit
     .div.p-4(v-if='debug')
       p Gamma {{ gamma }}
       p Beta {{ beta }}

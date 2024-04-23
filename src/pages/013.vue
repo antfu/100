@@ -4,13 +4,13 @@ paper
     canvas(ref='el' width='400' height='400')
   .box-description.py-2.flex(v-if='!shot')
     .flex(@click='init = init % 8 + 1')
-      .text-gray-400 init
+      .op50 init
       .text-gray-500.bold.px-2 {{init}}
     .flex.ml-3(@click='len = len % 8 + 1')
-      .text-gray-400 len
+      .op50 len
       .text-gray-500.bold.px-2 {{len}}
     .flex-auto
-    .text-gray-400(v-if='!stopped') *
+    .op50(v-if='!stopped') *
 
 note
   .p for each node, there is 50% chance for growing a new branch for its two branches.

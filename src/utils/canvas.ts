@@ -2,7 +2,7 @@ export function initCanvas(canvas: HTMLCanvasElement, width = 400, height = 400,
   const ctx = canvas.getContext('2d')!
 
   const dpr = window.devicePixelRatio || 1
-  // @ts-expect-error
+  // @ts-expect-error vendor prefix
   const bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1
 
   const dpi = _dpi || dpr / bsr

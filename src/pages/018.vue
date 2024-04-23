@@ -4,9 +4,9 @@ paper
     canvas.absolute.left-0.top-0.opacity-25(ref='canvas' width='400' height='400')
   .box-description(v-if='false')
     .flex.flex-col.mt-2
-      p.text-gray-400 (t,x,y) =>
+      p.op50 (t,x,y) =>
       .flex
-        .mr-2.text-gray-400 x =
+        .mr-2.op50 x =
         input.flex-auto.outline-none(
           v-model='expX'
           maxlength='32'
@@ -14,7 +14,7 @@ paper
           spellcheck='false'
         )
       .flex
-        .mr-2.text-gray-400 y =
+        .mr-2.op50 y =
         input.flex-auto.outline-none(
           v-model='expY'
           maxlength='32'

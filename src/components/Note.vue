@@ -1,6 +1,6 @@
 <template lang='pug'>
 .note.font-normal.font-mono(:class='{active}' v-if='!hide')
-  .handle.fixed.border.border-gray-200.text-center.p-2.text-gray-400.bg-white.bg-opacity-50(@click='active=true') i
+  .handle.fixed.border.border-gray-200.text-center.p-2.op50.bg-white.bg-opacity-50(@click='active=true') i
   .modal-bg.bg-black.fixed.top-0.left-0.right-0.bottom-0(@click='active=false')
   .content.border.border-gray-200.p-8.fixed.bottom-0.bg-white.shadow
     slot

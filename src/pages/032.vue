@@ -4,14 +4,14 @@ paper
   #day32(ref='el')
   .box-description(v-show='!shot')
     .flex.mt-6
-      p.text-gray-400 (t,i,x,y) =>
+      p.op50 (t,i,x,y) =>
       input.flex-auto.outline-none.ml-2.bg-transparent(
         v-model='expression'
         maxlength='32'
         autocomplete='false'
         spellcheck='false'
       )
-    p.text-gray-400(:class='{"opacity-0": !author}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
+    p.op50(:class='{"hidden": !author}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
     iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
 
 note

@@ -5,9 +5,9 @@ div
       canvas(ref='el')
   .box-description(v-show='controls')
     .flex.flex-col.mt-2
-      p.text-gray-400 (t,x,y) =>
+      p.op50 (t,x,y) =>
       .flex
-        .mr-2.text-gray-400 x =
+        .mr-2.op50 x =
         input.flex-auto.outline-none(
           v-model='expX'
           :maxlength='32'
@@ -15,7 +15,7 @@ div
           spellcheck='false'
         )
       .flex
-        .mr-2.text-gray-400 y =
+        .mr-2.op50 y =
         input.flex-auto.outline-none(
           v-model='expY'
           maxlength='32'

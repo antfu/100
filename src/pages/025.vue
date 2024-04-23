@@ -4,7 +4,7 @@ paper
     canvas(ref='el' width='400' height='400' @click='f.next()')
   .box-description.py-2.flex(v-if='!shot')
     .flex(@click='edges = (edges -1) % 14 + 2')
-      .text-gray-400 edges
+      .op50 edges
       .text-gray-500.bold.px-2 {{edges}}
     .flex-auto
     .link(@click='f.reset()') reset

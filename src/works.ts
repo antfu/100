@@ -62,7 +62,7 @@ export const info = [
   },
   {
     name: 'Connect',
-    date: '11/21',
+    date: '2020/11/21',
   },
   {
     name: 'Gravity',

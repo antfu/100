@@ -5,7 +5,7 @@ paper
       canvas(ref='el')
   .box-description
     .flex.mt-2(:class='{"text-center": rounded, "flex-col": rounded}')
-      p.text-gray-400 (t,r,th) =>
+      p.op50 (t,r,th) =>
       input.flex-auto.outline-none(
         v-model='expression'
         :class='{ "text-center": rounded, "ml-3": !rounded }'
@@ -14,7 +14,7 @@ paper
         autocomplete='false'
         spellcheck='false'
       )
-    p.text-gray-400(:class='{"opacity-0": !author, "text-center": rounded, "mt-4": rounded}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
+    p.op50(:class='{"opacity-0": !author, "text-center": rounded, "mt-4": rounded}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
     iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
 
 note

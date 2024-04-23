@@ -3,7 +3,7 @@ paper
   .box.centered.overflow-hidden
     canvas(:class='{shake}' ref='el' width='400' height='400' @click='f.next()')
   .box-description.py-1(v-if='!shot')
-    p.text-gray-400 click
+    p.op50 click
 </template>
 
 <script setup lang='ts'>

@@ -1,9 +1,3 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden
-    canvas(ref='el' width='400' height='400' @click='f.reset()')
-</template>
-
 <script setup lang='ts'>
 // https://ncase.me/sight-and-light/
 import { useRouteQuery } from '@vueuse/router'
@@ -11,7 +5,7 @@ import { noop, timestamp } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
 import { useMouseInElement, useRafFn } from '@vueuse/core'
 import { distance, initCanvas, r180, r360, r90, random, range } from '../utils'
-import type { Vector, ColorVector } from '../utils'
+import type { ColorVector, Vector } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -28,7 +22,7 @@ const h = 400
 const pattern = 0
 const lineWidth = 1
 
-const mergeColor = ([a, b, c]: ColorVector, [a2, b2, c2]: ColorVector): ColorVector => {
+function mergeColor([a, b, c]: ColorVector, [a2, b2, c2]: ColorVector): ColorVector {
   return [
     (a + a2) / 2,
     (b + b2) / 2,
@@ -50,7 +44,8 @@ function seg_insertion(from1: Vector, to1: Vector, from2: Vector, to2: Vector): 
   const gamma: number = ((from1[1] - to1[1]) * (to2[0] - from1[0]) + dX * (to2[1] - from1[1])) / determinant
 
   // check if there is an intersection
-  if (!(lambda >= 0 && lambda <= 1) || !(gamma >= 0 && gamma <= 1)) return undefined
+  if (!(lambda >= 0 && lambda <= 1) || !(gamma >= 0 && gamma <= 1))
+    return undefined
 
   return [
     from1[0] + lambda * dX,
@@ -130,3 +125,9 @@ onMounted(() => {
   })
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden
+    canvas(ref='el' width='400' height='400' @click='f.reset()')
+</template>
