@@ -1,9 +1,13 @@
+/// <reference types="vite-plugin-pages/client" />
+
+import '@unocss/reset/tailwind.css'
 import './main.postcss'
-import 'windi.css'
+import 'uno.css'
+
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
-import routes from 'pages-generated'
+import routes from '~pages'
 
 import App from './App.vue'
 

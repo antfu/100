@@ -2,6 +2,7 @@ export const info = [
   {
     name: 'Mass',
     date: '2020/11/06',
+    draft: false,
   },
   {
     name: 'Hex',

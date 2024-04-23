@@ -6,7 +6,7 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import PSVG from 'vite-plugin-psvg'
 import Vue from '@vitejs/plugin-vue'
-import WindiCSS from 'vite-plugin-windicss'
+import UnoCSS from 'unocss/vite'
 
 const config: UserConfig = {
   optimizeDeps: {
@@ -33,7 +33,7 @@ const config: UserConfig = {
     }),
     Icons(),
     PSVG(),
-    WindiCSS(),
+    UnoCSS(),
     AutoImport({
       imports: [
         'vue',
