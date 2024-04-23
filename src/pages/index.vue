@@ -2,6 +2,8 @@
 import { useTitle } from '@vueuse/core'
 import { works } from '../works'
 import { stringify } from '../utils/stringify'
+import { useRoute } from 'vue-router'
+import { isDark, toggleDark } from '../utils/dark'
 
 const avaliable_works = works.filter(i => !i.draft)
 
@@ -24,6 +26,8 @@ useTitle('100 days')
       a.link(href='https://github.com/antfu/100' target='_blank') github
       span.mx-1 .
       a.link(href='https://codecember.netlify.app' target='_blank') codecember
+      span.mx-1 .
+      button.link(@click="toggleDark()") {{ isDark ? 'dark' : 'light' }}
       br
       span.text-gray-300 from 2020/11/06
 </template>

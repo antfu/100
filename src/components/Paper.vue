@@ -1,6 +1,6 @@
 <template lang='pug'>
 .paper(:class='{shot}')
-  .bottom-nav.font-mono.flex.z-10(v-if='work')
+  .bottom-nav.font-mono.flex.z-10.items-end(v-if='work')
     .nav-links
       router-link.prev.link(v-if='prev' :to='`/${prev.no}`')
         span {{prev.name}}
@@ -12,9 +12,10 @@
         span {{next.name}}
         span.mx-1.opacity-25 {{next.no}}
     .flex-auto
-    .flex.flex-col
+    .flex.flex-col.items-end.group
       .flex-auto
-      span.text-gray-300 {{work.date}}
+      button.link.op0(@click="toggleDark" class="group-hover:op100") {{ isDark ? 'dark' : 'light' }}
+      span.op20 {{work.date}}
   .nav.font-mono(v-if='!shot && !hideFrame')
     router-link.link.text-xl.block.pt-1(to='/')
       carbon-chevron-left
@@ -27,6 +28,7 @@ import { ref } from 'vue'
 import { useEventListener, useFullscreen, useTitle } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import { works } from '../works'
+import { isDark, toggleDark } from '../utils/dark'
 
 const fullscreen = useFullscreen(ref(document.querySelector('html')))
 
