@@ -1,12 +1,11 @@
-[build.environment]
-  NPM_FLAGS = "--prefix=/dev/null"
-  NODE_VERSION = "14"
-
 [build]
-  publish = "dist"
-  command = "npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run build"
+publish = "dist"
+command = "pnpm run build"
+
+[build.environment]
+NODE_VERSION = "20"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+from = "/*"
+to = "/index.html"
+status = 200
