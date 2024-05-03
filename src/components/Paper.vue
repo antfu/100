@@ -1,6 +1,42 @@
+<script setup lang='ts'>
+import { ref } from 'vue'
+import { useEventListener, useFullscreen, useTitle } from '@vueuse/core'
+import { useRoute } from 'vue-router'
+import { works } from '../works'
+import { isDark, toggleDark } from '../utils/dark'
+
+const route = useRoute()
+const fullscreen = useFullscreen(ref(document.querySelector('html')))
+
+useEventListener('keydown', (e) => {
+  if (document.activeElement === document.body) {
+    if (e.key === 'f') {
+      if (fullscreen.isFullscreen.value)
+        fullscreen.exit()
+      else
+        fullscreen.enter()
+    }
+  }
+})
+
+let no = route.path.slice(1)
+if (no.startsWith('x'))
+  no = no.slice(1)
+
+const shot = Boolean(route.query.shot)
+const hideFrame = Boolean(route.query.hideFrame !== undefined || route.query.full !== undefined)
+const index = works.findIndex(i => i.no === no)
+
+const work = works[index]
+const prev = works[index - 1]
+const next = works[index + 1]
+
+useTitle(work ? `${no}. ${work.name}` : '404')
+</script>
+
 <template lang='pug'>
 .paper(:class='{shot}')
-  .bottom-nav.font-mono.flex.z-10.items-end(v-if='work')
+  .bottom-nav.font-mono.flex.z-10.items-end(v-if='work && !hideFrame')
     .nav-links
       router-link.prev.link(v-if='prev' :to='`/${prev.no}`')
         span {{prev.name}}
@@ -22,42 +58,6 @@
 
   slot(:work='work')
 </template>
-
-<script setup lang='ts'>
-import { ref } from 'vue'
-import { useEventListener, useFullscreen, useTitle } from '@vueuse/core'
-import { useRoute } from 'vue-router'
-import { works } from '../works'
-import { isDark, toggleDark } from '../utils/dark'
-
-const fullscreen = useFullscreen(ref(document.querySelector('html')))
-
-useEventListener('keydown', (e) => {
-  if (document.activeElement === document.body) {
-    if (e.key === 'f') {
-      if (fullscreen.isFullscreen.value)
-        fullscreen.exit()
-      else
-        fullscreen.enter()
-    }
-  }
-})
-
-const route = useRoute()
-let no = route.path.slice(1)
-if (no.startsWith('x'))
-  no = no.slice(1)
-
-const shot = Boolean(route.query.shot)
-const hideFrame = Boolean(route.query.hideFrame)
-const index = works.findIndex(i => i.no === no)
-
-const work = works[index]
-const prev = works[index - 1]
-const next = works[index + 1]
-
-useTitle(work ? `${no}. ${work.name}` : '404')
-</script>
 
 <style lang='stylus' scoped>
 .nav
