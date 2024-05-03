@@ -2,6 +2,7 @@
 import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
 import { onMounted, onUnmounted, ref } from 'vue'
+import Paper from '../components/Paper.vue'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -103,5 +104,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="el" pointer-events-none fixed bottom-0 left-0 right-0 top-0 z--1 dark:invert />
+  <Paper>
+    <div ref="el" pointer-events-none fixed bottom-0 left-0 right-0 top-0 z--1 dark:invert />
+  </Paper>
 </template>
