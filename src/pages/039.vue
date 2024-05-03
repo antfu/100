@@ -70,7 +70,7 @@ function draw({ circle }: P5I) {
     const length = (noise(x / SCALE, y / SCALE, t * 2) + 0.5) * LENGTH
     const nx = x + cos(rad) * length
     const ny = y + sin(rad) * length
-    stroke(200, 200, 200, (Math.abs(cos(rad)) * 0.8 + 0.2) * p.opacity * 255)
+    stroke(180, 180, 180, (Math.abs(cos(rad)) * 0.5 + 0.5) * p.opacity * 255)
     circle(nx, ny - offsetY, 1)
   }
 }
@@ -105,6 +105,6 @@ onUnmounted(() => {
 
 <template>
   <Paper>
-    <div ref="el" pointer-events-none fixed bottom-0 left-0 right-0 top-0 z--1 dark:invert />
+    <div ref="el" pointer-events-none fixed bottom-0 left-0 right-0 top-0 z--1 />
   </Paper>
 </template>
