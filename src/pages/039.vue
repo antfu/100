@@ -22,7 +22,7 @@ const {
 
 let w = window.innerWidth
 let h = window.innerHeight
-let offsetY = window.scrollY
+const offsetY = window.scrollY
 
 const SCALE = 200
 const LENGTH = 10
@@ -34,7 +34,7 @@ function getForceOnPoint(x: number, y: number, z: number) {
 }
 
 const existingPoints = new Set<string>()
-const points: { id: string, x: number, y: number }[] = []
+const points: { x: number, y: number, opacity: number }[] = []
 
 function addPoints() {
   for (let x = -SPACING / 2; x < w + SPACING; x += SPACING) {
@@ -43,15 +43,15 @@ function addPoints() {
       if (existingPoints.has(id))
         continue
       existingPoints.add(id)
-      points.push({ id, x, y })
+      points.push({ x, y, opacity: Math.random() * 0.5 + 0.5 })
     }
   }
 }
 
 function setup() {
   createCanvas(w, h)
-  background('#fff')
-  stroke('#999')
+  background('#ffffff')
+  stroke('#ccc')
   noFill()
 
   noiseSeed(+new Date())
@@ -60,7 +60,7 @@ function setup() {
 }
 
 function draw({ circle }: P5I) {
-  background('white')
+  background('#ffffff')
   const t = +new Date() / 10000
 
   for (const p of points) {
@@ -69,6 +69,7 @@ function draw({ circle }: P5I) {
     const length = (noise(x / SCALE, y / SCALE, t * 2) + 0.5) * LENGTH
     const nx = x + cos(rad) * length
     const ny = y + sin(rad) * length
+    stroke(200, 200, 200, (Math.abs(cos(rad)) * 0.8 + 0.2) * p.opacity * 255)
     circle(nx, ny - offsetY, 1)
   }
 }
@@ -88,15 +89,19 @@ onMounted(() => {
     addPoints()
   })
 
-  useEventListener('scroll', () => {
-    offsetY = window.scrollY
-    addPoints()
-  }, { passive: true })
+  // Uncomment to enable scroll-based animation
+  // Tho there is some lag when scrolling, not sure if it's solvable
+  // useEventListener('scroll', () => {
+  //   offsetY = window.scrollY
+  //   addPoints()
+  // }, { passive: true })
 })
-onUnmounted(() => unmount())
+
+onUnmounted(() => {
+  unmount()
+})
 </script>
 
-<template lang='pug'>
-paper
-  .fixed.left-0.right-0.bottom-0.top-0(ref='el' style='z-index:-1')
+<template>
+  <div ref="el" pointer-events-none fixed bottom-0 left-0 right-0 top-0 z--1 dark:invert />
 </template>
