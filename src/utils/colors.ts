@@ -5,9 +5,9 @@ export type ColorVector = [number, number, number]
 export function hexToRgb(hex: string): ColorVector {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)!
   return [
-    parseInt(result[1], 16),
-    parseInt(result[2], 16),
-    parseInt(result[3], 16),
+    Number.parseInt(result[1], 16),
+    Number.parseInt(result[2], 16),
+    Number.parseInt(result[3], 16),
   ]
 }
 
@@ -50,11 +50,16 @@ export function hslToRgb(h: number, s: number, l: number): [number, number, numb
   }
   else {
     const hue2rgb = function hue2rgb(p: number, q: number, t: number) {
-      if (t < 0) t += 1
-      if (t > 1) t -= 1
-      if (t < 1 / 6) return p + (q - p) * 6 * t
-      if (t < 1 / 2) return q
-      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
+      if (t < 0)
+        t += 1
+      if (t > 1)
+        t -= 1
+      if (t < 1 / 6)
+        return p + (q - p) * 6 * t
+      if (t < 1 / 2)
+        return q
+      if (t < 2 / 3)
+        return p + (q - p) * (2 / 3 - t) * 6
       return p
     }
 

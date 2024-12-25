@@ -1,34 +1,8 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden(@click='roll' ref='el')
-    canvas.absolute.left-0.top-0.opacity-25(ref='canvas' width='400' height='400')
-  .box-description(v-if='false')
-    .flex.flex-col.mt-2
-      p.op50 (t,x,y) =>
-      .flex
-        .mr-2.op50 x =
-        input.flex-auto.outline-none(
-          v-model='expX'
-          maxlength='32'
-          autocomplete='false'
-          spellcheck='false'
-        )
-      .flex
-        .mr-2.op50 y =
-        input.flex-auto.outline-none(
-          v-model='expY'
-          maxlength='32'
-          autocomplete='false'
-          spellcheck='false'
-        )
-  iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
-</template>
-
 <script setup lang='ts'>
-import { noop, useIntervalFn, useThrottle } from '@vueuse/shared'
-import { onMounted, ref, watch } from 'vue'
-import Matter from 'matter-js'
 import { useRouteQuery } from '@vueuse/router'
+import { noop, useIntervalFn, useThrottle } from '@vueuse/shared'
+import Matter from 'matter-js'
+import { onMounted, ref, watch } from 'vue'
 import { initCanvas, random, range } from '../utils'
 
 const { Engine, Render, World, Bodies, Body, Runner } = Matter
@@ -60,7 +34,7 @@ const cy = 200
 let fnX = (t: number, x: number, y: number) => 0
 let fnY = (t: number, x: number, y: number) => 0
 
-const field = (_x = 0, _y = 0) => {
+function field(_x = 0, _y = 0) {
   const x = cx - _x
   const y = cy - _y
   return [
@@ -80,7 +54,7 @@ function roll() {
   expY.value = b
 }
 
-onMounted(async() => {
+onMounted(async () => {
   const { ctx } = initCanvas(canvas.value!)
 
   const arrow = (fromX = 0, fromY = 0, tox = 0, toy = 0) => {
@@ -150,7 +124,6 @@ onMounted(async() => {
       fnY = () => 0
 
       try {
-        // eslint-disable-next-line no-eval
         // @ts-expect-error anyway
         fnX = runner.value!.contentWindow!.eval(`()=>{
           ${MathContext};
@@ -200,3 +173,29 @@ onMounted(async() => {
   Render.run(render)
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden(@click='roll' ref='el')
+    canvas.absolute.left-0.top-0.opacity-25(ref='canvas' width='400' height='400')
+  .box-description(v-if='false')
+    .flex.flex-col.mt-2
+      p.op50 (t,x,y) =>
+      .flex
+        .mr-2.op50 x =
+        input.flex-auto.outline-none(
+          v-model='expX'
+          maxlength='32'
+          autocomplete='false'
+          spellcheck='false'
+        )
+      .flex
+        .mr-2.op50 y =
+        input.flex-auto.outline-none(
+          v-model='expY'
+          maxlength='32'
+          autocomplete='false'
+          spellcheck='false'
+        )
+  iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
+</template>

@@ -1,43 +1,3 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden(@click='next' :class='{"rounded-full": rounded}')
-    .canvas-wrapper
-      canvas(ref='el')
-  .box-description
-    .flex.mt-2(:class='{"text-center": rounded, "flex-col": rounded}')
-      p.op50 (t,r,th) =>
-      input.flex-auto.outline-none(
-        v-model='expression'
-        :class='{ "text-center": rounded, "ml-3": !rounded }'
-        ref='input'
-        maxlength='32'
-        autocomplete='false'
-        spellcheck='false'
-      )
-    p.op50(:class='{"opacity-0": !author, "text-center": rounded, "mt-4": rounded}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
-    iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
-
-note
-  p.font-bold.mb-1 polar = (t,r,th)
-  p inspired by <a href='https://tixy.land/' target='_blank'>tixy.land</a> but in polar coordinates
-  br
-  pre <b>t</b>  - seconds passed
-  pre <b>r</b>  - radial    (-1 ~ 1)
-  pre <b>th</b> - angular θ (-1 ~ 1)
-  br
-  p return value should be in -1 to 1
-  p 0 -> black / 1 -> A / -1 -> B
-  p color A & B will be picked randomly
-  br
-  p `Math.` can be omitted
-  p `2 * t` can be written as `2t`
-  p link is sharable
-  br
-  p(@click='recolor') <b>c</b> - change colors
-  p(@click='f.start') <b>r</b> - reset `t`
-  p(@click='toggleShape') <b>s</b> - canvas shape
-</template>
-
 <script setup lang='ts'>
 import { noop, useEventListener, useRafFn, useThrottle } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
@@ -119,14 +79,14 @@ const MathContext = `const {${Object.getOwnPropertyNames(Math).join(',')}}=Math`
 
 const toggleShape = () => rounded.value = !rounded.value
 
-const next = () => {
+function next() {
   expressionIndex += 1
   const { code } = get(presets, expressionIndex)
   expression.value = code
   recolor()
 }
 
-const recolor = () => {
+function recolor() {
   colorA = pick(colors)
   colorB = pick(colors, colorA)
 }
@@ -159,7 +119,7 @@ useEventListener('keydown', (e) => {
   }
 })
 
-onMounted(async() => {
+onMounted(async () => {
   await load('https://cdn.jsdelivr.net/npm/stats.js@0.17.0/build/stats.min.js')
 
   // @ts-expect-error
@@ -253,7 +213,6 @@ onMounted(async() => {
         router.replace({ query: { q: `${exp} ` } })
 
       try {
-        // eslint-disable-next-line no-eval
         // @ts-expect-error
         fn = runner.value!.contentWindow!.eval(`()=>{
           ${MathContext};
@@ -270,6 +229,46 @@ onMounted(async() => {
   )
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden(@click='next' :class='{"rounded-full": rounded}')
+    .canvas-wrapper
+      canvas(ref='el')
+  .box-description
+    .flex.mt-2(:class='{"text-center": rounded, "flex-col": rounded}')
+      p.op50 (t,r,th) =>
+      input.flex-auto.outline-none(
+        v-model='expression'
+        :class='{ "text-center": rounded, "ml-3": !rounded }'
+        ref='input'
+        maxlength='32'
+        autocomplete='false'
+        spellcheck='false'
+      )
+    p.op50(:class='{"opacity-0": !author, "text-center": rounded, "mt-4": rounded}') by <a :href='`https://twitter.com/${author}`' target='_blank'>@{{author}}</a>
+    iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
+
+note
+  p.font-bold.mb-1 polar = (t,r,th)
+  p inspired by <a href='https://tixy.land/' target='_blank'>tixy.land</a> but in polar coordinates
+  br
+  pre <b>t</b>  - seconds passed
+  pre <b>r</b>  - radial    (-1 ~ 1)
+  pre <b>th</b> - angular θ (-1 ~ 1)
+  br
+  p return value should be in -1 to 1
+  p 0 -> black / 1 -> A / -1 -> B
+  p color A & B will be picked randomly
+  br
+  p `Math.` can be omitted
+  p `2 * t` can be written as `2t`
+  p link is sharable
+  br
+  p(@click='recolor') <b>c</b> - change colors
+  p(@click='f.start') <b>r</b> - reset `t`
+  p(@click='toggleShape') <b>s</b> - canvas shape
+</template>
 
 <style lang='stylus' scoped>
 .canvas-wrapper {

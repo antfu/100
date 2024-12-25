@@ -1,23 +1,10 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden(@click='roll')
-    canvas(ref='el' width='400' height='400' :style='filterStyle')
-  .box-description.py-4(v-if='!shot')
-    template(v-for='c,idx in coeff')
-      .inline-block.w-12.mx-2.text-right(
-        :class='[c < 0 ? "text-gray-300" : "text-gray-500"]'
-        @click='rollAt(idx)'
-      ) {{ c.toFixed(2) }}
-      br(v-if='idx % 6 === 5')
-</template>
-
 <script setup='props' lang='ts'>
 import { timestamp, useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { computed, onMounted, ref } from 'vue'
 import { initCanvas } from '../utils'
 
-type Color = {r?: number; g?: number; b?: number}
+interface Color { r?: number, g?: number, b?: number }
 
 const shot = useRouteQuery('shot')
 const el = ref<HTMLCanvasElement | null>(null)
@@ -27,23 +14,38 @@ const input = ref<HTMLInputElement | null>(null)
 const { cos, sin, abs, random, max, round } = Math
 
 const coeff = ref([
-  1, 4.3, 4, 2, 6, 4,
-  2, 3, 2, 2, 6, -2,
-  8, 2, 1, 2, -5.3, 3,
+  1,
+  4.3,
+  4,
+  2,
+  6,
+  4,
+  2,
+  3,
+  2,
+  2,
+  6,
+  -2,
+  8,
+  2,
+  1,
+  2,
+  -5.3,
+  3,
 ])
 
-const randomCoeff = (idx: number) => {
+function randomCoeff(idx: number) {
   if (idx % 2)
     return (random() - 0.5) * 12
   else
     return (random() - 0.5) * 20
 }
 
-const roll = () => {
-  coeff.value = new Array(coeff.value.length).fill(0).map((_, i) => randomCoeff(i))
+function roll() {
+  coeff.value = Array.from({ length: coeff.value.length }).fill(0).map((_, i) => randomCoeff(i))
 }
 
-const rollAt = (idx: number) => {
+function rollAt(idx: number) {
   coeff.value = coeff.value.map((v, i) => i === idx ? randomCoeff(i) : v)
 }
 
@@ -56,7 +58,7 @@ const filterStyle = computed(() => ({
 if (shot.value)
   roll()
 
-onMounted(async() => {
+onMounted(async () => {
   const canvas = el.value!
   const { ctx, dpi } = initCanvas(canvas)
   const { width, height } = canvas
@@ -132,3 +134,16 @@ onMounted(async() => {
   useRafFn(frame)
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden(@click='roll')
+    canvas(ref='el' width='400' height='400' :style='filterStyle')
+  .box-description.py-4(v-if='!shot')
+    template(v-for='c,idx in coeff')
+      .inline-block.w-12.mx-2.text-right(
+        :class='[c < 0 ? "text-gray-300" : "text-gray-500"]'
+        @click='rollAt(idx)'
+      ) {{ c.toFixed(2) }}
+      br(v-if='idx % 6 === 5')
+</template>

@@ -1,25 +1,10 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden
-    canvas(ref='el' width='400' height='400')
-  .box-description.py-1(v-if='!shot')
-    toggle.inline-block.mr-2(v-model='wireframe') wireframe
-    turns.inline-block.mr-2(v-model='speedLevel' :options='speeds')
-
-note
-  p inspired by&nbsp;
-    a(href='https://twitter.com/beesandbombs/status/1320394711182528515?s=20' target='_blank') this tweet
-    | &nbsp;from&nbsp;
-    a(href='https://twitter.com/beesandbombs' target='_blank') @beesandbombs
-</template>
-
 <script setup lang='ts'>
+import type { Vector } from '../utils'
 import { useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { timestamp } from '@vueuse/shared'
 import { computed, onMounted, ref, watch } from 'vue'
-import { SQRT_3, initCanvas, pick, r30, r60, r90, range, shuffle } from '../utils'
-import type { Vector } from '../utils'
+import { initCanvas, pick, r30, r60, r90, range, shuffle, SQRT_3 } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -182,6 +167,21 @@ onMounted(() => {
   controls.resume()
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden
+    canvas(ref='el' width='400' height='400')
+  .box-description.py-1(v-if='!shot')
+    toggle.inline-block.mr-2(v-model='wireframe') wireframe
+    turns.inline-block.mr-2(v-model='speedLevel' :options='speeds')
+
+note
+  p inspired by&nbsp;
+    a(href='https://twitter.com/beesandbombs/status/1320394711182528515?s=20' target='_blank') this tweet
+    | &nbsp;from&nbsp;
+    a(href='https://twitter.com/beesandbombs' target='_blank') @beesandbombs
+</template>
 
 <style lang='stylus' scoped>
 

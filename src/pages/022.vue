@@ -1,18 +1,12 @@
-<template lang='pug'>
-paper
-  .fixed.top-0.bottom-0.left-0.right-0(ref='el' style='filter:invert(1) brightness(1.5);')
-  //- .box
-</template>
-
 <script setup lang='ts'>
+import type { Vector } from '../utils'
 import { useEventListener, useWindowSize } from '@vueuse/core'
-import { onMounted, reactive, ref } from 'vue'
-import Matter from 'matter-js'
 // @ts-expect-error untyped
 import MatterAttractors from 'matter-attractors'
+import Matter from 'matter-js'
+import { onMounted, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { addVec, load, range, vec2mat } from '../utils'
-import type { Vector } from '../utils'
 
 Matter.use(MatterAttractors)
 
@@ -24,7 +18,7 @@ const debug = ref(!!route.query.debug)
 
 const viewport = reactive(useWindowSize())
 
-onMounted(async() => {
+onMounted(async () => {
   await Promise.all([
     load('https://cdn.jsdelivr.net/gh/schteppe/poly-decomp.js@master/build/decomp.min.js'),
     // load('https://cdn.jsdelivr.net/gh/progers/pathseg@master/pathseg.js'),
@@ -155,7 +149,8 @@ onMounted(async() => {
     range(14).forEach((_, idx) => {
       const u = getU((idx + 1) % 4)
       const body = Bodies.fromVertices(
-        cx - idx * 2, cy - idx * 2,
+        cx - idx * 2,
+        cy - idx * 2,
         [u],
         {
           frictionAir: 0.1,
@@ -186,6 +181,12 @@ onMounted(async() => {
   Render.run(render)
 })
 </script>
+
+<template lang='pug'>
+paper
+  .fixed.top-0.bottom-0.left-0.right-0(ref='el' style='filter:invert(1) brightness(1.5);')
+  //- .box
+</template>
 
 <style lang="stylus" scoped>
 

@@ -1,9 +1,7 @@
 <script setup lang='ts'>
 import { useTitle } from '@vueuse/core'
+import { isDark } from '../utils/dark'
 import { works } from '../works'
-import { stringify } from '../utils/stringify'
-import { useRoute } from 'vue-router'
-import { isDark, toggleDark } from '../utils/dark'
 
 const avaliable_works = works.filter(i => !i.draft)
 

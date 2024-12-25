@@ -1,14 +1,14 @@
-import { ref } from 'vue'
 import { useRafFn } from '@vueuse/core'
+import { ref } from 'vue'
 
+export * from './canvas'
+export * from './colors'
 export * from './load'
+export * from './shake'
 export * from './stringify'
 export * from './vector'
-export * from './canvas'
-export * from './shake'
-export * from './colors'
 
-export const noop = () => {}
+export function noop() {}
 
 export function shuffle<T>(arr: T[]): T[] {
   const array = arr.slice(0)
@@ -20,7 +20,7 @@ export function shuffle<T>(arr: T[]): T[] {
 }
 
 export function range(to: number) {
-  return new Array(to).fill(0).map((_, i) => i)
+  return Array.from({ length: to }).fill(0).map((_, i) => i)
 }
 
 export function useWindowPosition() {

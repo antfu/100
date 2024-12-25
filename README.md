@@ -14,7 +14,7 @@ My 100 day project of exploring design, compform, and new things.
 
 [@octref](https://github.com/octref)(100.matsu.io) and me started our 100-day challenges as we wanted to learn creative coding while having fun.
 
-We would love to share the journey with you and have you learning and doing sketches together. **Join us in [Codecember](https://codecember.netlify.app/)**, 
+We would love to share the journey with you and have you learning and doing sketches together. **Join us in [Codecember](https://codecember.netlify.app/)**,
 we'll give you a prompt every day that includes an artwork, its source code and a blurb, throughout December, 2020.
 
 <p align="center">
@@ -22,7 +22,6 @@ we'll give you a prompt every day that includes an artwork, its source code and 
 <img src="https://codecember.netlify.app/og.png" width="600" alt="Day 13, plum"/>
 </a>
 </p>
-
 
 ## Sponsors
 

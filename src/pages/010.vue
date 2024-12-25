@@ -1,19 +1,9 @@
-<template lang='pug'>
-paper
-  .box.borderless.centered
-    canvas(ref='el' width='400' height='400')
-
-note
-  p 方 - Square
-  p 圓 - Circle
-</template>
-
 <script setup lang='ts'>
 import { useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { timestamp } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
-import { SQRT_2, initCanvas, r180, r90, range } from '../utils'
+import { initCanvas, r90, r180, range, SQRT_2 } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -89,16 +79,16 @@ onMounted(() => {
     const rt = t % duration
     const rounds = Math.floor(t / (duration * 2))
 
-    const size = Math.round(398 / Math.pow(SQRT_2, rounds))
+    const size = Math.round(398 / SQRT_2 ** rounds)
 
     if (size < 5)
       return
 
     if (turn)
-      roundRect(size, Math.round(size * Math.pow(rt / 550, 2)))
+      roundRect(size, Math.round(size * (rt / 550) ** 2))
 
     else
-      rectRound(size, Math.round(Math.pow(rt / 60, 4)))
+      rectRound(size, Math.round((rt / 60) ** 4))
   }
 
   if (shot.value) {
@@ -112,6 +102,16 @@ onMounted(() => {
   controls.resume()
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.borderless.centered
+    canvas(ref='el' width='400' height='400')
+
+note
+  p 方 - Square
+  p 圓 - Circle
+</template>
 
 <style lang='stylus' scoped>
 

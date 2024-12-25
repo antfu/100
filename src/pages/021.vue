@@ -1,15 +1,9 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden
-    canvas(ref='el' width='400' height='400' @click='f.reset()')
-</template>
-
 <script setup lang='ts'>
+import type { Vector } from '../utils'
 import { useRouteQuery } from '@vueuse/router'
 import { noop } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
 import { distance, initCanvas, random, range } from '../utils'
-import type { Vector } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -28,7 +22,7 @@ const MAX_LINES = 3000
 let pattern = 0
 
 type Line = [number, number, number]
-type LineSegment = {line: Line; left: Vector; right: Vector}
+interface LineSegment { line: Line, left: Vector, right: Vector }
 
 const { tan, PI } = Math
 
@@ -175,3 +169,9 @@ onMounted(() => {
     range(500).forEach(f.next)
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden
+    canvas(ref='el' width='400' height='400' @click='f.reset()')
+</template>

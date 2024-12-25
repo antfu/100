@@ -1,17 +1,9 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden(ref="el" @click='toggle')
-
-note
-  p Day 8 of <a href='https://codecember.netlify.app/2020/8' class="link" target='_blank'>#Codecember</a>
-</template>
-
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive, ref } from 'vue'
-import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
-import { useMouse } from '@vueuse/core'
 import type { Vector } from '../utils'
+import { useMouse } from '@vueuse/core'
+import { p5i } from 'p5i'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 
 const size = 400
 const spacing = 30
@@ -74,3 +66,11 @@ function toggle() {
 onMounted(() => mount(el.value!, { setup, draw }))
 onUnmounted(() => unmount())
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden(ref="el" @click='toggle')
+
+note
+  p Day 8 of <a href='https://codecember.netlify.app/2020/8' class="link" target='_blank'>#Codecember</a>
+</template>

@@ -1,16 +1,3 @@
-<template lang='pug'>
-paper
-  playground-x(ref='playground' v-model:x='expX' v-model:y='expY' :iterations='speed')
-  .box-description.py-1(v-if='!shot')
-    turns.inline-block.mr-2(v-model='speedLevel' :options='speeds')
-
-note
-  p x = x + (random() - 0.5) * 8
-  p y = y + (random() - 0.5) * 8
-  br
-  a.link(@click='playground.f.start()') restart
-</template>
-
 <script setup lang='ts'>
 import { useRouteQuery } from '@vueuse/router'
 import { computed, ref } from 'vue'
@@ -35,3 +22,16 @@ const speed = computed(() => {
   return 10
 })
 </script>
+
+<template lang='pug'>
+paper
+  playground-x(ref='playground' v-model:x='expX' v-model:y='expY' :iterations='speed')
+  .box-description.py-1(v-if='!shot')
+    turns.inline-block.mr-2(v-model='speedLevel' :options='speeds')
+
+note
+  p x = x + (random() - 0.5) * 8
+  p y = y + (random() - 0.5) * 8
+  br
+  a.link(@click='playground.f.start()') restart
+</template>

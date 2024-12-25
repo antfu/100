@@ -1,14 +1,6 @@
-<template lang='pug'>
-paper
-  .box.borderless.centered.overflow-hidden(ref='el')
-
-note
-  p Day 1 of <a href='https://codecember.netlify.app/2020/1' class="link" target='_blank'>#Codecember</a>
-</template>
-
 <script setup lang="ts">
-import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
+import { p5i } from 'p5i'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { distance, r60, SQRT_3 } from '../utils'
 
@@ -93,3 +85,11 @@ function draw({ mouseX, mouseY }: P5I) {
 onMounted(() => mount(el.value!, { setup, draw }))
 onUnmounted(() => unmount())
 </script>
+
+<template lang='pug'>
+paper
+  .box.borderless.centered.overflow-hidden(ref='el')
+
+note
+  p Day 1 of <a href='https://codecember.netlify.app/2020/1' class="link" target='_blank'>#Codecember</a>
+</template>

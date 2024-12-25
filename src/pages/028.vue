@@ -1,26 +1,9 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden.borderless(ref='el')
-
-note
-  p <b>Unknown Pleasures</b>
-  br
-  p Day 3 of <a href='https://codecember.netlify.app/2020/3' class="link" target='_blank'>#Codecember</a>
-  br
-  p Strength
-  p ↑
-  p |
-  p |
-  P +-------> Speed
-</template>
-
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch, watchEffect, withCtx } from 'vue'
-import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
-import { functions } from 'lodash-es'
 import { clamp, useEventListener, useMouseInElement } from '@vueuse/core'
-import { initCanvas, range } from '../utils'
+import { p5i } from 'p5i'
+import { onMounted, onUnmounted, ref, watchEffect } from 'vue'
+import { range } from '../utils'
 
 const { sqrt, PI, pow, random, trunc, E } = Math
 
@@ -36,7 +19,7 @@ const pressed = ref(false)
 
 const { elementY, elementX, isOutside } = useMouseInElement(el)
 
-const press = () => {
+function press() {
   if (!isOutside.value)
     pressed.value = true
 }
@@ -59,11 +42,11 @@ watchEffect(() => {
 // See https://www.desmos.com/calculator/rx1syj7svh
 const NORMAL_DIST_BASE = 1 / sqrt(2 * PI)
 function normalDist(x: number, multipier = 4) {
-  return NORMAL_DIST_BASE * pow(E, -0.5 * (x ** 2)) * multipier
+  return NORMAL_DIST_BASE * E ** (-0.5 * (x ** 2)) * multipier
 }
 
 const NOISE_COUNT = 500
-const NOISES = new Array(NOISE_COUNT).fill(0).map(i => random())
+const NOISES = Array.from({ length: NOISE_COUNT }).fill(0).map(i => random())
 
 function getNoises(d: number) {
   const start = trunc(d / size) % NOISE_COUNT
@@ -84,9 +67,9 @@ function setup({ createCanvas }: P5I) {
   createCanvas(size, size)
 }
 
-let LINE_OFFSETS = new Array(steps).fill(0).map(i => trunc(random() * step * NOISE_COUNT))
-const LINE_SPEEDS = new Array(steps).fill(0).map(i => random() * 0.02 + 0.005)
-const LINE_DIRECTION = new Array(steps).fill(0).map(i => random() > 0.5)
+let LINE_OFFSETS = Array.from({ length: steps }).fill(0).map(i => trunc(random() * step * NOISE_COUNT))
+const LINE_SPEEDS = Array.from({ length: steps }).fill(0).map(i => random() * 0.02 + 0.005)
+const LINE_DIRECTION = Array.from({ length: steps }).fill(0).map(i => random() > 0.5)
 const rangeY = range(steps).slice(8)
 const rangeX = range(steps)
 
@@ -136,3 +119,19 @@ const { mount, unmount } = p5i({ setup, draw })
 onMounted(() => mount(el.value!))
 onUnmounted(() => unmount())
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden.borderless(ref='el')
+
+note
+  p <b>Unknown Pleasures</b>
+  br
+  p Day 3 of <a href='https://codecember.netlify.app/2020/3' class="link" target='_blank'>#Codecember</a>
+  br
+  p Strength
+  p ↑
+  p |
+  p |
+  P +-------> Speed
+</template>

@@ -1,23 +1,3 @@
-<template lang='pug'>
-paper(:style='transformStyle')
-  .box.centered.rounded-full
-    .anchor.overflow-visable.w-0.h-0.fixed
-      .text
-        p.pt-12 A ship in harbor is safe,<br>but that is not what ships<br>are built for.
-        br
-        em.op50 — John A. Shedd
-
-  .box-description.py-3
-    .op50.text-center.tip(v-if='!mobile && !shot') use phone to visit
-    .div.p-4(v-if='debug')
-      p Gamma {{ gamma }}
-      p Beta {{ beta }}
-      p Theta {{ theta }}
-      p Alpha {{ alpha }}
-
-note
-</template>
-
 <script setup lang='ts'>
 import { clamp, useDeviceOrientation } from '@vueuse/core'
 import { computed } from 'vue'
@@ -49,6 +29,26 @@ const transformStyle = computed(() => {
   }
 })
 </script>
+
+<template lang='pug'>
+paper(:style='transformStyle')
+  .box.centered.rounded-full
+    .anchor.overflow-visable.w-0.h-0.fixed
+      .text
+        p.pt-12 A ship in harbor is safe,<br>but that is not what ships<br>are built for.
+        br
+        em.op50 — John A. Shedd
+
+  .box-description.py-3
+    .op50.text-center.tip(v-if='!mobile && !shot') use phone to visit
+    .div.p-4(v-if='debug')
+      p Gamma {{ gamma }}
+      p Beta {{ beta }}
+      p Theta {{ theta }}
+      p Alpha {{ alpha }}
+
+note
+</template>
 
 <style lang='stylus' scoped>
 .anchor

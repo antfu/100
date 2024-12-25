@@ -1,9 +1,3 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden
-    canvas(ref='el' width='400' height='400')
-</template>
-
 <script setup='props' lang='ts'>
 import { timestamp, useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
@@ -18,7 +12,7 @@ const { round, max } = Math
 const timeout = 2000
 const D = 100
 
-onMounted(async() => {
+onMounted(async () => {
   const canvas = el.value!
   const { ctx } = initCanvas(canvas)
   const { width, height } = canvas
@@ -67,3 +61,9 @@ onMounted(async() => {
   useRafFn(updateCanvas)
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden
+    canvas(ref='el' width='400' height='400')
+</template>

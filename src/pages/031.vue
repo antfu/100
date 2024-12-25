@@ -1,19 +1,8 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden(ref='el')
-
-note
-  p <b>Tonhalle – Beethoven</b>
-  br
-  p Day 6 of <a href='https://codecember.netlify.app/2020/6' class="link" target='_blank'>#Codecember</a>
-</template>
-
 <script setup lang="ts">
-import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
-import { onMounted, onUnmounted, ref } from 'vue'
 import { useMouseInElement } from '@vueuse/core'
-import { hslToRgb } from '../utils'
+import { p5i } from 'p5i'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -116,3 +105,13 @@ function draw({ width, height, arc, translate }: P5I) {
 onMounted(() => mount(el.value!, { setup, draw }))
 onUnmounted(() => unmount())
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden(ref='el')
+
+note
+  p <b>Tonhalle – Beethoven</b>
+  br
+  p Day 6 of <a href='https://codecember.netlify.app/2020/6' class="link" target='_blank'>#Codecember</a>
+</template>

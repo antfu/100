@@ -1,26 +1,38 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden(ref="el" @click='start')
-
-note
-  p Day 11 of <a href='https://codecember.netlify.app/2020/11' class="link" target='_blank'>#Codecember</a>
-</template>
-
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, reactive, ref, watch, watchEffect, withCtx } from 'vue'
-import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
-import { useMouse } from '@vueuse/core'
+import { p5i } from 'p5i'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const size = 400
 const spacing = 30
 const el = ref<HTMLElement | null>(null)
 
 const {
-  mount, unmount, noiseSeed, background, stroke, TAU, CLOSE, cos, sin,
-  beginShape, endShape, vertex, push, pop,
-  noStroke, fill, createVector, map, random,
-  sqrt, abs, min, pow, rect, lerp,
+  mount,
+  unmount,
+  noiseSeed,
+  background,
+  stroke,
+  TAU,
+  CLOSE,
+  cos,
+  sin,
+  beginShape,
+  endShape,
+  vertex,
+  push,
+  pop,
+  noStroke,
+  fill,
+  createVector,
+  map,
+  random,
+  sqrt,
+  abs,
+  min,
+  pow,
+  rect,
+  lerp,
 } = p5i()
 
 type Vector3D = [number, number, number]
@@ -171,3 +183,11 @@ function start() {
 onMounted(start)
 onUnmounted(() => unmount())
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden(ref="el" @click='start')
+
+note
+  p Day 11 of <a href='https://codecember.netlify.app/2020/11' class="link" target='_blank'>#Codecember</a>
+</template>

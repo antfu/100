@@ -1,20 +1,10 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden(ref='box')
-
-note
-  p.font-bold hands-on <a href='https://threejs.org/' target='_blank'>three.js</a>
-  br
-  p following <a href='https://tympanus.net/codrops/2020/03/17/create-a-wave-motion-effect-on-an-image-with-three-js/' target='_blank'>this guide</a>
-</template>
-
 <script setup lang='ts'>
 // https://tympanus.net/codrops/2020/03/17/create-a-wave-motion-effect-on-an-image-with-three-js/
 // https://threejs.org/docs/#manual/en/introduction/Installation
 
-import { onMounted, ref } from 'vue'
 import { useRafFn } from '@vueuse/core'
 import * as THREE from 'three'
+import { onMounted, ref } from 'vue'
 
 const box = ref<HTMLElement | null>(null)
 
@@ -149,7 +139,7 @@ void main() {
 }
 `
 
-onMounted(async() => {
+onMounted(async () => {
   const scene = new THREE.Scene()
   const clock = new THREE.Clock()
   const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000)
@@ -178,8 +168,17 @@ onMounted(async() => {
     renderer.render(scene, camera)
   })
 })
-
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden(ref='box')
+
+note
+  p.font-bold hands-on <a href='https://threejs.org/' target='_blank'>three.js</a>
+  br
+  p following <a href='https://tympanus.net/codrops/2020/03/17/create-a-wave-motion-effect-on-an-image-with-three-js/' target='_blank'>this guide</a>
+</template>
 
 <style lang='stylus' scoped>
 

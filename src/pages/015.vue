@@ -1,16 +1,10 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden(@click='f.start' style='border-color: #592A2A')
-    canvas(ref='el' width='400' height='400')
-</template>
-
 <script setup='props' lang='ts'>
+import type { Vector } from '../utils'
 import { useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
-import { onMounted, ref } from 'vue'
 import { sampleSize } from 'lodash-es'
+import { onMounted, ref } from 'vue'
 import { colorInterpration, hexToRgb, inbound, initCanvas, random, range } from '../utils'
-import type { Vector } from '../utils'
 
 const shot = useRouteQuery('shot')
 const el = ref<HTMLCanvasElement | null>(null)
@@ -39,7 +33,7 @@ function randomVectors(n = 5): Vector[] {
   return range(n).map(i => [trunc(random(400)), trunc(random(400))])
 }
 
-onMounted(async() => {
+onMounted(async () => {
   const canvas = el.value!
   const width = 400
   const height = 400
@@ -47,7 +41,7 @@ onMounted(async() => {
 
   const data = ctx.createImageData(width, height)
 
-  let rustness = range(width).map(i => new Array(height).fill(0))
+  let rustness = range(width).map(i => Array.from({ length: height }).fill(0))
 
   function clear() {
     rustness = rustness.map(col => col.map(i => 0))
@@ -164,3 +158,9 @@ onMounted(async() => {
   f.start()
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden(@click='f.start' style='border-color: #592A2A')
+    canvas(ref='el' width='400' height='400')
+</template>

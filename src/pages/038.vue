@@ -1,20 +1,25 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden(ref='el')
-</template>
-
 <script setup lang="ts">
-import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
+import { p5i } from 'p5i'
 import { onMounted, onUnmounted, ref } from 'vue'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
 const {
-  mount, unmount,
-  createCanvas, background,
-  rotateX, rotateY, rotateZ, box, abs,
-  push, pop, translate, millis,
+  mount,
+  unmount,
+  createCanvas,
+  background,
+  color,
+  rotateX,
+  rotateY,
+  rotateZ,
+  box,
+  abs,
+  push,
+  pop,
+  translate,
+  millis,
 } = p5i()
 
 const w = 400
@@ -25,7 +30,7 @@ function setup({ WEBGL, ortho, strokeWeight }: P5I) {
   strokeWeight(2)
 }
 
-function draw({ frameCount }: P5I) {
+function draw() {
   background('black')
 
   const t = millis() / 1000
@@ -57,3 +62,8 @@ function restart() {
 onMounted(restart)
 onUnmounted(() => unmount())
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden(ref='el')
+</template>

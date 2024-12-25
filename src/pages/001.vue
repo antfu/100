@@ -1,15 +1,7 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden(@click='f.add' ref='canvas')
-
-note
-  p hands-on <a href='https://brm.io/matter-js' target='_blank'>Matter.js</a>
-</template>
-
 <script setup lang='ts'>
 import { noop } from '@vueuse/shared'
-import { onMounted, ref } from 'vue'
 import Matter from 'matter-js'
+import { onMounted, ref } from 'vue'
 
 const { Engine, Render, World, Bodies, Runner } = Matter
 const canvas = ref(null)
@@ -18,7 +10,7 @@ const f = {
   add: noop,
 }
 
-onMounted(async() => {
+onMounted(async () => {
   const engine = Engine.create()
   const render = Render.create({
     element: canvas.value!,
@@ -56,3 +48,11 @@ onMounted(async() => {
   Render.run(render)
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden(@click='f.add' ref='canvas')
+
+note
+  p hands-on <a href='https://brm.io/matter-js' target='_blank'>Matter.js</a>
+</template>

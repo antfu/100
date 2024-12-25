@@ -1,18 +1,10 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden(ref="el" @click='toggle')
-
-note
-  p Day 10 of <a href='https://codecember.netlify.app/2020/10' class="link" target='_blank'>#Codecember</a>
-</template>
-
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, reactive, ref } from 'vue'
-import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
-import { useMouse } from '@vueuse/core'
-import {createNoise4D} from 'simplex-noise'
 import type { Vector } from '../utils'
+import { useMouse } from '@vueuse/core'
+import { p5i } from 'p5i'
+import { createNoise4D } from 'simplex-noise'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 
 const { PI } = Math
 const size = 400
@@ -22,9 +14,24 @@ const el = ref<HTMLElement | null>(null)
 let lines: Vector[][] = []
 
 const {
-  mount, unmount, noiseSeed, background, stroke, TAU, CLOSE, cos, sin,
-  beginShape, endShape, vertex, push, pop,
-  noStroke, fill, createVector, map,
+  mount,
+  unmount,
+  noiseSeed,
+  background,
+  stroke,
+  TAU,
+  CLOSE,
+  cos,
+  sin,
+  beginShape,
+  endShape,
+  vertex,
+  push,
+  pop,
+  noStroke,
+  fill,
+  createVector,
+  map,
 } = p5i()
 
 const mouse = reactive(useMouse())
@@ -96,3 +103,11 @@ function draw({ height, width, BURN }: P5I) {
 onMounted(() => mount(el.value!, { setup, draw }))
 onUnmounted(() => unmount())
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden(ref="el" @click='toggle')
+
+note
+  p Day 10 of <a href='https://codecember.netlify.app/2020/10' class="link" target='_blank'>#Codecember</a>
+</template>

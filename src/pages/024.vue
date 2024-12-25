@@ -1,11 +1,11 @@
 <script setup lang='ts'>
+import type { ColorVector, Vector } from '../utils'
+import { useMouseInElement, useRafFn } from '@vueuse/core'
 // https://ncase.me/sight-and-light/
 import { useRouteQuery } from '@vueuse/router'
 import { noop, timestamp } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
-import { useMouseInElement, useRafFn } from '@vueuse/core'
-import { distance, initCanvas, r180, r360, r90, random, range } from '../utils'
-import type { ColorVector, Vector } from '../utils'
+import { distance, initCanvas, random, range } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 

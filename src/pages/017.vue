@@ -1,9 +1,3 @@
-<template lang='pug'>
-paper
-  .box.borderless(@click='reset')
-    canvas(ref='el' width='400' height='400')
-</template>
-
 <script setup='props' lang='ts'>
 import { timestamp, useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
@@ -26,7 +20,7 @@ let colors = palette[0]
 let ts = timestamp()
 let pattern = 0x1111
 
-const reset = () => {
+function reset() {
   ts = timestamp()
   pattern = pick([
     0x0101,
@@ -38,7 +32,7 @@ const reset = () => {
   colors = pick(palette)
 }
 
-onMounted(async() => {
+onMounted(async () => {
   const canvas = el.value!
   const { ctx } = initCanvas(canvas)
   const width = 400
@@ -87,7 +81,7 @@ onMounted(async() => {
       const it = (t / 1000 - i * interval) % cycle
       if (it < 0)
         continue
-      const offset = G * pow(it, 2) / 2
+      const offset = G * it ** 2 / 2
 
       if (pattern & 0x0001) {
         ctx.strokeStyle = colors[0]
@@ -111,3 +105,9 @@ onMounted(async() => {
   useRafFn(updateCanvas)
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.borderless(@click='reset')
+    canvas(ref='el' width='400' height='400')
+</template>

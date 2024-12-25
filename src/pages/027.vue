@@ -1,18 +1,8 @@
-<template lang='pug'>
-paper
-  .box.large.borderless.centered.overflow-hidden(ref='el')
-
-note
-  p <b>line ⟷ circle</b>
-  br
-  p Day 2 of <a href='https://codecember.netlify.app/2020/2' class="link" target='_blank'>#Codecember</a>
-</template>
-
 <script setup lang="ts">
-import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
-import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { distance, r60, SQRT_2, SQRT_3, square } from '../utils'
+import { p5i } from 'p5i'
+import { onMounted, onUnmounted, ref } from 'vue'
+import { SQRT_2 } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -29,12 +19,28 @@ const cy = h / 2
 
 const { trunc } = Math
 const {
-  createCanvas, millis, rectMode,
-  rotate, push, pop, translate, scale,
-  line, fill, noStroke, ellipse, background, rect, triangle, stroke,
-  sin, cos,
-  mount, unmount,
-  CENTER, PI,
+  createCanvas,
+  millis,
+  rectMode,
+  rotate,
+  push,
+  pop,
+  translate,
+  scale,
+  line,
+  fill,
+  noStroke,
+  ellipse,
+  background,
+  rect,
+  triangle,
+  stroke,
+  sin,
+  cos,
+  mount,
+  unmount,
+  CENTER,
+  PI,
 } = p5i()
 
 let st = 0
@@ -80,3 +86,13 @@ function draw({ mouseX, mouseY }: P5I) {
 onMounted(() => mount(el.value!, { setup, draw }))
 onUnmounted(() => unmount())
 </script>
+
+<template lang='pug'>
+paper
+  .box.large.borderless.centered.overflow-hidden(ref='el')
+
+note
+  p <b>line ⟷ circle</b>
+  br
+  p Day 2 of <a href='https://codecember.netlify.app/2020/2' class="link" target='_blank'>#Codecember</a>
+</template>

@@ -1,3 +1,50 @@
+<script setup lang='ts'>
+import { useDeviceMotion, useMouseInElement, useWindowSize } from '@vueuse/core'
+import { computed, reactive, ref, watch } from 'vue'
+import { useWindowPosition } from '../utils'
+
+const BOX_SIZE = 400
+const box = ref<HTMLDivElement | null>(null)
+const { width, height } = useWindowSize()
+const { screenLeft, screenTop } = useWindowPosition()
+const mouse = reactive(useMouseInElement(box, { touch: true }))
+
+const boxX = ref((width.value - BOX_SIZE) / 2)
+const boxY = ref((height.value - BOX_SIZE) / 2)
+
+const screenWidth = window.screen.width
+const screenHeight = window.screen.height
+
+const px = (v: number) => `${v}px`
+
+const dragging = ref(false)
+const draggingOffests = ref([0, 0])
+
+const motion = reactive(useDeviceMotion())
+
+function mousedown() {
+  draggingOffests.value = [mouse.elementX, mouse.elementY]
+  dragging.value = true
+}
+
+function mouseup() {
+  dragging.value = false
+}
+
+watch(
+  () => [mouse.x, mouse.y],
+  ([x, y]) => {
+    if (!dragging.value)
+      return
+    boxX.value = Math.min(Math.max(0, x - draggingOffests.value[0]), width.value - BOX_SIZE)
+    boxY.value = Math.min(Math.max(0, y - draggingOffests.value[1]), height.value - BOX_SIZE)
+  },
+)
+
+const innerX = computed(() => -(boxX.value + screenLeft.value))
+const innerY = computed(() => -(boxY.value + screenTop.value))
+</script>
+
 <template lang='pug'>
 paper(@mouseup='mouseup' @touchend='mouseup')
   .box.fixed.overflow-hidden.bg-white(
@@ -23,50 +70,3 @@ note
   br
   p texts are from <a href='https://www.lipsum.com/' target='_blank'>lipsum.com</a>
 </template>
-
-<script setup lang='ts'>
-import { useDeviceMotion, useMouseInElement, useWindowSize } from '@vueuse/core'
-import { computed, reactive, ref, watch } from 'vue'
-import { useWindowPosition } from '../utils'
-
-const BOX_SIZE = 400
-const box = ref<HTMLDivElement | null>(null)
-const { width, height } = useWindowSize()
-const { screenLeft, screenTop } = useWindowPosition()
-const mouse = reactive(useMouseInElement(box, { touch: true }))
-
-const boxX = ref((width.value - BOX_SIZE) / 2)
-const boxY = ref((height.value - BOX_SIZE) / 2)
-
-const screenWidth = window.screen.width
-const screenHeight = window.screen.height
-
-const px = (v: number) => `${v}px`
-
-const dragging = ref(false)
-const draggingOffests = ref([0, 0])
-
-const motion = reactive(useDeviceMotion())
-
-const mousedown = () => {
-  draggingOffests.value = [mouse.elementX, mouse.elementY]
-  dragging.value = true
-}
-
-const mouseup = () => {
-  dragging.value = false
-}
-
-watch(
-  () => [mouse.x, mouse.y],
-  ([x, y]) => {
-    if (!dragging.value)
-      return
-    boxX.value = Math.min(Math.max(0, x - draggingOffests.value[0]), width.value - BOX_SIZE)
-    boxY.value = Math.min(Math.max(0, y - draggingOffests.value[1]), height.value - BOX_SIZE)
-  },
-)
-
-const innerX = computed(() => -(boxX.value + screenLeft.value))
-const innerY = computed(() => -(boxY.value + screenTop.value))
-</script>

@@ -1,9 +1,9 @@
 <script setup lang='ts'>
-import { ref } from 'vue'
 import { useEventListener, useFullscreen, useTitle } from '@vueuse/core'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { isDark } from '../utils/dark'
 import { works } from '../works'
-import { isDark, toggleDark } from '../utils/dark'
 
 const route = useRoute()
 const fullscreen = useFullscreen(ref(document.querySelector('html')))

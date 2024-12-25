@@ -1,15 +1,10 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden(ref='box')
-</template>
-
 <script setup lang='ts'>
-import { onMounted, ref } from 'vue'
 import { clamp, useMouse, useRafFn } from '@vueuse/core'
 import * as THREE from 'three'
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { r180, r90, random, range } from '../utils'
+import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
+import { onMounted, ref } from 'vue'
+import { r90, r180, random, range } from '../utils'
 
 const box = ref<HTMLElement | null>(null)
 const { round } = Math
@@ -26,7 +21,7 @@ const plane_width = 50
 const plane_height = 50
 const plane_color = 0xFFFFFF
 
-onMounted(async() => {
+onMounted(async () => {
   const renderer = new THREE.WebGLRenderer()
   box.value!.appendChild(renderer.domElement)
   renderer.physicallyCorrectLights = true
@@ -132,8 +127,12 @@ onMounted(async() => {
     renderer.render(scene, camera)
   })
 })
-
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden(ref='box')
+</template>
 
 <style lang='stylus' scoped>
 

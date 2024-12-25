@@ -1,28 +1,31 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden(ref='el' @click='restart')
-
-note
-  p <b>Perlin Noise</b>
-  br
-  p Day 5 of <a href='https://codecember.netlify.app/2020/5' class="link" target='_blank'>#Codecember</a>
-</template>
-
 <script setup lang="ts">
-import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
-import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { transform } from 'lodash-es'
+import { p5i } from 'p5i'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
 const { random, trunc, min } = Math
 const {
-  mount, unmount,
-  createCanvas, resizeCanvas, background, noFill,
-  stroke, noise, noiseSeed, noLoop, cos, sin, line,
-  beginShape, endShape, vertex,
-  push, pop, translate,
+  mount,
+  unmount,
+  createCanvas,
+  resizeCanvas,
+  background,
+  noFill,
+  stroke,
+  noise,
+  noiseSeed,
+  noLoop,
+  cos,
+  sin,
+  line,
+  beginShape,
+  endShape,
+  vertex,
+  push,
+  pop,
+  translate,
   TWO_PI,
 } = p5i()
 
@@ -40,7 +43,7 @@ function getForceOnPoint(x: number, y: number, z: number) {
   return (noise(x / SCALE, y / SCALE, z / SCALE_Z) - 0.5) * 2 * TWO_PI
 }
 
-let points: {x: number; y: number; t: number }[] = []
+let points: { x: number, y: number, t: number }[] = []
 
 function setup() {
   createCanvas(400, 400)
@@ -96,3 +99,13 @@ function restart() {
 onMounted(restart)
 onUnmounted(() => unmount())
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden(ref='el' @click='restart')
+
+note
+  p <b>Perlin Noise</b>
+  br
+  p Day 5 of <a href='https://codecember.netlify.app/2020/5' class="link" target='_blank'>#Codecember</a>
+</template>

@@ -1,17 +1,7 @@
-<template lang='pug'>
-paper
-  .fixed.top-0.bottom-0.left-0.right-0(ref='el')
-
-note
-  p drag them, or shake your phone
-  br
-  a.link(@click='toggleShape') toggle shape
-</template>
-
 <script setup lang='ts'>
 import { useEventListener, useWindowSize } from '@vueuse/core'
-import { computed, onMounted, reactive, ref, watch } from 'vue'
 import Matter from 'matter-js'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { range, useShake } from '../utils'
 
@@ -32,11 +22,11 @@ const offest = reactive({
   y: computed(() => (viewport.height - size * rows) / 2),
 })
 
-const toggleShape = () => {
+function toggleShape() {
   sphere.value = !sphere.value
 }
 
-onMounted(async() => {
+onMounted(async () => {
   const engine = Engine.create()
   const render = Render.create({
     element: el.value!,
@@ -90,7 +80,8 @@ onMounted(async() => {
         },
       )
       Body.setAngularVelocity(
-        body, -body.angle * factor,
+        body,
+        -body.angle * factor,
       )
     }
 
@@ -218,6 +209,16 @@ onMounted(async() => {
   }
 })
 </script>
+
+<template lang='pug'>
+paper
+  .fixed.top-0.bottom-0.left-0.right-0(ref='el')
+
+note
+  p drag them, or shake your phone
+  br
+  a.link(@click='toggleShape') toggle shape
+</template>
 
 <style lang="stylus" scoped>
 

@@ -1,24 +1,10 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden
-    canvas(ref='el' width='400' height='400')
-  .box-description
-    pre {{JSON.stringify(data, null, 2)}}
-
-note
-  p Will I get my PS5?
-</template>
-
 <script setup lang='ts'>
-import { timestamp, useRafFn } from '@vueuse/core'
-import { useRouteQuery } from '@vueuse/router'
-import { onMounted, reactive, ref } from 'vue'
 import type { Vector } from '../utils'
-import { SQRT_3, initCanvas, r120, r360, r60 } from '../utils'
+import { timestamp, useRafFn } from '@vueuse/core'
+import { onMounted, reactive, ref } from 'vue'
+import { initCanvas, r60, r120, r360, SQRT_3 } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
-
-const shot = useRouteQuery('shot')
 
 const data = reactive<any>({
   t: 0,
@@ -93,7 +79,7 @@ onMounted(() => {
     draw(move(zoom(rotate(_crossB, rad), scale), dx, dy))
   }
 
-  function circle(dx: number, dy: number, rad = 0, scale = 1) {
+  function circle(dx: number, dy: number, _rad = 0, scale = 1) {
     ctx.beginPath()
     ctx.arc(dx, dy, hs * scale, 0, r360)
     ctx.stroke()
@@ -180,6 +166,13 @@ onMounted(() => {
 })
 </script>
 
-<style lang='stylus' scoped>
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden
+    canvas(ref='el' width='400' height='400')
+  .box-description
+    pre {{JSON.stringify(data, null, 2)}}
 
-</style>
+note
+  p Will I get my PS5?
+</template>

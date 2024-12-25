@@ -1,34 +1,7 @@
-<template lang='pug'>
-div
-  .box.overflow-hidden
-    .canvas-wrapper
-      canvas(ref='el')
-  .box-description(v-show='controls')
-    .flex.flex-col.mt-2
-      p.op50 (t,x,y) =>
-      .flex
-        .mr-2.op50 x =
-        input.flex-auto.outline-none(
-          v-model='expX'
-          :maxlength='32'
-          autocomplete='false'
-          spellcheck='false'
-        )
-      .flex
-        .mr-2.op50 y =
-        input.flex-auto.outline-none(
-          v-model='expY'
-          maxlength='32'
-          autocomplete='false'
-          spellcheck='false'
-        )
-    iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
-</template>
-
 <script setup='props' lang='ts'>
-import { useEventListener, useRafFn, useThrottle, noop, useVModel } from '@vueuse/core'
+import { noop, useEventListener, useRafFn, useThrottle, useVModel } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
-import { onMounted, ref, watch, defineProps } from 'vue'
+import { defineProps, onMounted, ref, watch } from 'vue'
 import { initCanvas, load, range } from '../utils'
 
 const props = defineProps({
@@ -75,7 +48,7 @@ useEventListener('keydown', (e) => {
     f.start()
 })
 
-onMounted(async() => {
+onMounted(async () => {
   await load('https://cdn.jsdelivr.net/npm/stats.js@0.17.0/build/stats.min.js')
 
   // @ts-ignore
@@ -192,7 +165,6 @@ onMounted(async() => {
       fnY = () => 0
 
       try {
-        // eslint-disable-next-line no-eval
         // @ts-ignore
         fnX = runner.value!.contentWindow!.eval(`()=>{
           ${MathContext};
@@ -219,6 +191,33 @@ onMounted(async() => {
   )
 })
 </script>
+
+<template lang='pug'>
+div
+  .box.overflow-hidden
+    .canvas-wrapper
+      canvas(ref='el')
+  .box-description(v-show='controls')
+    .flex.flex-col.mt-2
+      p.op50 (t,x,y) =>
+      .flex
+        .mr-2.op50 x =
+        input.flex-auto.outline-none(
+          v-model='expX'
+          :maxlength='32'
+          autocomplete='false'
+          spellcheck='false'
+        )
+      .flex
+        .mr-2.op50 y =
+        input.flex-auto.outline-none(
+          v-model='expY'
+          maxlength='32'
+          autocomplete='false'
+          spellcheck='false'
+        )
+    iframe.none.h-0(ref='runner' sandbox='allow-same-origin')
+</template>
 
 <style lang='stylus' scoped>
 </style>

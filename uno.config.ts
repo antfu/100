@@ -1,10 +1,10 @@
+import extractorPug from '@unocss/extractor-pug'
 import {
   defineConfig,
   presetUno,
   presetWebFonts,
-  transformerDirectives
+  transformerDirectives,
 } from 'unocss'
-import extractorPug from '@unocss/extractor-pug'
 
 export default defineConfig({
   presets: [
@@ -14,13 +14,13 @@ export default defineConfig({
         code: 'DM Mono',
         sans: 'DM Sans',
         serif: 'DM Serif Display',
-      }
-    })
+      },
+    }),
   ],
   transformers: [
-    transformerDirectives()
+    transformerDirectives(),
   ],
   extractors: [
-    extractorPug()
-  ]
+    extractorPug(),
+  ],
 })

@@ -1,23 +1,8 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden.borderless(@click='shuffle')
-    canvas(ref="el")
-  .box-description.py-4.flex.justify-center(v-if='!shot')
-    .mx-4.text-right.text-gray-500(@click='roll(0)') a {{a<0?'':'+'}}{{a.toFixed(2)}}
-    .mx-4.text-right.text-gray-500(@click='roll(1)') b {{b<0?'':'+'}}{{b.toFixed(2)}}
-    .mx-4.text-right.text-gray-500(@click='roll(2)') c {{c<0?'':'+'}}{{c.toFixed(2)}}
-    .mx-4.text-right.text-gray-500(@click='roll(3)') d {{d<0?'':'+'}}{{d.toFixed(2)}}
-note
-  p <b>Peter de Jong Attractor</b>
-  br
-  p Day 4 of <a href='https://codecember.netlify.app/2020/4' class="link" target='_blank'>#Codecember</a>
-</template>
-
 <script setup lang="ts">
+import type { Ref } from 'vue'
 import { noop, useMouse, useMousePressed, useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
-import { computed, onMounted, reactive, ref, watchEffect, unref as v, nextTick } from 'vue'
-import type { Ref } from 'vue'
+import { computed, onMounted, reactive, ref, unref as v } from 'vue'
 import { useRouter } from 'vue-router'
 import { initCanvas, random } from '../utils'
 
@@ -28,7 +13,7 @@ const { pressed } = useMousePressed({ target: el })
 
 const { sin, cos } = Math
 
-const useToNumber = (r: Ref<string>) => {
+function useToNumber(r: Ref<string>) {
   return computed({
     get() {
       return +r.value
@@ -52,16 +37,16 @@ const fn = {
   clear: noop,
 }
 
-const rand = () => {
+function rand() {
   return +(random() * 10 - 5).toFixed(2)
 }
 
-const roll = (n: number) => {
+function roll(n: number) {
   [a, b, c, d][n].value = rand()
   fn.clear()
 }
 
-const shuffle = async() => {
+async function shuffle() {
   router.replace({ query: { a: rand(), b: rand(), c: rand(), d: rand() } })
   fn.clear()
 }
@@ -110,3 +95,18 @@ onMounted(() => {
   useRafFn(draw)
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden.borderless(@click='shuffle')
+    canvas(ref="el")
+  .box-description.py-4.flex.justify-center(v-if='!shot')
+    .mx-4.text-right.text-gray-500(@click='roll(0)') a {{a<0?'':'+'}}{{a.toFixed(2)}}
+    .mx-4.text-right.text-gray-500(@click='roll(1)') b {{b<0?'':'+'}}{{b.toFixed(2)}}
+    .mx-4.text-right.text-gray-500(@click='roll(2)') c {{c<0?'':'+'}}{{c.toFixed(2)}}
+    .mx-4.text-right.text-gray-500(@click='roll(3)') d {{d<0?'':'+'}}{{d.toFixed(2)}}
+note
+  p <b>Peter de Jong Attractor</b>
+  br
+  p Day 4 of <a href='https://codecember.netlify.app/2020/4' class="link" target='_blank'>#Codecember</a>
+</template>

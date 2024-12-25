@@ -1,5 +1,5 @@
-import Matter from '@types/matter-js'
-import * as THREE from 'three'
+import type Matter from '@types/matter-js'
+import type * as THREE from 'three'
 
 declare interface Window {
   Matter: Matter

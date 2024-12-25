@@ -1,20 +1,6 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden
-    canvas(ref='el' width='400' height='400' @click='f.run()')
-  .box-description.py-1
-    turns.inline-block.mr-2(v-model='mode' :options='patterns')
-    toggle.inline-block.mr-2(v-model='showHexagon') hex
-
-note
-  p inspired by <a href='https://codepen.io/Manoylov/pen/dyorBVb' target='_blank'>this CodePen</a>
-  br
-  p extend reading <a href='https://www.redblobgames.com/grids/hexagons/' target='_blank'>Hexagonal Grids</a>
-</template>
-
 <script setup lang='ts'>
-import { get, initCanvas, noop, pick, r30, r60, range, shuffle } from '../utils'
 import type { Vector } from '../utils'
+import { get, initCanvas, noop, pick, r30, r60, range, shuffle } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -34,7 +20,7 @@ onMounted(() => {
   const SQRT_3 = Math.sqrt(3)
 
   const drawHexagon = (x: number, y: number, size: number) => {
-    const points: [number, number][] = new Array(6)
+    const points: [number, number][] = Array.from({ length: 6 })
       .fill(0)
       .map((_, i) => [
         x + size * Math.cos(i % 6 * 2 * Math.PI / 6),
@@ -146,6 +132,20 @@ onMounted(() => {
   f.run()
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden
+    canvas(ref='el' width='400' height='400' @click='f.run()')
+  .box-description.py-1
+    turns.inline-block.mr-2(v-model='mode' :options='patterns')
+    toggle.inline-block.mr-2(v-model='showHexagon') hex
+
+note
+  p inspired by <a href='https://codepen.io/Manoylov/pen/dyorBVb' target='_blank'>this CodePen</a>
+  br
+  p extend reading <a href='https://www.redblobgames.com/grids/hexagons/' target='_blank'>Hexagonal Grids</a>
+</template>
 
 <style lang='stylus' scoped>
 

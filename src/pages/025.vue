@@ -1,24 +1,10 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden
-    canvas(ref='el' width='400' height='400' @click='f.next()')
-  .box-description.py-2.flex(v-if='!shot')
-    .flex(@click='edges = (edges -1) % 14 + 2')
-      .op50 edges
-      .text-gray-500.bold.px-2 {{edges}}
-    .flex-auto
-    .link(@click='f.reset()') reset
-
-note
-</template>
-
 <script setup lang='ts'>
+import type { Vector } from '../utils'
+import { useMouseInElement, useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { noop, timestamp } from '@vueuse/shared'
 import { onMounted, ref, watch } from 'vue'
-import { useMouseInElement, useRafFn } from '@vueuse/core'
-import { distance, hslToRgb, initCanvas, r180, r360, r90, random, range } from '../utils'
-import type { Vector, ColorVector } from '../utils'
+import { distance, hslToRgb, initCanvas, r360, random, range } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -106,3 +92,17 @@ onMounted(() => {
   })
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden
+    canvas(ref='el' width='400' height='400' @click='f.next()')
+  .box-description.py-2.flex(v-if='!shot')
+    .flex(@click='edges = (edges -1) % 14 + 2')
+      .op50 edges
+      .text-gray-500.bold.px-2 {{edges}}
+    .flex-auto
+    .link(@click='f.reset()') reset
+
+note
+</template>

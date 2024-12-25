@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { p5i } from 'p5i'
 import type { P5I } from 'p5i'
+import { p5i } from 'p5i'
 import { onMounted, onUnmounted, ref } from 'vue'
 import Paper from '../components/Paper.vue'
 

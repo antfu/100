@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "module": "ESNext",
+    "incremental": true,
     "target": "ESNext",
     "lib": ["DOM", "ESNext"],
-    "strict": true,
-    "esModuleInterop": true,
-    "incremental": true,
-    "skipLibCheck": true,
+    "baseUrl": ".",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
     "paths": {
       "/~/*": ["src/*"]
-    }
+    },
+    "resolveJsonModule": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "exclude": ["dist", "node_modules"]
 }

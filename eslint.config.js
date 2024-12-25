@@ -5,3 +5,6 @@ export default antfu({
   unocss: true,
   vue: true,
 })
+  .removeRules(
+    'unused-imports/no-unused-vars',
+  )

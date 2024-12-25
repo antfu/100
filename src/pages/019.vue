@@ -1,17 +1,9 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden
-    canvas(:class='{shake}' ref='el' width='400' height='400' @click='f.next()')
-  .box-description.py-1(v-if='!shot')
-    p.op50 click
-</template>
-
 <script setup lang='ts'>
+import type { Vector } from '../utils'
 import { useRouteQuery } from '@vueuse/router'
 import { noop, useTimeoutFn } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
 import { initCanvas, r30, SQRT_3 } from '../utils'
-import type { Vector } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -61,7 +53,7 @@ onMounted(() => {
 
   const drawBox = (x: number, y: number, size: number, lines = 0b111111111) => {
     const c: Vector = [x, y]
-    const points: Vector[] = new Array(6)
+    const points: Vector[] = Array.from({ length: 6 })
       .fill(0)
       .map((_, i) => [
         x + size * Math.cos(i % 6 * 2 * Math.PI / 6 + r30),
@@ -168,6 +160,14 @@ onMounted(() => {
   f.next()
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden
+    canvas(:class='{shake}' ref='el' width='400' height='400' @click='f.next()')
+  .box-description.py-1(v-if='!shot')
+    p.op50 click
+</template>
 
 <style lang='stylus' scoped>
 .shake {

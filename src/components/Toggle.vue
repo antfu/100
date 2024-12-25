@@ -1,18 +1,17 @@
+<script setup lang='ts'>
+const props = defineProps({
+  modelValue: Boolean,
+})
+const emit = defineEmits(['update:modelValue'])
+function toggle() {
+  emit('update:modelValue', !props.modelValue)
+}
+</script>
+
 <template lang='pug'>
 .toggle(:class='{active: modelValue}' @click='toggle')
   slot
 </template>
-
-<script setup lang='ts'>
-const emit = defineEmits(['update:modelValue'])
-const props = defineProps({
-  modelValue: Boolean,
-})
-
-const toggle = () => {
-  emit('update:modelValue', !props.modelValue)
-}
-</script>
 
 <style lang='stylus' scoped>
 .toggle

@@ -1,9 +1,3 @@
-<template lang='pug'>
-paper
-  .not-found.box(ref='box')
-  .not-found.text Not Found
-</template>
-
 <script setup lang='ts'>
 import { onMounted, ref } from 'vue'
 
@@ -23,6 +17,12 @@ onMounted(() => {
   }
 })
 </script>
+
+<template lang='pug'>
+paper
+  .not-found.box(ref='box')
+  .not-found.text Not Found
+</template>
 
 <style lang='stylus'>
 .not-found.box .box

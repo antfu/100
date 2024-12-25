@@ -1,16 +1,10 @@
-<template lang='pug'>
-paper
-  .box.centered.overflow-hidden
-    canvas(ref='el' width='400' height='400' @click='f.reset()')
-</template>
-
 <script setup lang='ts'>
+import type { ColorVector, Vector } from '../utils'
+import { useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { noop, timestamp } from '@vueuse/shared'
 import { onMounted, ref } from 'vue'
-import { useRafFn } from '@vueuse/core'
-import { distance, initCanvas, r180, r360, r90, random, range } from '../utils'
-import type { Vector, ColorVector } from '../utils'
+import { initCanvas, r180, r360, random, range } from '../utils'
 
 const el = ref<HTMLCanvasElement | null>(null)
 
@@ -27,7 +21,7 @@ const h = 400
 const pattern = 0
 const lineWidth = 1
 
-const mergeColor = ([a, b, c]: ColorVector, [a2, b2, c2]: ColorVector): ColorVector => {
+function mergeColor([a, b, c]: ColorVector, [a2, b2, c2]: ColorVector): ColorVector {
   return [
     (a + a2) / 2,
     (b + b2) / 2,
@@ -94,7 +88,8 @@ class Line {
     const gamma: number = ((from1[1] - to1[1]) * (to2[0] - from1[0]) + dX * (to2[1] - from1[1])) / determinant
 
     // check if there is an intersection
-    if (!(lambda >= 0 && lambda <= 1) || !(gamma >= 0 && gamma <= 1)) return undefined
+    if (!(lambda >= 0 && lambda <= 1) || !(gamma >= 0 && gamma <= 1))
+      return undefined
 
     return [
       from1[0] + lambda * dX,
@@ -177,3 +172,9 @@ onMounted(() => {
   })
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.centered.overflow-hidden
+    canvas(ref='el' width='400' height='400' @click='f.reset()')
+</template>

@@ -1,5 +1,5 @@
-import fs from 'fs-extra'
 import cheerio from 'cheerio'
+import fs from 'fs-extra'
 import { works } from '../src/works'
 
 const DOMAIN = 'https://100.antfu.me'

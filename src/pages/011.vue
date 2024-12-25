@@ -1,22 +1,17 @@
-<template lang='pug'>
-paper
-  .large.box.borderless.centered.overflow-hidden(ref='el')
-</template>
-
 <script setup lang='ts'>
-import { onMounted, ref } from 'vue'
 import { timestamp, useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import * as THREE from 'three'
-import { OutlineEffect } from 'three/examples/jsm/effects/OutlineEffect'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OutlineEffect } from 'three/examples/jsm/effects/OutlineEffect'
+import { onMounted, ref } from 'vue'
 import { r90 } from '../utils'
 
 const el = ref<HTMLElement | null>(null)
 
 const debug = useRouteQuery('debug')
 
-onMounted(async() => {
+onMounted(async () => {
   function createMesh(geometry: THREE.Geometry, solid = true) {
     const material = new THREE.MeshBasicMaterial({
       color: 0xFFFFFF,
@@ -160,8 +155,12 @@ onMounted(async() => {
     effect.render(scene, camera)
   })
 })
-
 </script>
+
+<template lang='pug'>
+paper
+  .large.box.borderless.centered.overflow-hidden(ref='el')
+</template>
 
 <style lang='stylus' scoped>
 

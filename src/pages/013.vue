@@ -1,29 +1,8 @@
-<template lang='pug'>
-paper
-  .box.overflow-hidden(@click='f.start')
-    canvas(ref='el' width='400' height='400')
-  .box-description.py-2.flex(v-if='!shot')
-    .flex(@click='init = init % 8 + 1')
-      .op50 init
-      .text-gray-500.bold.px-2 {{init}}
-    .flex.ml-3(@click='len = len % 8 + 1')
-      .op50 len
-      .text-gray-500.bold.px-2 {{len}}
-    .flex-auto
-    .op50(v-if='!stopped') *
-
-note
-  .p for each node, there is 50% chance for growing a new branch for its two branches.
-  br
-  .p <b>init</b> - the initial iterations that guaranteed having 100% to grow.
-  .p <b>len</b> - max length for each branch.
-</template>
-
 <script setup='props' lang='ts'>
 import { useRafFn } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { onMounted, ref, watch } from 'vue'
-import { initCanvas, polar2cart, r15, r180, r90 } from '../utils'
+import { initCanvas, polar2cart, r15, r90, r180 } from '../utils'
 
 const shot = useRouteQuery('shot')
 const el = ref<HTMLCanvasElement | null>(null)
@@ -40,7 +19,7 @@ const stopped = ref(false)
 
 watch([init, len], () => f.start())
 
-onMounted(async() => {
+onMounted(async () => {
   const canvas = el.value!
   const { ctx } = initCanvas(canvas)
   const { width, height } = canvas
@@ -95,13 +74,13 @@ onMounted(async() => {
     prevSteps = []
     steps = random() < 0.5
       ? [
-        () => step(0, random() * 400, 0),
-        () => step(400, random() * 400, r180),
-      ]
+          () => step(0, random() * 400, 0),
+          () => step(400, random() * 400, r180),
+        ]
       : [
-        () => step(random() * 400, 0, r90),
-        () => step(random() * 400, 400, -r90),
-      ]
+          () => step(random() * 400, 0, r90),
+          () => step(random() * 400, 400, -r90),
+        ]
     controls.resume()
     stopped.value = false
   }
@@ -109,3 +88,24 @@ onMounted(async() => {
   f.start()
 })
 </script>
+
+<template lang='pug'>
+paper
+  .box.overflow-hidden(@click='f.start')
+    canvas(ref='el' width='400' height='400')
+  .box-description.py-2.flex(v-if='!shot')
+    .flex(@click='init = init % 8 + 1')
+      .op50 init
+      .text-gray-500.bold.px-2 {{init}}
+    .flex.ml-3(@click='len = len % 8 + 1')
+      .op50 len
+      .text-gray-500.bold.px-2 {{len}}
+    .flex-auto
+    .op50(v-if='!stopped') *
+
+note
+  .p for each node, there is 50% chance for growing a new branch for its two branches.
+  br
+  .p <b>init</b> - the initial iterations that guaranteed having 100% to grow.
+  .p <b>len</b> - max length for each branch.
+</template>
